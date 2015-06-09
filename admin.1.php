@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <?php 
 	include_once('function.php');
+    function test_input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    
+    $nameErr = $passErr = $emailErr= $contErr = $addrErr = $passcErr = "";
+    $username = $email = $address = $contact = $password = $passwordc = "";
+    
 	if($_POST['welcome']){
 		// remove all session variables
 		session_unset(); 
@@ -12,25 +22,52 @@
 		header("Location:login.php");
 	}
     if($_SERVER["REQUEST_METHOD"] == "POST"){
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        if (empty($_POST['username'])){
+            $nameErr = "This field is required";
+        }else{
+            $username = test_input($_POST['username']);
+        }
         
-        $email = $_POST['email'];
-        $passwordc = $_POST['passwordc'];
+        if (empty($_POST["password"])){
+            $passErr = "This field is required";
+        }else{
+            $password = test_input($_POST['password']);
+        }
         
+        if (empty($_POST['email'])){
+            $emailErr = "This field is required";
+        }else{        
+            $email = test_input($_POST['email']);
+        }
         
-        $contact = $_POST['contact'];
-        $address = $_POST['address'];
+        if (empty($_POST["passwordc"])){
+            $passcErr = "This field is required";
+        }else{
+            $passwordc = test_input($_POST['passwordc']);
+        }
+        
+        if (empty($_POST["contact"])){
+            $contErr = "This field is required";
+        }else{
+            $contact = test_input($_POST['contact']);
+        }
+        
+        if (empty($_POST["address"])){
+            $addrErr = "This field is required";
+        }else{
+            $address = test_input($_POST['address']);
+        }
         
         if($password != $passwordc){
             echo "<script>alert('password mismatch')</script>";
         }
         else{
+            if($nameErr == "" and $passErr == "" and $emailErr== "" and $contErr == "" and $addrErr == "" and $passcErr == ""){
             $log_obj = new dbFunction();
             $user = $log_obj->create_hotel($username, $password, $email, $address, $contact);
             echo "<script>alert('Done')</script>";
             header("Location:admin.php");
-            
+            }
         }
     }
 ?>
@@ -120,18 +157,18 @@ ul#menu li a:hover {
         <form name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <h1>Create Account</h1>
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br> <br> 
+        <input type="text" id="username" name="username" value = "<?php echo $username; ?>"><br> <br> 
 
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password"><br><br> 
         <label for="passwordc">ConfirmPassword:</label><br>
         <input type="password" id="passwordc" name="passwordc"><br><br>
-        <label for="email" id = "email" name = "email">Email Address:</label><br>
-        <input type="text" id="email" name="email"><br><br>
+        <label for="email" id = "email" name = "email" >Email Address:</label><br>
+        <input type="text" id="email" name="email" value = "<?php echo $email; ?>"><br><br>
         <label for="address" id = "address" name = "address">Address:</label><br>
-        <input type="text" id="address" name="address"><br><br>
+        <input type="text" id="address" name="address" value = "<?php echo $address; ?>"><br><br>
         <label for="contact" id = "contact" name = "contact">Contact Number:</label><br>
-        <input type="text" id="contact" name="contact"><br><br>                       
+        <input type="text" id="contact" name="contact" value = "<?php echo $contact; ?>"><br><br>                       
         <input type="submit" value="Register">
         </form>
     <footer>
