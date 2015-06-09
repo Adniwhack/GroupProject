@@ -26,6 +26,9 @@
             $nameErr = "This field is required";
         }else{
             $username = test_input($_POST['username']);
+            if (!preg_match("/^[a-zA-Z0-9_]*$/",$username)) {
+                $nameErr = "Only letters numbers and underscore allowed"; 
+            }
         }
         
         if (empty($_POST["password"])){
@@ -38,6 +41,9 @@
             $emailErr = "This field is required";
         }else{        
             $email = test_input($_POST['email']);
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $emailErr = "Invalid email format"; 
+            }
         }
         
         if (empty($_POST["passwordc"])){
@@ -50,16 +56,20 @@
             $contErr = "This field is required";
         }else{
             $contact = test_input($_POST['contact']);
+            if (!preg_match("[0-9]",$contact)){
+                $contErr = "Numbers only allowed";
+            }
         }
         
         if (empty($_POST["address"])){
             $addrErr = "This field is required";
         }else{
             $address = test_input($_POST['address']);
+            
         }
         
-        if($password != $passwordc){
-            echo "<script>alert('password mismatch')</script>";
+        if($password != $passwordc and  ($password != "" or $passwordc != "")){
+            $passErr = "Passwords do not match";
         }
         else{
             if($nameErr == "" and $passErr == "" and $emailErr== "" and $contErr == "" and $addrErr == "" and $passcErr == ""){
@@ -147,7 +157,7 @@ ul#menu li a:hover {
     
     <div id="nav">
         <ul id="menu">
-          <li><a href="/html/default.asp">Account Management</a></li> <br><br>
+          <li><a href="admin.1.php">Account Management</a></li> <br><br>
           <li><a href="/html/default.asp">System Management</a></li> <br><br>
           <li><a href="/html/default.asp">Issue Response</a></li> <br><br>
           <li><a href="/html/default.asp">Message Portal</a></li> <br><br>
@@ -156,19 +166,19 @@ ul#menu li a:hover {
     <div style="float:left; width:80%; margin-left:10px;">
         <form name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <h1>Create Account</h1>
+            <span class="error">* required field</span><br><br>
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" value = "<?php echo $username; ?>"><br> <br> 
-
+        <input type="text" id="username" name="username" value = "<?php echo $username; ?>"><span class="error"><?php echo $nameErr; ?></span><br> <br> 
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br><br> 
-        <label for="passwordc">ConfirmPassword:</label><br>
-        <input type="password" id="passwordc" name="passwordc"><br><br>
+        <input type="password" id="password" name="password"> <span class="error"><?php echo $passErr; ?></span><br><br> 
+        <label for="passwordc">Confirm Password:</label><br>
+        <input type="password" id="passwordc" name="passwordc"><span class="error"><?php echo $passcErr ;?></span><br><br>
         <label for="email" id = "email" name = "email" >Email Address:</label><br>
-        <input type="text" id="email" name="email" value = "<?php echo $email; ?>"><br><br>
+        <input type="text" id="email" name="email" value = "<?php echo $email; ?>"><span class="error"><?php echo $emailErr; ?></span><br><br>
         <label for="address" id = "address" name = "address">Address:</label><br>
-        <input type="text" id="address" name="address" value = "<?php echo $address; ?>"><br><br>
+        <input type="text" id="address" name="address" value = "<?php echo $address; ?>"><span class="error"><?php echo $addrErr; ?></span><br><br>
         <label for="contact" id = "contact" name = "contact">Contact Number:</label><br>
-        <input type="text" id="contact" name="contact" value = "<?php echo $contact; ?>"><br><br>                       
+        <input type="text" id="contact" name="contact" value = "<?php echo $contact; ?>"><span class="error"><?php echo $contErr; ?></span><br><br>                       
         <input type="submit" value="Register">
         </form>
     <footer>
