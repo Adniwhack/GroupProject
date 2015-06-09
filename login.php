@@ -11,7 +11,7 @@
         $user = $log_obj->admin_log($username, $password);
         
         if ($user == TRUE){
-            
+            echo "<script>alert('You have successfully logged in')</script>";
             header("Location:admin.php");
         }
         else{

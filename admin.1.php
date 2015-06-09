@@ -4,7 +4,6 @@
 	if($_POST['welcome']){
 		// remove all session variables
 		session_unset(); 
-
 		// destroy the session 
 		session_destroy();
 	}
@@ -61,15 +60,12 @@ footer {
     float:left;
     padding:5px;	      
 }
-
 ul#menu {
     padding: 0;
 }
-
 ul#menu li {
     display: inline;
 }
-
 ul#menu li a {
     background-color: black;
     color: white;
@@ -77,11 +73,9 @@ ul#menu li a {
     text-decoration: none;
     border-radius: 10px 10px 10px 10px;
 }
-
 ul#menu li a:hover {
     background-color: orange;
 }
-
 .btn {
     width:100px;
     position:relative;
@@ -89,7 +83,6 @@ ul#menu li a:hover {
     align-content: center;
     
 }
-
 .notification {
     position:absolute;
     right:-7px;
@@ -111,9 +104,11 @@ ul#menu li a:hover {
     <div id="nav">
         <ul id="menu">
           <li><a href="/html/default.asp">Account Management</a></li> <br><br>
+          
           <li><a href="/html/default.asp">System Management</a></li> <br><br>
           <li><a href="/html/default.asp">Issue Response</a></li> <br><br>
           <li><a href="/html/default.asp">Message Portal</a></li> <br><br>
+         
         </ul> 
     </div>
     <div style="float:left; width:80%; margin-left:10px;">
@@ -132,7 +127,11 @@ ul#menu li a:hover {
         <input type="text" id="address" name="address"><br><br>
         <label for="contact" id = "contact" name = "contact">Contact Number:</label><br>
         <input type="text" id="contact" name="contact"><br><br>                       
-        <input type="submit" value="Register">
+        <input type="submit" class="btn" value="Register">
+        <input name="back" type="submit" class="btn" id="back" formaction="admin.php" value="Back">
+        
+        <input name="Submit" type="submit" class="btn" id="button" value="View profiles" formaction="delete.php">
+        
         </form>
     <footer>
     </footer>    
