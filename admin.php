@@ -1,3 +1,24 @@
+<?php 
+
+  
+include("lib/inc/chartphp_dist.php"); 
+$freespace = disk_free_space("E:");
+$totalspace = disk_total_space("E:");
+$usedspace = $totalspace - $freespace;
+
+$p = new chartphp(); 
+
+$p->data = array(array(array('Free space',$freespace),array('Used space', $usedspace)));
+$p->chart_type = "pie"; 
+
+// Common Options 
+$p->title = "Pie Chart"; 
+
+$out = $p->render('c2'); 
+
+
+?> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +48,15 @@ footer {
     padding:5px;	      
 }
 
+#chart{
+    line-height:30px;
+    
+    height:300px;
+    width:200px;
+    float:right;
+    padding:5px;	
+    
+}
 ul#menu {
     padding: 0;
 }
@@ -66,11 +96,15 @@ ul#menu li a:hover {
     border-radius:10px;
 }
     </style>
+    <script src="lib/js/jquery.min.js"></script> 
+        <script src="lib/js/chartphp.js"></script> 
+        <link rel="stylesheet" href="lib/js/chartphp.css">
 </head>
-    
+        
 <body>
     <header>
     <h1>Online Hotel Reservation Management System - Administrator Portal</h1>
+    
     </header>
     
     <div id="nav">
@@ -81,6 +115,13 @@ ul#menu li a:hover {
           <li><a href="/html/default.asp">Message Portal</a></li> <br><br>
         </ul> 
     </div>
+    <style> 
+        /* white color data labels */ 
+        .jqplot-data-label{color:white;} 
+    </style> 
+    <div id="chart" style="width:40%; min-width:450px;"> 
+        <?php echo $out; ?> 
+    </div> 
  
     <footer>
     </footer>    
