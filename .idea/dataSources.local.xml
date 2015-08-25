@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - ohrms@localhost" uuid="0aebc7aa-5b0c-47f7-9358-1783d9421d4f">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>ohrms.*</schema-pattern>
+      <default-schemas>ohrms.*</default-schemas>
+    </data-source>
+  </component>
+</project>

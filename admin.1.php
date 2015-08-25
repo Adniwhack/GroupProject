@@ -11,6 +11,14 @@
     $nameErr = $passErr = $emailErr= $contErr = $addrErr = $passcErr = "";
     $username = $email = $address = $contact = $password = $passwordc = "";
     
+	/*if($_POST['welcome']){
+		// remove all session variables
+		session_unset(); 
+
+		// destroy the session 
+		session_destroy();
+	}
+*/
 	if(!($_SESSION)){
 		header("Location:login.php");
 	}
@@ -76,7 +84,8 @@
 ?>
 <html>
 <head>
-    
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 <style>
     
 header {
