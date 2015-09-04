@@ -43,7 +43,7 @@ $out = $p->render('c2');
 			</div>
 		</div> 
 	</div>
-            
+         <div class="container-fluid">
         <!-- Adding the buttons -->    
         <div class="col-md-3" >
           <ul class="nav nav-pills nav-stacked">
@@ -64,8 +64,9 @@ $out = $p->render('c2');
                         Message Portal
                   </button>  </li>
           </ul>
-    </div >
-            <div class = "col-lg-3"></div>
+            </div >
+             <div class="col-md-6"></div>
+            <div class = "col-md-3">
             <style>
                 /* white color data labels */
                 .jqplot-data-label{color:white;}
@@ -73,8 +74,9 @@ $out = $p->render('c2');
             <div id="chart" style="width:40%; min-width:450px;">
                 <?php echo $out; ?>
             </div>
+            </div>
 
         </div>
-
+</div>
 </body>
     </html>

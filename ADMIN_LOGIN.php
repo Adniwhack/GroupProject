@@ -39,7 +39,7 @@
                         </div>	
                 <div class="col-md-4">
                     <!--  Create the form horizontally !-->
-                    <form class="form-horizontal" role="form">
+                    <form class="form-horizontal" role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					
                         <div class="form-group">
 							<label for="inputEmail3" class="col-sm-2 control-label">
@@ -47,7 +47,7 @@
 							</label>
 							
                             <div class="col-sm-10">
-								<input type="email" class="form-control" id="inputEmail3" />
+								<input type="email" class="form-control" id="inputEmail3" name="email"/>
 							</div>
 						</div>
                         <!--  Input for the password !-->
@@ -56,7 +56,7 @@
 								Password
 							</label>
 							<div class="col-sm-10">
-								<input type="password" class="form-control" id="inputPassword3" />
+								<input type="password" class="form-control" id="inputPassword3"  name="password">
 							</div>
 						</div>
 						<!--  Input for the check box !-->
