@@ -11,6 +11,7 @@ else {
         $Room_Type = $_POST['Room_Type'];
         $Room_AC =$_POST['Room_AC'];
         $Room_Desc = $_POST['Room_Description'];
+        //echo $_POST['Room_photo'];
         $Room_photo = $_FILES['Room_photo']['name'];
         //echo $Room_photo;
         $Photo = $_FILES['Room_photo']['tmp_name'];
@@ -121,7 +122,7 @@ else {
     <div class="container">
 	<div class="col-sm-8">
 	<div class="jumbotron">
-    <form name = "Room_create" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  enctype=" multipart/form-data ">
+    <form name = "Room_create" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  enctype="multipart/form-data">
         <legend><h2 align="center">Create New Room</h2></legend>
         <div class="form-group">
             <label for="Room_Name" id="Room_Name" >Room Name</label>
@@ -149,7 +150,7 @@ else {
         </div>
         <div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>
-            <input type="file" name="Room_photo" accept="image/*">
+            <input type="file" name="Room_photo" id="Room_photo" accept="image/*">
         </div>
         <button type="submit" class="btn btn-default" value="submit" >Submit</button>
     </form>
