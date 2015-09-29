@@ -197,11 +197,22 @@
                 return $res;
             }
 
+			public function return_sorted_room($Hotel_email){
+				$QUE = "SELECT * FROM hotel_room WHERE hotel_email='".$Hotel_email."' order by Room_weight DESC";
+				$res = mysql_query($QUE);
+				return $res;
+			}
+
 			public function return_unreserved_room($hotel_email, $Check_in, $Check_out){
 				//Return unreserved rooms
                 $QUE = "SELECT * FROM reservation INNER JOIN hotel_room on hotel_room.hotel_email = reservation.Hotel_email WHERE (Hotel_email = '".$hotel_email."' AND reservation.CheckIn < '".$Check_in."' AND reservation.Checkout > '".$Check_out."'";
                 $res = mysql_query($QUE);
                 return $res;
+			}
+
+			public function return_room_options($Room_ID){
+				$Res = mysql_Query("Select Room_Option from room_options where Room_ID='".$Room_ID."'");
+				return $Res;
 			}
 		}
 
@@ -216,11 +227,16 @@ class dbHotel{
     }
     function __destruct(){}
 
-    public function hotel_create_room($Hotel_email ,$Room_ID, $Room_type, $Room_AC, $Room_Photo, $Room_desc,$Room_photo_loc, $Cost_per_stay){
+    public function hotel_create_room($Hotel_email ,$Room_ID, $Room_type, $Room_AC, $Room_Photo, $Room_desc,$Room_photo_loc, $Cost_per_stay, $SeaView, $MtnView , $Gndflr, $OptionsArray,$Room_weight){
 
-			$QUE = "INSERT INTO hotel_room(Room_id, Hotel_email,Room_type, Room_AC, Room_description, Cost_per_unit, Room_photo_id, Room_photo_location) VALUES ('" . $Room_ID . "','" . $Hotel_email . "','" . $Room_type . "','" . $Room_AC . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "')";
-			echo $QUE;
+			$QUE = "INSERT INTO hotel_room(Room_id, Hotel_email,Room_type, Room_AC, Room_description, Cost_per_unit, Room_photo_id, Room_photo_location, Sea_View, Mountain_View, Ground_Floor, Room_weight) VALUES ('" . $Room_ID . "','" . $Hotel_email . "','" . $Room_type . "','" . $Room_AC . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "', '".$SeaView."', '".$MtnView."', '".$Gndflr."', '".$Room_weight."') ";
+			//echo $QUE;
 			$res = mysql_query($QUE);
+			foreach($OptionsArray as $Option ){
+				echo $Option;
+					$res2 = mysql_query("INSERT INTO room_options(Room_ID, Room_Option) VALUES ('" . $Room_ID . "', '" . $Option . "')");
+				}
+			$res3 = mysql_query("ALTER TABLE hotel_room ORDER BY Hotel_email ASC, Room_weight DESC");
 			return $res;
 
     }
@@ -275,7 +291,10 @@ class dbHotel{
 
 
 
-
+	public function return_room_options($Room_ID){
+		$Res = mysql_Query("Select Room_Option from room_options where Room_ID='".$Room_ID."'");
+		return $Res;
+	}
 
 
 }

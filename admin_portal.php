@@ -65,7 +65,7 @@ $out = $p->render('c2');
                   </button>  </li>
           </ul>
             </div >
-             <div class="col-md-6"></div>
+             <div class="col-md-6"></div><!--Space to insert notification system here-->
             <div class = "col-md-3">
             <style>
                 /* white color data labels */

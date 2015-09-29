@@ -10,6 +10,39 @@ else {
         $Room_Cost = $_POST['Room_Cost'];
         $Room_Type = $_POST['Room_Type'];
         $Room_AC =$_POST['Room_AC'];
+        if($Room_AC == "A"){
+            $Room_weight += 1;
+        }
+        $Room_Option = $_POST['basic_options'];
+        $Room_weight = 0;
+
+        if($Room_Option == "SeaView"){
+            $SeaView = "A";
+            $MtnView = "N/A";
+            $Room_weight += 1;
+        }
+        elseif($Room_Option == "MountainView"){
+            $SeaView = "N/A";
+            $MtnView = "A";
+            $Room_weight += 1;
+        }
+        elseif($Room_Option == "N/A"){
+            $SeaView = "N/A";
+            $MtnView = "N/A";
+
+        }
+        $Room_GndFlr = "N/A";
+        if(isset($_POST['GndFlr'])){
+            $Room_GndFlr = "A";
+            $Room_weight += 1;
+        }
+
+        $RoomOtherOptions = $_POST['options'];
+        $RoomOptionArray = explode(",", $RoomOtherOptions);
+        if (isset($_POST['options'])){
+            $Room_weight += count($RoomOptionArray);
+        }
+
         $Room_Desc = $_POST['Room_Description'];
         //echo $_POST['Room_photo'];
         $Room_photo = $_FILES['Room_photo']['name'];
@@ -26,7 +59,10 @@ else {
         //$hotel->hotel_create_room($Room_Name, $Room_Desc, $Room_Price,$Hotel);
         $log = new dbHotel();
 
-        $log->hotel_create_room($Hotel_email, $Room_Name, $Room_Type, $Room_AC, $Room_photo, $Room_Desc, $target, $Room_Cost);
+        $log->hotel_create_room($Hotel_email, $Room_Name, $Room_Type, $Room_AC, $Room_photo, $Room_Desc, $target, $Room_Cost,$SeaView, $MtnView , $Room_GndFlr, $RoomOptionArray, $Room_weight);
+        $Hotel_ID=$_SESSION['hotel_id'];
+        header("Location:pROFILE.php?hotel_id=".$Hotel_ID."");
+        exit();
     }
 }
 ?>
@@ -142,11 +178,23 @@ else {
         </div>
         <div class="form-group">
             <label for="Room_Description" id="Room_Description">Room Description</label>
-            <textarea name="Room_Description" rows="5" cols="10" class="form-control"></textarea>
+            <textarea name="Room_Description" rows="5" cols="5" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label><input type="radio" name="Room_AC" value="A">Air Conditioning available</label><br>
             <label><input type="radio" name="Room_AC" value = "N/A">Air Conditioning not available</label>
+        </div>
+        <div class="form_group">
+            <label for="basic_options">Basic Options</label><br>
+            <label><input type="radio" name="basic_options" value="SeaView">Sea view</label><br>
+            <label><input type="radio" name="basic_options" value = "MountainView">Mountain view</label><br>
+            <label><input type="radio" name="basic_options" value = "N/A">Not Applicable</label><br>
+            <label><input type="checkbox" name="GndFlr" value = "GndFlr">Ground Floor</label><br><br>
+        </div>
+        <div class="form-group">
+            <label for="options">Other options:</label>
+            <a href="#">How do I use this?</a>
+            <textarea name="options" rows ="5" cols = "5" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>

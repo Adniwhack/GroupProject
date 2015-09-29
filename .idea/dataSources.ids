@@ -52,6 +52,11 @@
       <column name="Cost_per_unit" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
       <column name="Room_photo_id" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <column name="Room_photo_location" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Sea_View" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Mountain_View" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Ground_Floor" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Room_weight" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Discount" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
       <primary-key name="PRIMARY" columns="Hotel_email,Room_id"/>
       <foreign-key name="hotel_room_ibfk_1" columns="Hotel_email" ref-table="hotel" ref-schema="" ref-catalog="ohrms" ref-columns="email" update-rule="3" delete-rule="3" deferrability="2"/>
     </table>
@@ -74,6 +79,10 @@
       <column name="Checkout" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="Status" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="ReservationID"/>
+    </table>
+    <table name="room_options" schema="" catalog="ohrms" type="TABLE">
+      <column name="Room_ID" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Room_Option" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
     </table>
   </data-source>
 </component>

@@ -112,6 +112,7 @@ $res = $log->return_room($hotel_email);
                 </tbody>
                 </table>
             </div>
+
     </div>
 </div>
 </body>

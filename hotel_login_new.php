@@ -70,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD']=="POST"){
     <button type="submit" class="btn btn-info">Sign in</button>
     
   </div>
+    <br><a href="forgot_password.php" ><font align="center">Forgot password?</font></align></a>
   <br><a href="hotelform.html"><font align="center">Registration</font></a>
 </form>
 </div>
