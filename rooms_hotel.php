@@ -109,9 +109,6 @@ $res = $log->return_sorted_room($hotel_email);
             $room = $data['Room_id'];
             $room_cost = $data['Cost_per_unit'];
             $room_type = $data['Room_type'];
-            $room_sea =$data['Sea_View'];
-            $room_mtn =$data['Mountain_View'];
-            $room_gnd =$data['Ground_Floor'];
             $room_image = $data['Room_photo_location'];
             $Room_options =($log->return_room_options($room));
             $print_option = "";
@@ -124,7 +121,7 @@ $res = $log->return_sorted_room($hotel_email);
                 }
             }
 
-            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td>".$room_sea."</td><td>".$room_mtn."</td><td>".$room_gnd."</td><td>".$print_option."</td><td><a href='Reservations_hotel.php?room_id=".$room."'>Link</a></td></tr>";
+            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td>".$print_option."</td><td><a href='Reservations_hotel.php?room_id=".$room."'>Link</a></td></tr>";
         }
         ?>
                 </tbody>
