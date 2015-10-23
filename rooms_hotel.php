@@ -95,18 +95,15 @@ $res = $log->return_sorted_room($hotel_email);
                         <th>Cost per Stay</th>
                         <th>Room Type</th>
                         <th>Room Image</th>
-                        <th>Sea View</th>
-                        <th>Mountain View</th>
-                        <th>Ground Floor</th>
-                        <th>Other Options</th>
-                        <th>Reserve now!</th>
+                        <th>Options</th>
+                        <th>Create Reservation</th>
                     </tr>
                     </thread>
                 <tbody>
         <?php
 
         while ($data = mysql_fetch_array($res)){
-            $room = $data['Room_id'];
+            $room = $data['Room_name'];
             $room_cost = $data['Cost_per_unit'];
             $room_type = $data['Room_type'];
             $room_image = $data['Room_photo_location'];

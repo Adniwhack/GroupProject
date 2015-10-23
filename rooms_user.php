@@ -8,25 +8,13 @@
 
 include 'function.php';
 
-$hotel_email = $_SESSION['hotel_email_view'];
+if (isset($_GET['hotel_id']) ){
+    $hotel_id = $_GET['hotel_id'];
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $log = new dbSearch();
-    $Check_in=$_POST['Check_in'];
-    $Check_out= $_POST['Check_out'];
-    if(empty($Check_in) and empty($Check_out)){
-        $res = $log->return_room($hotel_email);
-    }
-    else{
-        $Check_in = date( 'Y-m-d H:i:s', $Check_in );
-        $Check_out = date( 'Y-m-d H:i:s', $Check_out );
-        $res = $log->return_unreserved_room($hotel_email, $Check_in, $Check_out);
-
-    }
-
+    $log = new dbHotel();
+    $res = $log->get_hotel_room($hotel_id);
 
 }
-
 
 ?>
 
@@ -107,6 +95,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         <th>Cost per Stay</th>
                         <th>Room Type</th>
                         <th>Room Image</th>
+
+                        <th>Options</th>
                         <th>Reserve now!</th>
                     </tr>
                     </thread>
@@ -114,15 +104,28 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <?php
 
         while ($data = mysql_fetch_array($res)){
-            $room = $data['Room_name'];
+            $room_name = $data['Room_name'];
+            $room = $data['Room_id'];
             $room_cost = $data['Cost_per_unit'];
             $room_type = $data['Room_type'];
             $room_image = $data['Room_photo_location'];
-            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='reservation.php?room_id=".$room."'>Link</a></td></tr>";
+            $Room_options =($log->return_room_options($room));
+            $print_option = "";
+            while($option = mysql_fetch_array($Room_options)){
+                if ($print_option != "") {
+                    $print_option = $print_option . " " . $option['Room_Option'];
+                }
+                else{
+                    $print_option = $option['Room_Option'];
+                }
+            }
+
+            echo "<tr><td>".$room_name."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td>".$print_option."</td><td><a href='reservation.php?room_id=".$room."&hotel_id=".$hotel_id."'>Link</a></td></tr>";
         }
         ?>
                 </tbody>
                 </table>
+            <a href="roominfo.php" class="btn btn-primary btn-lg" role="button">Create new Room</a>
             </div>
     </div>
 </div>

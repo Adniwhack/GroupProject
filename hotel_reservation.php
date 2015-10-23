@@ -2,34 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: GP60
- * Date: 8/28/2015
- * Time: 12:43 AM
+ * Date: 10/23/2015
+ * Time: 11:37 AM
  */
 
-include 'function.php';
-
-$hotel_email = $_SESSION['hotel_email_view'];
-
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $log = new dbSearch();
-    $Check_in=$_POST['Check_in'];
-    $Check_out= $_POST['Check_out'];
-    if(empty($Check_in) and empty($Check_out)){
-        $res = $log->return_room($hotel_email);
-    }
-    else{
-        $Check_in = date( 'Y-m-d H:i:s', $Check_in );
-        $Check_out = date( 'Y-m-d H:i:s', $Check_out );
-        $res = $log->return_unreserved_room($hotel_email, $Check_in, $Check_out);
-
-    }
+include "function.php";
+if (isset($_SESSION['hotel_login'])) {
+    $hotel_id = $_SESSION['hotel_id'];
+    $log = new dbFunction();
+    $que = "SELECT * FROM reservation INNER JOIN hotel_room on hotel_room.Room_id= reservation.RoomID INNER Join hotel on hotel.Hotel_ID = reservation.HotelID INNER JOIN customer on reservation.UserID=customer.Customer_ID WHERE hotel.Hotel_ID = '".$hotel_id ."'";
+    echo $que;
+    $res = mysql_query($que);
 
 
 }
-
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -99,32 +86,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </div>
     <div class="col-md-6">
         <div class="container-fluid">
-            <h2>Rooms available</h2>
-            <table class="table">
-                <thread>
-                    <tr>
-                        <th>Room_name</th>
-                        <th>Cost per Stay</th>
-                        <th>Room Type</th>
-                        <th>Room Image</th>
-                        <th>Reserve now!</th>
-                    </tr>
-                    </thread>
-                <tbody>
-        <?php
+            <h1>Reservations</h1>
+            <table class="table table-responsive">
+                <tr>
+                    <th>Room Name</th>
+                    <th>Room Number</th>
+                    <th>Customer Name</th>
+                    <th>Check in</th>
+                    <th>Check Out</th>
 
-        while ($data = mysql_fetch_array($res)){
-            $room = $data['Room_name'];
-            $room_cost = $data['Cost_per_unit'];
-            $room_type = $data['Room_type'];
-            $room_image = $data['Room_photo_location'];
-            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='reservation.php?room_id=".$room."'>Link</a></td></tr>";
-        }
-        ?>
-                </tbody>
-                </table>
+                </tr>
+                <?php
+                    while ($data = mysql_fetch_array($res)){
+                        echo "<td>".$data['Room_name']."</td><td>".$data['Room_number']."</td><td>".$data['Customer_FirstName']." ".$data['Customer_LastName']."</td><td>".$data['Checkin']."</td><td>".$data['Checkout']."</td>";
+                    }
+                ?>
+            </table>
+            <form method="get" action="payment.php">
+                <button class="btn btn-primary" type="submit">Manual Reservation</button>
+            </form>
+
+
             </div>
+        </div>
     </div>
-</div>
 </body>
 </html>

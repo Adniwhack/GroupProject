@@ -11,12 +11,14 @@ else {
         $Room_Type = $_POST['Room_Type'];
         $Room_AC =$_POST['Room_AC'];
         $Room_Number = 0;
+        $Room_weight= 0;
+        $RoomOptionsMain = array();
         if($Room_AC == "A"){
+            array_push($RoomOptionsMain, "A/C");
             $Room_weight += 1;
         }
-        $RoomOptionsMain = array();
+
         $Room_Option = $_POST['basic_options'];
-        $Room_weight = 0;
 
         if($Room_Option != "N/A"){
             $RoomOptionsMain = array($Room_Option);
@@ -24,8 +26,7 @@ else {
         }
 
         elseif($Room_Option == "N/A"){
-            $SeaView = "N/A";
-            $MtnView = "N/A";
+
 
         }
         $Room_GndFlr = "N/A";
@@ -40,7 +41,7 @@ else {
         if (isset($_POST['options'])){
             $Room_weight += count($RoomOptionArray);
         }
-        array_merge($RoomOptionArray, $RoomOptionsMain);
+        $RoomOptionArray = array_merge($RoomOptionArray, $RoomOptionsMain);
 
         $Room_Desc = $_POST['Room_Description'];
         //echo $_POST['Room_photo'];
@@ -53,13 +54,16 @@ else {
         //echo "<img src=images/".$Room_photo.">";
 
         //$Hotel = $_SESSION['hotel_email'];
-
+        //echo $RoomOptionsMain;
         //$hotel = new dbHotel();
         //$hotel->hotel_create_room($Room_Name, $Room_Desc, $Room_Price,$Hotel);
         $log = new dbHotel();
 
-        $log->hotel_create_room($Hotel_email, $Room_Name, $Room_Type, $Room_photo, $Room_Desc, $target, $Room_Cost, $RoomOptionArray, $Room_weight);
+        $log->hotel_create_room($Hotel_email, $Room_Name, "0", $Room_Type, $Room_photo, $Room_Desc, $target, $Room_Cost, $RoomOptionArray, $Room_weight);
+
         $Hotel_ID=$_SESSION['hotel_id'];
+
+
         header("Location:pROFILE.php?hotel_id=".$Hotel_ID."");
         exit();
     }

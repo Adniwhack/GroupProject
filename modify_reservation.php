@@ -9,6 +9,7 @@ if ($_GET['rid']){
     $data = mysql_fetch_array($res);
     $checkin = $data['Checkin'];
     $checkout = $data['Checkout'];
+    $status = $data['status'];
 
 }
 

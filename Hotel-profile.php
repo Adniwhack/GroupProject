@@ -19,10 +19,7 @@ if ($_GET['hotel_id']){
     $_SESSION['hotel_view'] = $Hotel_name;
 
 }
-else{
-    header('Location:hotel_list.php');
-    exit();
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -368,7 +365,7 @@ else{
         <!-- Creating the form for the room availability -->
         <div class="col-md-6" align = "left">
             <br>   </br>
-            <form class="form-horizontal ">
+            <form class="form-horizontal " action="rooms_user.php?hotel_id=<?php echo $hotelID;?> method="get">
                 <fieldset>
 
                     <!-- Form Name -->
@@ -386,12 +383,13 @@ else{
                         <!-- Get in the calender -->
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-                            <form class="navbar-form navbar-left" role="search" required>
+                            <form class="navbar-form navbar-left" role="search" name="Room_availability" method="post" action="rooms_user.php" >
                                 <label for="checkin">Check in<span class="glyphicon glyphicon-calendar"></span>:</label>
                                 <input type="date" id="for" class="form-control">
                                 <br></br>
                                 <label for="checkout">Check out<span class="glyphicon glyphicon-calendar"></span>:</label>
-                                <input type="date" id="checkout" class="form-control" required>
+                                <input type="date" id="checkout" class="form-control" >
+                                <input type="hidden" name="hotel_id" value="<?php echo $hotelID;?>">
 
                                 <br></br>
                                 <button type="submit" class="btn btn-default">

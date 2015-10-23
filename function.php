@@ -76,14 +76,16 @@
 				$ID = md5($FirstName . $Lastname);
 				$QUE = "INSERT INTO customer(Customer_ID, Customer_address, Customer_FirstName, Customer_Contact, Customer_LastName, Customer_Country) VALUES ('".$ID."', '".$Address."','".$FirstName."', '".$Contact."', '".$Lastname."', '".$Country."')";
 				$RES = mysql_query($QUE);
-				return $RES;
+				return $ID;
 			}
 			public function create_reg_user($FirstName, $Lastname,$Address, $Contact, $Country, $email, $password, $username, $gender, $dob){
 				$ID = md5($FirstName . $Lastname);
 				$password_hashed = password_hash($password, PASSWORD_BCRYPT);
 				$QUE = "INSERT INTO customer(Customer_ID, Customer_address, Customer_FirstName, Customer_Contact, Customer_LastName, Customer_Country) VALUES ('".$ID."', '".$Address."','".$FirstName."', '".$Contact."', '".$Lastname."', '".$Country."')";
+				echo $QUE;
 				$RES = mysql_query($QUE);
 				$QUE = "INSERT INTO registered_customer(Customer_ID, Customer_email, Customer_password, Customer_username, Gender, Customer_DOB) VALUES ('".$ID."','".$email."','".$password_hashed."', '".$username."', '".$gender."', '".$dob."')";
+				echo $QUE;
 				$RES = mysql_query($QUE);
 				/*$password_hashed = password_hash($password, PASSWORD_BCRYPT);
 				$email_hashed = md5($email);
@@ -136,7 +138,7 @@
 				//echo $no_rows;
 				if ($no_rows==1 ){
 					//echo  $admin_data['password'];
-					$hash = $customer_data['password'];
+					$hash = $customer_data['Customer_password'];
 
 					if(password_verify($password, $hash )){
 					$_SESSION['customer_login'] = true;
@@ -388,13 +390,14 @@ class dbHotel{
     function __destruct(){}
 
     public function hotel_create_room($Hotel_email ,$Room_Name, $Room_Number, $Room_type,  $Room_Photo, $Room_desc,$Room_photo_loc, $Cost_per_stay, $OptionsArray,$Room_weight){
-			$Room_ID = md5(Room_Name . " " . strval($Room_Number));
-			$QUE = "INSERT INTO hotel_room(Room_id, Room_number, Hotel_email,Room_type,  Room_description, Cost_per_unit, Room_photo_id, Room_photo_location, Room_weight) VALUES ('" . $Room_ID . "','" . $Room_Name . "','" . $Room_Number . "','" . $Hotel_email . "','" . $Room_type . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "', '".$Room_weight."') ";
+			$Room_ID = md5($Room_Name . " " . strval($Room_Number));
+		//echo $Hotel_email, $Room_ID;
+			$QUE = "INSERT INTO hotel_room(Room_id,Room_name, Room_number, Hotel_email,Room_type,  Room_description, Cost_per_unit, Room_photo_id, Room_photo_location, Room_weight) VALUES ('" . $Room_ID . "','" . $Room_Name . "','" . $Room_Number . "','" . $Hotel_email . "','" . $Room_type . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "', '".$Room_weight."') ";
 			//echo $QUE;
 			$res = mysql_query($QUE);
 			foreach($OptionsArray as $Option ){
 				echo $Option;
-					$res2 = mysql_query("INSERT INTO room_options(Room_ID, Room_Option) VALUES ('" . $Room_ID . "', '" . $Option . "')");
+				$res2 = mysql_query("INSERT INTO room_options(Room_ID, Room_Option) VALUES ('" . $Room_ID . "', '" . $Option . "')");
 				}
 			$res3 = mysql_query("ALTER TABLE hotel_room ORDER BY Hotel_email ASC, Room_weight DESC");
 			return $res;
@@ -426,6 +429,13 @@ class dbHotel{
 
     }
 
+	public function get_hotel_room($Hotel_ID){
+		$Res = $this->get_hotel_data($Hotel_ID);
+		$email = $Res['email'];
+		$resx = $this->get_hotel_rooms($email);
+		return $resx;
+
+	}
 	public function create_new_reservation($HotelID, $Room_ID, $First_Name, $Last_Name, $Country, $Address, $Check_in, $Check_out, $Status, $Contact){
 		$QUE = "SELECT FROM reservation WHERE Checkin = '".$Check_in."' && Checkout = '".$Check_out."'";
 		$res = mysql_query($QUE);
@@ -449,17 +459,19 @@ class dbHotel{
 
 	}
 
-
+	public function get_hotel_rooms($Hotel_email){
+		return mysql_query("SELECT * FROM hotel_room WHERE Hotel_email = '".$Hotel_email."'");
+	}
 
 	public function return_room_options($Room_ID){
-		$Res = mysql_Query("Select Room_Option from room_options where Room_ID='".$Room_ID."'");
+		$Res = mysql_query("Select Room_Option from room_options where Room_ID='".$Room_ID."'");
 		return $Res;
 	}
 
 
 	public function return_room($Room_ID){
 		$Res = mysql_query("SELECT * FROM hotel_room where Room_id = '".$Room_ID."'");
-		return $Res;
+		return mysql_fetch_array($Res);
 	}
 }
 
@@ -470,14 +482,42 @@ class dbHotel{
 			}
 			function __destruct(){}
 
+			public function registered_get_details($UserID){
+				$QUE = "SELECT * FROM registered_customer INNER JOIN customer ON customer.Customer_ID = registered_customer.Customer_ID WHERE customer.Customer_ID = '".$UserID."'";
+				$RES = mysql_query($QUE);
 
-			public function user_reserve($HotelID, $UserID, $Room_ID, $Check_In, $Check_out){
-				$QUERY = "INSERT INTO reservation(UserID, HotelID, RoomID, Checkin, Checkout, Status) VALUES ('".$UserID."','".$HotelID."','".$Room_ID."','".$Check_In."','".$Check_out."','NCNF')";
-				$res = mysql_query($QUERY);
-				return $res;
 			}
 
-			public function user_reserve_cancel($ReservationID){}
+
+			public function user_reserve($HotelID, $UserID, $Room_ID, $Check_In, $Check_out, $notes){
+				$QUE = "SELECT * FROM reservation WHERE not Checkin > ".$Check_In." or  not Checkout < ".$Check_out." and RoomID = '".$Room_ID."'";
+				$res = mysql_query($QUE);
+				$results = mysql_num_rows($res);
+
+				if($results >= 1){
+					header("location:reservation.php?room_id=".$Room_ID."&hotel_id=".$HotelID."");
+					echo "<script>alert('Cannot Reserve. Room is not available')</script>";
+					exit();
+
+
+				}
+				else {
+					$QUERY = "INSERT INTO reservation(UserID, HotelID, RoomID, Checkin, Checkout, Status, Notes) VALUES ('" . $UserID . "','" . $HotelID . "','" . $Room_ID . "','" . $Check_In . "','" . $Check_out . "','NCNF' , '".$notes."')";
+					$res = mysql_query($QUERY);
+
+
+				}
+			}
+
+			public function user_reserve_cancel($ReservationID){
+				$QUERY = "UPDATE reservation SET Status='CNCL' WHERE ReservationID='".$ReservationID."'";
+				$RES = mysql_query($QUERY);//Update
+				return $RES;
+			}
+
+			public function user_pay_reservation($ReservationID){
+
+			}
 
 		}
 
