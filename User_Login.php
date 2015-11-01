@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" ){
     <button type="submit" class="btn btn-info">Sign in</button>
     
   </div>
-  <br><a href="hotelform.html"><font align="center">New User?</font></a>
+  <br><a href="user_registration.php"><font align="center">New User?</font></a>
 </form>
 </div>
 </div>

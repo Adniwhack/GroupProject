@@ -41,7 +41,9 @@ if (isset($_GET['rid'])) {
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	  
+	  <script>
+
+	  </script>
   <style>
 .navbar {
     color: #FFFFFF;

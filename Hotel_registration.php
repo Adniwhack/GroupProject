@@ -110,6 +110,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($nameErr == "" and $addressErr == "" and $cityErr == "" and $CountryErr == "" and  $emailErr == "" and  $contactErr == "" and  $usererr =="" and $passerr  == "" and  $conpasserr == ""){
             $log = new dbFunction();
             $log->create_hotel($Hotel_Username, $Hotel_email , $Hotel_Password, $Hotel_address, $Hotel_city , $Hotel_Country , $Hotel_contact, $Hotel_name);
+            
+
             header("Location:home.html");
         }
 
@@ -338,7 +340,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="col-md-8">
                                 
                                 
-                          <input type="file" name="pic" accept="image/*">
+                          <input type="file" name="pic[]" accept="image/*">
 
                         
                                                     </div>

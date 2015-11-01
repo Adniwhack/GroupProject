@@ -14,7 +14,7 @@
 
 		class dbFunction {
 			function __construct(){
-				$db = new dbConnect();;
+				$db = new dbConnect();
 			}
 			function __destruct(){}
 
@@ -404,6 +404,26 @@ class dbHotel{
 
     }
 
+	public function hotel_create_rooms($Hotel_email ,$Room_Name, $Room_Numbers, $Room_type,  $Room_Photo, $Room_desc,$Room_photo_loc, $Cost_per_stay, $OptionsArray,$Room_weight){
+		// Add multi rooms
+		$Room_IDs  = array();
+		foreach($Room_Numbers as $Room_Number){
+			$Room_ID = md5($Room_Name . " " . strval($Room_Number));
+			//echo $Hotel_email, $Room_ID;
+			$QUE = "INSERT INTO hotel_room(Room_id,Room_name, Room_number, Hotel_email,Room_type,  Room_description, Cost_per_unit, Room_photo_id, Room_photo_location, Room_weight) VALUES ('" . $Room_ID . "','" . $Room_Name . "','" . $Room_Number . "','" . $Hotel_email . "','" . $Room_type . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "', '".$Room_weight."') ";
+			//echo $QUE;
+			$res = mysql_query($QUE);
+			foreach($OptionsArray as $Option ){
+				echo $Option;
+				$res2 = mysql_query("INSERT INTO room_options(Room_ID, Room_Option) VALUES ('" . $Room_ID . "', '" . $Option . "')");
+			}
+			$res3 = mysql_query("ALTER TABLE hotel_room ORDER BY Hotel_email ASC, Room_weight DESC");
+		}
+
+
+
+	}
+
 	public function hotel_belongs_room($Hotel_email, $room_id){
 		$QUE = "SELECT $room_id FROM hotel_room WHERE (Hotel_email ='".$Hotel_email."' && Room_id = '".$room_id."' ";
 		$res = mysql_query($QUE);
@@ -490,7 +510,7 @@ class dbHotel{
 
 
 			public function user_reserve($HotelID, $UserID, $Room_ID, $Check_In, $Check_out, $notes){
-				$QUE = "SELECT * FROM reservation WHERE not Checkin > ".$Check_In." or  not Checkout < ".$Check_out." and RoomID = '".$Room_ID."'";
+				$QUE = "SELECT * FROM reservation WHERE not Checkin > ".$Check_In." and RoomID = '".$Room_ID."' or  not Checkout < ".$Check_out." and RoomID = '".$Room_ID."'";
 				$res = mysql_query($QUE);
 				$results = mysql_num_rows($res);
 

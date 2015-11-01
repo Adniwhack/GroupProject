@@ -126,7 +126,24 @@ else {
 	padding-right: 40px;
 }
 </style>
-    
+    <script>
+        function showOption(str){
+            if (str.length == 0){
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }else {
+                var strarray = str.split(',');
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "room_options.php?opt=" + strarray[strarray.length - 1], true);
+                xmlhttp.send();
+            }
+        }
+    </script>
 </head>
 
 <body background="hotelimages/pic3.jpg">
@@ -198,7 +215,8 @@ else {
         <div class="form-group">
             <label for="options">Other options:</label>
             <a href="#" onclick="javascript:void window.open('instructions.html','1443469567306','width=700,height=500,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">How do I use this?</a>
-            <textarea name="options" rows ="5" cols = "5" class="form-control"></textarea>
+            <textarea name="options" rows ="5" cols = "5" class="form-control" onkeyup="showOption(this.value)"></textarea>
+            <p>Suggestions : <span id="txtHint"></span></p>
         </div>
         <div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>

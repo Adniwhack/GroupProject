@@ -1,7 +1,7 @@
 <?php
 include "function.php";
 if (!isset($_SESSION['customer_login'])){
-	header("location:user_registration.php");
+	header("location:user_login.php");
 }
 if ($_GET['hotel_id'] && $_GET['room_id']){
 	$Hotel_id = $_GET['hotel_id'];

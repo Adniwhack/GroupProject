@@ -188,13 +188,13 @@
     <favorites_list name="OHRMS" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.83437014">
+    <splitter split-orientation="horizontal" split-proportion="0.24213406">
       <split-first>
         <leaf>
           <file leaf-file-name="next.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/next.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-2.2452831">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
                   <folding />
                 </state>
@@ -204,14 +204,24 @@
           <file leaf-file-name="onlinepay.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/onlinepay.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-5.164557">
-                  <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
                   <folding>
-                    <marker date="1445579043611" expanded="true" signature="127:174" placeholder="SELECT * FRO..reservation..." />
-                    <marker date="1445579043611" expanded="true" signature="127:188" placeholder="SELECT * FRO..reservation..." />
-                    <marker date="1445579043611" expanded="true" signature="450:492" placeholder="SELECT * fro..hotel_room..." />
-                    <marker date="1445579043611" expanded="true" signature="450:502" placeholder="SELECT * fro..hotel_room..." />
+                    <marker date="1446309342404" expanded="true" signature="127:174" placeholder="SELECT * FRO..reservation..." />
+                    <marker date="1446309342404" expanded="true" signature="127:188" placeholder="SELECT * FRO..reservation..." />
+                    <marker date="1446309342404" expanded="true" signature="450:492" placeholder="SELECT * fro..hotel_room..." />
+                    <marker date="1446309342404" expanded="true" signature="450:502" placeholder="SELECT * fro..hotel_room..." />
                   </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="roominfo.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/roominfo.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="217" column="110" selection-start-line="217" selection-start-column="110" selection-end-line="217" selection-end-column="110" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -219,7 +229,7 @@
           <file leaf-file-name="onlineresult.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/onlineresult.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-2.227848">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="192" column="69" selection-start-line="192" selection-start-column="69" selection-end-line="192" selection-end-column="69" />
                   <folding>
                     <marker date="1445541885253" expanded="true" signature="6113:6201" placeholder="insert into ..." />
@@ -229,21 +239,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="payment.php" pinned="false" current-in-tab="false">
+          <file leaf-file-name="payment.php" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/payment.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-22.538462">
+                <state vertical-scroll-proportion="0.696">
                   <caret line="130" column="24" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Reservations_hotel.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="Reservations_hotel.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Reservations_hotel.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.816">
-                  <caret line="108" column="14" selection-start-line="108" selection-start-column="14" selection-end-line="108" selection-end-column="14" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="150" column="40" selection-start-line="150" selection-start-column="40" selection-end-line="150" selection-end-column="40" />
                   <folding />
                 </state>
               </provider>
@@ -252,7 +262,7 @@
           <file leaf-file-name="hotel_reservation.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/hotel_reservation.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-25.153847">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="105" column="80" selection-start-line="105" selection-start-column="80" selection-end-line="105" selection-end-column="80" />
                   <folding>
                     <element signature="e#6#89#0#PHP" expanded="true" />
@@ -268,7 +278,7 @@
           <file leaf-file-name="rooms_hotel.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/rooms_hotel.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-9.153846">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="88" column="37" selection-start-line="21" selection-start-column="0" selection-end-line="88" selection-end-column="37" />
                   <folding />
                 </state>
@@ -278,7 +288,7 @@
           <file leaf-file-name="hotel_welcome_page.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/hotel_welcome_page.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-19.923077">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="78" column="30" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="30" />
                   <folding />
                 </state>
@@ -288,7 +298,7 @@
           <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/login.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.65384614">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
                   <folding />
                 </state>
@@ -302,66 +312,81 @@
           <file leaf-file-name="function.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/function.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-65.26415">
-                  <caret line="497" column="98" selection-start-line="497" selection-start-column="98" selection-end-line="497" selection-end-column="98" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
                   <folding>
-                    <marker date="1445577867867" expanded="true" signature="464:512" placeholder="SELECT * FRO..admin..." />
-                    <marker date="1445577867867" expanded="true" signature="1288:1360" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="1736:1998" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="2522:2749" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="3053:3280" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="3340:3559" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="4218:4264" placeholder="SELECT * FRO..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="5004:5076" placeholder="SELECT * FRO..registered_customer..." />
-                    <marker date="1445577867867" expanded="true" signature="5924:5980" placeholder="SELECT email..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="6253:6345" placeholder="Select Custo..registered_customer..." />
-                    <marker date="1445577867867" expanded="true" signature="6828:6847" placeholder="SELECT * FRO..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="6961:7005" placeholder="SELECT * FRO..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="7124:7262" placeholder="SELECT email..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="7381:7440" placeholder="Select * Fro..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="7566:7640" placeholder="Select * FRO..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="7727:7788" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="7942:8029" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="8219:8442" placeholder="SELECT * FRO..reservation..." />
-                    <marker date="1445577867867" expanded="true" signature="8596:8661" placeholder="Select Room_..room_options..." />
-                    <marker date="1445577867867" expanded="true" signature="9035:9254" placeholder="SELECT hotel..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="9928:10113" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="10267:10311" placeholder="Select * fro..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="10660:10877" placeholder="SELECT * FRO..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="11097:11213" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="11558:11784" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="11958:12100" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="12446:12696" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="13185:13577" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="13708:13801" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="13835:13900" placeholder="ALTER TABLE hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="13999:14097" placeholder="SELECT ${$ro..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="14375:14427" placeholder="SELECT * fro..hotel..." />
-                    <marker date="1445577867867" expanded="true" signature="14903:14989" placeholder="SELECT FROM reservation..." />
-                    <marker date="1445577867867" expanded="true" signature="15231:15298" placeholder="Select Custo..customer..." />
-                    <marker date="1445577867867" expanded="true" signature="15377:15591" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="15611:15710" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="15892:15955" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="16033:16098" placeholder="Select Room_..room_options..." />
-                    <marker date="1445577867867" expanded="true" signature="16184:16239" placeholder="SELECT * FRO..hotel_room..." />
-                    <marker date="1445577867867" expanded="true" signature="16452:16606" placeholder="SELECT * FRO..registered_customer..." />
-                    <marker date="1445577867867" expanded="true" signature="16752:16873" placeholder="SELECT * FRO..reservation..." />
-                    <marker date="1445577867867" expanded="true" signature="17175:17385" placeholder="INSERT INTO ..." />
-                    <marker date="1445577867867" expanded="true" signature="17505:17582" placeholder="UPDATE reser..." />
+                    <marker date="1446285145865" expanded="true" signature="463:511" placeholder="SELECT * FRO..admin..." />
+                    <marker date="1446285145865" expanded="true" signature="1287:1359" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="1735:1997" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="2521:2748" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="3052:3279" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="3339:3558" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="4217:4263" placeholder="SELECT * FRO..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="5003:5075" placeholder="SELECT * FRO..registered_customer..." />
+                    <marker date="1446285145865" expanded="true" signature="5923:5979" placeholder="SELECT email..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="6252:6344" placeholder="Select Custo..registered_customer..." />
+                    <marker date="1446285145865" expanded="true" signature="6827:6846" placeholder="SELECT * FRO..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="6960:7004" placeholder="SELECT * FRO..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="7123:7261" placeholder="SELECT email..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="7380:7439" placeholder="Select * Fro..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="7565:7639" placeholder="Select * FRO..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="7726:7787" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="7941:8028" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="8218:8441" placeholder="SELECT * FRO..reservation..." />
+                    <marker date="1446285145865" expanded="true" signature="8595:8660" placeholder="Select Room_..room_options..." />
+                    <marker date="1446285145865" expanded="true" signature="9034:9253" placeholder="SELECT hotel..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="9927:10112" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="10266:10310" placeholder="Select * fro..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="10659:10876" placeholder="SELECT * FRO..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="11096:11212" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="11557:11783" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="11957:12099" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="12445:12695" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="13184:13576" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="13707:13800" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="13834:13899" placeholder="ALTER TABLE hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="14295:14687" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="14818:14911" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="14944:15009" placeholder="ALTER TABLE hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="15095:15193" placeholder="SELECT ${$ro..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="15471:15523" placeholder="SELECT * fro..hotel..." />
+                    <marker date="1446285145865" expanded="true" signature="15999:16085" placeholder="SELECT FROM reservation..." />
+                    <marker date="1446285145865" expanded="true" signature="16327:16394" placeholder="Select Custo..customer..." />
+                    <marker date="1446285145865" expanded="true" signature="16473:16687" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="16707:16806" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="16988:17051" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="17129:17194" placeholder="Select Room_..room_options..." />
+                    <marker date="1446285145865" expanded="true" signature="17280:17335" placeholder="SELECT * FRO..hotel_room..." />
+                    <marker date="1446285145865" expanded="true" signature="17548:17702" placeholder="SELECT * FRO..registered_customer..." />
+                    <marker date="1446285145865" expanded="true" signature="17848:17997" placeholder="SELECT * FRO..reservation..." />
+                    <marker date="1446285145865" expanded="true" signature="18299:18509" placeholder="INSERT INTO ..." />
+                    <marker date="1446285145865" expanded="true" signature="18629:18706" placeholder="UPDATE reser..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="roominfo.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/roominfo.php">
+          <file leaf-file-name="ohrms.hotel_room" pinned="false" current-in-tab="false">
+            <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..hotel_room">
+              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+                <state>
+                  <filtering enabled="true" />
+                </state>
+              </provider>
+              <provider editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="server_access.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/server_access.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-33.346153">
-                  <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
-                  <folding>
-                    <marker date="1445319233564" expanded="true" signature="158:997" placeholder="..." />
-                    <marker date="1445319233564" expanded="true" signature="2286:2306" placeholder="..." />
-                  </folding>
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+                  <folding />
                 </state>
               </provider>
             </entry>
@@ -369,28 +394,57 @@
           <file leaf-file-name="reservation.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/reservation.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-0.3207547">
-                  <caret line="1" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="2" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="hotel_welcome_page.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/hotel_welcome_page.php">
+          <file leaf-file-name="User_Login.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/User_Login.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-25.807692">
-                  <caret line="78" column="30" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="30" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="82" column="35" selection-start-line="82" selection-start-column="35" selection-end-line="82" selection-end-column="35" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Rooms.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Rooms.php">
+          <file leaf-file-name="room_options.php" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/room_options.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-25.5">
-                  <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+                  <folding>
+                    <element signature="e#6#88#0#PHP" expanded="true" />
+                    <marker date="1446322306548" expanded="true" signature="186:256" placeholder="SELECT Room_..room_options..." />
+                    <marker date="1446322306548" expanded="true" signature="186:266" placeholder="SELECT Room_..room_options..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="ohrms.room_options" pinned="false" current-in-tab="false">
+            <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..room_options">
+              <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+                <state>
+                  <filtering enabled="true" />
+                </state>
+              </provider>
+              <provider editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Hotel_registration.php" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/Hotel_registration.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state vertical-scroll-proportion="0.0">
+                  <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
                   <folding />
                 </state>
               </provider>
@@ -399,57 +453,22 @@
           <file leaf-file-name="reserve_action.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/reserve_action.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-24.192308">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="37" column="58" selection-start-line="37" selection-start-column="58" selection-end-line="37" selection-end-column="58" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Hotel-profile.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Hotel-profile.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-26.153847">
-                  <caret line="391" column="100" selection-start-line="391" selection-start-column="100" selection-end-line="391" selection-end-column="100" />
-                  <folding>
-                    <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                    <marker date="1445574332333" expanded="true" signature="2746:3065" placeholder="..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="view_reservation.php" pinned="false" current-in-tab="true">
+          <file leaf-file-name="view_reservation.php" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/view_reservation.php">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.8834286">
+                <state vertical-scroll-proportion="0.0">
                   <caret line="80" column="119" selection-start-line="80" selection-start-column="119" selection-end-line="80" selection-end-column="119" />
                   <folding>
                     <marker date="1445580605308" expanded="true" signature="183:346" placeholder="SELECT * FRO..reservation..." />
                     <marker date="1445580605308" expanded="true" signature="183:359" placeholder="SELECT * FRO..reservation..." />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="modify_reservation.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/modify_reservation.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-13.730769">
-                  <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-                  <folding>
-                    <marker date="1445283614826" expanded="true" signature="101:159" placeholder="SELECT * fro..reservation..." />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="mysqli_connection.php" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/mysqli_connection.php">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-8.5">
-                  <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -465,15 +484,9 @@
       </list>
     </option>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.txt" root0="SKIP_INSPECTION" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin_account.php" />
-        <option value="$PROJECT_DIR$/customer_login.php" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/13846c37-1a44-40e0-98bc-2674e170bacd/console_1.sql" />
         <option value="$PROJECT_DIR$/upload_file.php" />
         <option value="$PROJECT_DIR$/room_infoupload2.php" />
         <option value="$PROJECT_DIR$/room_infoupload2.php" />
@@ -484,7 +497,6 @@
         <option value="$PROJECT_DIR$/hotel_login.php" />
         <option value="$PROJECT_DIR$/room_create.php" />
         <option value="$PROJECT_DIR$/hotel_Reservations.php" />
-        <option value="$PROJECT_DIR$/Hotel_registration.php" />
         <option value="$PROJECT_DIR$/ADMIN_LOGIN.php" />
         <option value="$PROJECT_DIR$/admin_portal.php" />
         <option value="$PROJECT_DIR$/admin_portal.php" />
@@ -505,23 +517,27 @@
         <option value="$PROJECT_DIR$/Temp/generalhomepage.html" />
         <option value="$PROJECT_DIR$/Temp/Hotel_registration_hotel.html" />
         <option value="$PROJECT_DIR$/modify_reservation.php" />
-        <option value="$PROJECT_DIR$/roominfo.php" />
         <option value="$PROJECT_DIR$/Rooms.php" />
         <option value="$PROJECT_DIR$/user_registration.php" />
-        <option value="$PROJECT_DIR$/User_Login.php" />
         <option value="$PROJECT_DIR$/onlineresult.php" />
         <option value="$PROJECT_DIR$/Hotel-profile.php" />
         <option value="$PROJECT_DIR$/rooms_user.php" />
         <option value="$PROJECT_DIR$/reserve_action.php" />
         <option value="$PROJECT_DIR$/next.php" />
-        <option value="$PROJECT_DIR$/function.php" />
-        <option value="$PROJECT_DIR$/function.php" />
-        <option value="$PROJECT_DIR$/reservation.php" />
-        <option value="$PROJECT_DIR$/onlinepay.php" />
         <option value="$PROJECT_DIR$/rooms_hotel.php" />
         <option value="$PROJECT_DIR$/Reservations_hotel.php" />
         <option value="$PROJECT_DIR$/view_reservation.php" />
         <option value="$PROJECT_DIR$/hotel_reservation.php" />
+        <option value="$PROJECT_DIR$/server_access.php" />
+        <option value="$PROJECT_DIR$/function.php" />
+        <option value="$PROJECT_DIR$/function.php" />
+        <option value="$PROJECT_DIR$/function2.php" />
+        <option value="$PROJECT_DIR$/reservation.php" />
+        <option value="$PROJECT_DIR$/User_Login.php" />
+        <option value="$PROJECT_DIR$/onlinepay.php" />
+        <option value="$PROJECT_DIR$/roominfo.php" />
+        <option value="$PROJECT_DIR$/room_options.php" />
+        <option value="$PROJECT_DIR$/Hotel_registration.php" />
       </list>
     </option>
   </component>
@@ -704,31 +720,31 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
+    <frame x="-9" y="-9" width="1938" height="1098" extended-state="7" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.09211928" sideWeight="0.4790097" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11288605" sideWeight="0.4790097" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3083049" sideWeight="0.5021299" order="13" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22310969" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.09478168" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31216362" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17838125" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11661342" sideWeight="0.5209903" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3078579" sideWeight="0.4978701" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31216362" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2036405" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.12118903" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12008733" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23035522" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3078579" sideWeight="0.4978701" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -755,20 +771,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/roominfoupload.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12631579">
-          <caret line="94" column="10" selection-start-line="94" selection-start-column="10" selection-end-line="94" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/room_create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.031578947">
-          <caret line="19" column="38" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/room_infoupload2.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8210526">
@@ -819,13 +821,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
@@ -870,42 +872,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..hotel_room">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..customer">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
         </state>
       </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..room_options">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
         </state>
       </provider>
     </entry>
@@ -913,7 +888,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-25.153847">
           <caret line="89" column="62" selection-start-line="89" selection-start-column="46" selection-end-line="89" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -921,7 +895,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -929,7 +902,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -937,25 +909,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
           <caret line="63" column="45" selection-start-line="63" selection-start-column="45" selection-end-line="63" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server_access.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/User_Login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
-          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-          <folding>
-            <marker date="1445406190708" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -963,20 +916,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
           <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..onlinepayment">
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -984,7 +935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-26.461538">
           <caret line="78" column="26" selection-start-line="78" selection-start-column="26" selection-end-line="78" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -992,36 +942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="5.3428574">
           <caret line="287" column="14" selection-start-line="287" selection-start-column="14" selection-end-line="287" selection-end-column="14" />
-          <folding>
-            <marker date="1441139259195" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/hotel_list-on-search.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-47.73077">
-          <caret line="73" column="81" selection-start-line="73" selection-start-column="81" selection-end-line="73" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/roominfo.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-33.346153">
-          <caret line="51" column="48" selection-start-line="51" selection-start-column="48" selection-end-line="51" selection-end-column="48" />
-          <folding>
-            <marker date="1445319233564" expanded="true" signature="158:997" placeholder="..." />
-            <marker date="1445319233564" expanded="true" signature="2286:2306" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Hotel_registration.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.9230769">
-          <caret line="100" column="5" selection-start-line="98" selection-start-column="4" selection-end-line="100" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1029,13 +949,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.653847">
           <caret line="98" column="29" selection-start-line="98" selection-start-column="29" selection-end-line="98" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.65384614">
+        <state vertical-scroll-proportion="0.0">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding />
         </state>
@@ -1043,80 +962,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Hotel-profile.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-26.153847">
+        <state vertical-scroll-proportion="0.0">
           <caret line="391" column="100" selection-start-line="391" selection-start-column="100" selection-end-line="391" selection-end-column="100" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#3;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1445574332333" expanded="true" signature="2746:3065" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/next.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2452831">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Rooms.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.5">
+        <state vertical-scroll-proportion="0.0">
           <caret line="44" column="47" selection-start-line="44" selection-start-column="47" selection-end-line="44" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/function.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-65.26415">
-          <caret line="497" column="98" selection-start-line="497" selection-start-column="98" selection-end-line="497" selection-end-column="98" />
-          <folding>
-            <marker date="1445577867867" expanded="true" signature="464:512" placeholder="SELECT * FRO..admin..." />
-            <marker date="1445577867867" expanded="true" signature="1288:1360" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="1736:1998" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="2522:2749" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="3053:3280" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="3340:3559" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="4218:4264" placeholder="SELECT * FRO..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="5004:5076" placeholder="SELECT * FRO..registered_customer..." />
-            <marker date="1445577867867" expanded="true" signature="5924:5980" placeholder="SELECT email..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="6253:6345" placeholder="Select Custo..registered_customer..." />
-            <marker date="1445577867867" expanded="true" signature="6828:6847" placeholder="SELECT * FRO..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="6961:7005" placeholder="SELECT * FRO..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="7124:7262" placeholder="SELECT email..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="7381:7440" placeholder="Select * Fro..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="7566:7640" placeholder="Select * FRO..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="7727:7788" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="7942:8029" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="8219:8442" placeholder="SELECT * FRO..reservation..." />
-            <marker date="1445577867867" expanded="true" signature="8596:8661" placeholder="Select Room_..room_options..." />
-            <marker date="1445577867867" expanded="true" signature="9035:9254" placeholder="SELECT hotel..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="9928:10113" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="10267:10311" placeholder="Select * fro..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="10660:10877" placeholder="SELECT * FRO..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="11097:11213" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="11558:11784" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="11958:12100" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="12446:12696" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="13185:13577" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="13708:13801" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="13835:13900" placeholder="ALTER TABLE hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="13999:14097" placeholder="SELECT ${$ro..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="14375:14427" placeholder="SELECT * fro..hotel..." />
-            <marker date="1445577867867" expanded="true" signature="14903:14989" placeholder="SELECT FROM reservation..." />
-            <marker date="1445577867867" expanded="true" signature="15231:15298" placeholder="Select Custo..customer..." />
-            <marker date="1445577867867" expanded="true" signature="15377:15591" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="15611:15710" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="15892:15955" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="16033:16098" placeholder="Select Room_..room_options..." />
-            <marker date="1445577867867" expanded="true" signature="16184:16239" placeholder="SELECT * FRO..hotel_room..." />
-            <marker date="1445577867867" expanded="true" signature="16452:16606" placeholder="SELECT * FRO..registered_customer..." />
-            <marker date="1445577867867" expanded="true" signature="16752:16873" placeholder="SELECT * FRO..reservation..." />
-            <marker date="1445577867867" expanded="true" signature="17175:17385" placeholder="INSERT INTO ..." />
-            <marker date="1445577867867" expanded="true" signature="17505:17582" placeholder="UPDATE reser..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1124,60 +978,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-27.461538">
           <caret line="122" column="241" selection-start-line="122" selection-start-column="185" selection-end-line="122" selection-end-column="241" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modify_reservation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
+        <state vertical-scroll-proportion="0.0">
           <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
-          <folding>
-            <marker date="1445283614826" expanded="true" signature="101:159" placeholder="SELECT * fro..reservation..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/onlinepay.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.164557">
-          <caret line="24" column="15" selection-start-line="24" selection-start-column="15" selection-end-line="24" selection-end-column="15" />
-          <folding>
-            <marker date="1445579043611" expanded="true" signature="127:174" placeholder="SELECT * FRO..reservation..." />
-            <marker date="1445579043611" expanded="true" signature="127:188" placeholder="SELECT * FRO..reservation..." />
-            <marker date="1445579043611" expanded="true" signature="450:492" placeholder="SELECT * fro..hotel_room..." />
-            <marker date="1445579043611" expanded="true" signature="450:502" placeholder="SELECT * fro..hotel_room..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mysqli_connection.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
+        <state vertical-scroll-proportion="0.0">
           <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reservation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.3207547">
-          <caret line="1" column="2" selection-start-line="0" selection-start-column="0" selection-end-line="15" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reserve_action.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.192308">
-          <caret line="37" column="58" selection-start-line="37" selection-start-column="58" selection-end-line="37" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/onlineresult.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.227848">
+        <state vertical-scroll-proportion="0.0">
           <caret line="192" column="69" selection-start-line="192" selection-start-column="69" selection-end-line="192" selection-end-column="69" />
           <folding>
             <marker date="1445541885253" expanded="true" signature="6113:6201" placeholder="insert into ..." />
@@ -1186,28 +1006,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/view_reservation.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8834286">
-          <caret line="80" column="119" selection-start-line="80" selection-start-column="119" selection-end-line="80" selection-end-column="119" />
-          <folding>
-            <marker date="1445580605308" expanded="true" signature="183:346" placeholder="SELECT * FRO..reservation..." />
-            <marker date="1445580605308" expanded="true" signature="183:359" placeholder="SELECT * FRO..reservation..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-22.538462">
-          <caret line="130" column="24" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/hotel_welcome_page.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.923077">
+        <state vertical-scroll-proportion="0.0">
           <caret line="78" column="30" selection-start-line="78" selection-start-column="30" selection-end-line="78" selection-end-column="30" />
           <folding />
         </state>
@@ -1215,7 +1016,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rooms_hotel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
+        <state vertical-scroll-proportion="0.0">
           <caret line="88" column="37" selection-start-line="21" selection-start-column="0" selection-end-line="88" selection-end-column="37" />
           <folding />
         </state>
@@ -1223,7 +1024,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hotel_reservation.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.153847">
+        <state vertical-scroll-proportion="0.0">
           <caret line="105" column="80" selection-start-line="105" selection-start-column="80" selection-end-line="105" selection-end-column="80" />
           <folding>
             <element signature="e#6#89#0#PHP" expanded="true" />
@@ -1235,10 +1036,205 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/hotel_list-on-search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.73077">
+          <caret line="83" column="1" selection-start-line="83" selection-start-column="1" selection-end-line="83" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Reservations_hotel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.816">
-          <caret line="108" column="14" selection-start-line="108" selection-start-column="14" selection-end-line="108" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="150" column="40" selection-start-line="150" selection-start-column="40" selection-end-line="150" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view_reservation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="119" selection-start-line="80" selection-start-column="119" selection-end-line="80" selection-end-column="119" />
+          <folding>
+            <marker date="1445580605308" expanded="true" signature="183:346" placeholder="SELECT * FRO..reservation..." />
+            <marker date="1445580605308" expanded="true" signature="183:359" placeholder="SELECT * FRO..reservation..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reserve_action.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="37" column="58" selection-start-line="37" selection-start-column="58" selection-end-line="37" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/next.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/function2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75242716">
+          <caret line="58" column="0" selection-start-line="58" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/function.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding>
+            <marker date="1446285145865" expanded="true" signature="463:511" placeholder="SELECT * FRO..admin..." />
+            <marker date="1446285145865" expanded="true" signature="1287:1359" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="1735:1997" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="2521:2748" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="3052:3279" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="3339:3558" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="4217:4263" placeholder="SELECT * FRO..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="5003:5075" placeholder="SELECT * FRO..registered_customer..." />
+            <marker date="1446285145865" expanded="true" signature="5923:5979" placeholder="SELECT email..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="6252:6344" placeholder="Select Custo..registered_customer..." />
+            <marker date="1446285145865" expanded="true" signature="6827:6846" placeholder="SELECT * FRO..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="6960:7004" placeholder="SELECT * FRO..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="7123:7261" placeholder="SELECT email..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="7380:7439" placeholder="Select * Fro..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="7565:7639" placeholder="Select * FRO..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="7726:7787" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="7941:8028" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="8218:8441" placeholder="SELECT * FRO..reservation..." />
+            <marker date="1446285145865" expanded="true" signature="8595:8660" placeholder="Select Room_..room_options..." />
+            <marker date="1446285145865" expanded="true" signature="9034:9253" placeholder="SELECT hotel..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="9927:10112" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="10266:10310" placeholder="Select * fro..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="10659:10876" placeholder="SELECT * FRO..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="11096:11212" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="11557:11783" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="11957:12099" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="12445:12695" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="13184:13576" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="13707:13800" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="13834:13899" placeholder="ALTER TABLE hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="14295:14687" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="14818:14911" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="14944:15009" placeholder="ALTER TABLE hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="15095:15193" placeholder="SELECT ${$ro..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="15471:15523" placeholder="SELECT * fro..hotel..." />
+            <marker date="1446285145865" expanded="true" signature="15999:16085" placeholder="SELECT FROM reservation..." />
+            <marker date="1446285145865" expanded="true" signature="16327:16394" placeholder="Select Custo..customer..." />
+            <marker date="1446285145865" expanded="true" signature="16473:16687" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="16707:16806" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="16988:17051" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="17129:17194" placeholder="Select Room_..room_options..." />
+            <marker date="1446285145865" expanded="true" signature="17280:17335" placeholder="SELECT * FRO..hotel_room..." />
+            <marker date="1446285145865" expanded="true" signature="17548:17702" placeholder="SELECT * FRO..registered_customer..." />
+            <marker date="1446285145865" expanded="true" signature="17848:17997" placeholder="SELECT * FRO..reservation..." />
+            <marker date="1446285145865" expanded="true" signature="18299:18509" placeholder="INSERT INTO ..." />
+            <marker date="1446285145865" expanded="true" signature="18629:18706" placeholder="UPDATE reser..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server_access.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reservation.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/User_Login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="82" column="35" selection-start-line="82" selection-start-column="35" selection-end-line="82" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/onlinepay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding>
+            <marker date="1446309342404" expanded="true" signature="127:174" placeholder="SELECT * FRO..reservation..." />
+            <marker date="1446309342404" expanded="true" signature="127:188" placeholder="SELECT * FRO..reservation..." />
+            <marker date="1446309342404" expanded="true" signature="450:492" placeholder="SELECT * fro..hotel_room..." />
+            <marker date="1446309342404" expanded="true" signature="450:502" placeholder="SELECT * fro..hotel_room..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..hotel_room">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/roominfo.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="217" column="110" selection-start-line="217" selection-start-column="110" selection-end-line="217" selection-end-column="110" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/payment.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.696">
+          <caret line="130" column="24" selection-start-line="130" selection-start-column="24" selection-end-line="130" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/room_options.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+          <folding>
+            <element signature="e#6#88#0#PHP" expanded="true" />
+            <marker date="1446322306548" expanded="true" signature="186:256" placeholder="SELECT Room_..room_options..." />
+            <marker date="1446322306548" expanded="true" signature="186:266" placeholder="SELECT Room_..room_options..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/7c3083e4/13846c37-1a44-40e0-98bc-2674e170bacd/ohrms..room_options">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Hotel_registration.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
           <folding />
         </state>
       </provider>
