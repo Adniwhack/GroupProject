@@ -102,7 +102,7 @@ $res = $log->return_room($hotel_email);
 
         while ($data = mysql_fetch_array($res)){
             $room_address = $data['Room_id'];
-            $room = $data['Room_name'];
+            $room = $data['Room_id'];
             $room_cost = $data['Cost_per_unit'];
             $room_type = $data['Room_type'];
             $room_image = $data['Room_photo_location'];
@@ -112,6 +112,7 @@ $res = $log->return_room($hotel_email);
                 </tbody>
                 </table>
             </div>
+
     </div>
 </div>
 </body>

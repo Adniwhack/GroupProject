@@ -42,6 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         else{
             $CountryErr = "Fill this field";
         }
+
         if (!empty($_POST['email'])){
             $Hotel_email = $_POST['email'];
         }
@@ -109,8 +110,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if($nameErr == "" and $addressErr == "" and $cityErr == "" and $CountryErr == "" and  $emailErr == "" and  $contactErr == "" and  $usererr =="" and $passerr  == "" and  $conpasserr == ""){
             $log = new dbFunction();
             $log->create_hotel($Hotel_Username, $Hotel_email , $Hotel_Password, $Hotel_address, $Hotel_city , $Hotel_Country , $Hotel_contact, $Hotel_name);
+            
 
-
+            header("Location:home.html");
         }
 
 
@@ -136,66 +138,65 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
       .captcha, #recaptcha_image, #recaptcha_image img {
     width:100% !important;
 }
-      
+.navbar {
+    color: #FFFFFF;
+    background-color: #161640;
+}
+
+/* OR*/
+
+.nav {
+    color: #FFFFFF;
+    background-color: #161640;
+	
+.nav-pills > li > a {
+  color: #A7A79Bf;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em ;
+  padding: 1px 1px 1px ;
+}
+
+
       </style>
     </head>
     
-    <body>
-        
-                <div class="container-fluid">
+    <body background="images/123.jpg">
+    <nav class="navbar navbar-default">
+		<div class="container-fluid">
+    			<div class="navbar-header">
+      				<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
+					</ul>
+                        </div>
+                    <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+		
 
-            
-                
-                <div class="col-md-12">
-            
-            <nav class="navbar navbar-default" role="navigation" >
-                
-
-                <div class="navbar-header">
-                     <button type="button" class="btn btn-primary btn-md">
-                        
-                          
-          <span class="glyphicon glyphicon-home"></span> Home
-        </button>
-                    
-                    <button type="button" class="btn btn-primary btn-md">
-                         
-          <span class="glyphicon glyphicon-chevron-left"></span> Back
-        </button>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                    </button>                 
-                </div>
-                
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                
-                    <ul class="nav navbar-nav navbar-right">
-                        <button type="submit" class="btn btn-primary btn-md">
-                            <span class=" glyphicon glyphicon-log-in"></span> Login
-                        </button>
-                        <button type="submit" class="btn btn-primary btn-md">
-                            <span class=" glyphicon glyphicon-thumbs-up"></span> About us
-                            
-                        </button>
-                        
-                    </ul>
-                    
-                </div>
-                
-            </nav>
-        </div>
+    		
+      				<ul class="nav nav-pills navbar-right">
         
+        				<!--<li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>-->
+        				<!--li><a href="#"><span class="glyphicon glyphicon-user"><b><font size="4" color="#A7A79B">Profile</font></b></span></a></li-->
+        				<!--<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>-->
+                                <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
+      				<li><a href="#"><span class="glyphicon glyphicon-phone-alt"><b><font size="4" color="#FFF" face="calibri light"> ContactUs</font></b></a></li></ul>
+					
+    			
+  		</div>
+	</nav>
+
         
             <!--Create account for hotel -->
+                <div class="container">
                 <div class="col-md-6">
                     <!--  Create the form horizontally !-->
                     <br><br>
                     <form name = "hotel_registration" class="form-horizontal col-md-10 col-md-offset-1" role="form" align = "left" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                       <legend>Enter your registration details here</legend>
+                        <legend> <font color=" #FFF"> <b> Enter your registration details here </b></font> </legend>
                         
-                        <div class="form-group" align = "center">
-                            <label for="inputName" class="col-md-4 control-label">
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
                                 Hotel name 
+                                </font>
                             </label>
                             <div class="col-md-8">
                                 <input type="inputName" class="form-control" id="inputName" name ="hotel_name" />
@@ -207,10 +208,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                         ?>
                         
+    <!--<div class="form-group">
+      <label for="name">Star ratings(If applicable)</label>
+      <select class="form-control">
+         <option>One star</option>
+         <option>Two stars</option>
+         <option>Three stars</option>
+         <option>Four stars</option>
+         <option>Five stars</option>
+      </select>
+	</div>-->
                         
                         <div class="form-group">
-                            <label for="inputAddress" class="col-md-4 control-label">
-                                Address
+                            <label for="inputAddress" class="col-md-4 control-label"> <font color=" #FFF">
+                                Address </font>
                             </label>
                             
                             <div class="col-md-8">
@@ -223,9 +234,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                         ?>
                         
-                        <div class="form-group" align = "center">
-                            <label for="inputName" class="col-md-4 control-label">
-                                City 
+                        <div class="form-group" >
+                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
+                                City </font>
                             </label>
                             <div class="col-md-8">
                                 <input type="inputName" class="form-control" id="inputName" name = "city"/>
@@ -236,35 +247,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             echo '<div class="alert alert-warning">'.$cityErr.'</div>';
                         }
                         ?>
-                        <div class="form-group" align = "center">
-                            <label for="inputName" class="col-md-4 control-label" >
-                                Country 
-                            </label>
 
+                        <div class="form-group" align = "center">
+                            <label for="inputName" class="col-md-4 control-label" ><font color=" #FFF">
+                                    Country</font>
+                            </label>
+                            <div class="col-md-8">
                             <select class="form-control" name="Country">
                                 <option>Sri Lanka</option>
                                 <option>India</option>
                             </select>
-                            <!--<div class="dropdown" name = "country">
-                                  <button class="btn btn-default  dropdown-toggle" type="button" data-toggle="dropdown">   Country  
-                                  <span class="caret"></span></button>
-                                  <ul class="dropdown-menu dropdown-menu-right" >
-                                    <li><a href="#">Sri Lanka</a></li>
-                                    <li><a href="#">India</a></li>
-                                    
-                                  </ul>
-                                </div>
-                                -->
+                            </div>
                         </div>
-                        <?php
-                        if(!empty($CountryErr)){
-                            echo '<div class="alert alert-warning">'.$CountryErr.'</div>';
-                        }
-                        ?>
-                        
+
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-md-4 control-label" align = "right">
-                                Email ID
+                            <label for="inputEmail3" class="col-md-4 control-label" align = "right"> <font color=" #FFF">
+                                Email ID </font>
                             </label>
                             
                             <div class="col-md-8">
@@ -278,8 +276,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         ?>
 
                         <div class="form-group">
-                            <label for="inputNumber" class="col-md-4 control-label">
-                                Contact No
+                            <label for="inputNumber" class="col-md-4 control-label"> <font color=" #FFF">
+                                Contact No </font>
                             </label>
                             
                             <div class="col-md-8">
@@ -292,9 +290,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         }
                         ?>
                         
-                        <div class="form-group" align = "center">
-                            <label for="inputName" class="col-md-4 control-label">
-                                User name 
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
+                                User name </font>
                             </label>
                             <div class="col-md-8">
                                 <input type="inputName" class="form-control" id="inputName" name = "username"/>
@@ -307,8 +305,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         ?>
                         
                         <div class="form-group" >
-                            <label for="inputPassword" class="col-md-4 control-label">
-                                Password 
+                            <label for="inputPassword" class="col-md-4 control-label"> <font color=" #FFF">
+                                Password </font>
                             </label>
                             <div class="col-md-8">
                                 <input type="password" class="form-control" id="inputName"  name = "password" type = "password"/>
@@ -322,8 +320,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         
                         <div class="form-group" >
                             
-                            <label for="inputPassword" class="col-md-4 control-label">
-                                Confirm password 
+                            <label for="inputPassword" class="col-md-4 control-label"> <font color=" #FFF">
+                                Confirm password </font>
                             </label>
                             <div class="col-md-8">
                                 <input type="password" class="form-control" id="inputName" name = "passwordc" type = "password"/>
@@ -335,19 +333,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             echo '<div class="alert alert-warning">'.$conpasserr.'</div>';
                         }
                         ?>
-                        <div class="form-group" align = "center">
-                            <label for="inputName" class="col-md-4 control-label">
-                                Photos of the hotel
+                        <div class="form-group" >
+                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
+                                Photos of the hotel </font>
                             </label>
                             <div class="col-md-8">
                                 
                                 
-                          <input type="file" name="pic" accept="image/*">
+                          <input type="file" name="pic[]" accept="image/*">
 
                         
                                                     </div>
                         </div>
-                        <p>    I have read and accept the terms of the<a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="test content <a href='' title='test add link'>link on content</a>"data-original-title="test title">User Agreement</a></p>
+                        <p>  <font color=" #FFF">  I have read and accept the terms of the </font><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="test content <a href='' title='test add link'>link on content</a>"data-original-title="test title"> <font color=" #FFF"> <u>User Agreement</u> </font></a></p>
                         
                                         <div class="form-group">
                     <div class="captcha">
@@ -357,8 +355,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         
                         <!-- Adding recaptcha into the page -->
                                     <div class="form-group">
-                <div class="recaptcha_only_if_image">Enter the words above</div>
-                <div class="recaptcha_only_if_audio">Enter the numbers you hear</div>
+                                        <div class="recaptcha_only_if_image"> <font color=" #FFF">Enter the words above</font></div>
+                                        <div class="recaptcha_only_if_audio"><font color=" #FFF">Enter the numbers you hear</font></div>
                 <div class="input-group">
                     <input type="text" id="recaptcha_response_field" name="recaptcha_response_field" class="form-control input-lg" /> <a class="btn btn-default input-group-addon" href="javascript:Recaptcha.reload()"><span class="icon-refresh"></span></a>
              <a class="btn btn-default input-group-addon recaptcha_only_if_image" href="javascript:Recaptcha.switch_type('audio')"><span class="icon-volume-up"></span></a>
@@ -392,6 +390,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 
                             </div>
                         </div>
-                    </form></div>
+                    </form></div> </div>
         
     </body></html>

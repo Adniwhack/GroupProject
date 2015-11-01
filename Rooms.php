@@ -118,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $room_cost = $data['Cost_per_unit'];
             $room_type = $data['Room_type'];
             $room_image = $data['Room_photo_location'];
-            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='Reservations_hotel.php?room_id=".$room."'>Link</a></td></tr>";
+            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='reservation.php?room_id=".$room."'>Link</a></td></tr>";
         }
         ?>
                 </tbody>

@@ -29,11 +29,11 @@
       <column name="address" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Hotel_Name" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
       <column name="City" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <column name="Country" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="Hotel_ID" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
       <column name="telephone_number" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="Hotel_Lat" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
       <column name="Hotel_Lng" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <column name="Hotel_Description" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="email"/>
       <exported-key name="hotel_room_ibfk_1" table="hotel_room" schema="" catalog="ohrms" columns="Hotel_email"/>
     </table>
@@ -47,13 +47,33 @@
       <column name="Hotel_email" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="Room_id" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="Room_type" sqlType="CHAR" precision="20" scale="0" nullable="false" jdbcType="1"/>
-      <column name="Room_AC" sqlType="VARCHAR" precision="10" scale="0" nullable="true" jdbcType="12"/>
       <column name="Room_description" sqlType="TEXT" precision="65535" scale="0" nullable="false" jdbcType="-1"/>
       <column name="Cost_per_unit" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
       <column name="Room_photo_id" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <column name="Room_photo_location" sqlType="LONGTEXT" precision="2147483647" scale="0" nullable="true" jdbcType="-1"/>
+      <column name="Room_weight" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Discount" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="Room_name" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Room_number" sqlType="VARCHAR" precision="60" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="Hotel_email,Room_id"/>
       <foreign-key name="hotel_room_ibfk_1" columns="Hotel_email" ref-table="hotel" ref-schema="" ref-catalog="ohrms" ref-columns="email" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="onlinepayment" schema="" catalog="ohrms" type="TABLE">
+      <column name="payid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="reserid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="holdername" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12"/>
+      <column name="expdate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="country" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="amount" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
+      <primary-key name="PRIMARY" columns="payid"/>
+      <foreign-key name="onlinepayment_ibfk_1" columns="reserid" ref-table="reservation" ref-schema="" ref-catalog="ohrms" ref-columns="ReservationID" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
+    <table name="payment" schema="" catalog="ohrms" type="TABLE">
+      <column name="invoiceid" sqlType="VARCHAR" precision="8" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="paydate" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
+      <column name="amount" sqlType="FLOAT" precision="12" scale="0" nullable="false" jdbcType="7"/>
+      <column name="discount" sqlType="FLOAT" precision="12" scale="0" nullable="true" jdbcType="7"/>
+      <primary-key name="PRIMARY" columns="invoiceid"/>
     </table>
     <table name="registered_customer" schema="" catalog="ohrms" type="TABLE">
       <column name="Customer_ID" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
@@ -73,7 +93,13 @@
       <column name="Checkin" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="Checkout" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <column name="Status" sqlType="VARCHAR" precision="4" scale="0" nullable="true" jdbcType="12"/>
+      <column name="Notes" sqlType="TEXT" precision="65535" scale="0" nullable="true" jdbcType="-1"/>
       <primary-key name="PRIMARY" columns="ReservationID"/>
+      <exported-key name="onlinepayment_ibfk_1" table="onlinepayment" schema="" catalog="ohrms" columns="reserid"/>
+    </table>
+    <table name="room_options" schema="" catalog="ohrms" type="TABLE">
+      <column name="Room_ID" sqlType="VARCHAR" precision="60" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Room_Option" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
     </table>
   </data-source>
 </component>

@@ -13,7 +13,7 @@ $hotel_email = $_SESSION['hotel_email'];
 
 $log = new dbSearch();
 
-$res = $log->return_room($hotel_email);
+$res = $log->return_sorted_room($hotel_email);
 
 
 ?>
@@ -95,22 +95,35 @@ $res = $log->return_room($hotel_email);
                         <th>Cost per Stay</th>
                         <th>Room Type</th>
                         <th>Room Image</th>
-                        <th>Reserve now!</th>
+                        <th>Options</th>
+                        <th>Create Reservation</th>
                     </tr>
                     </thread>
                 <tbody>
         <?php
 
         while ($data = mysql_fetch_array($res)){
-            $room = $data['Room_id'];
+            $room = $data['Room_name'];
             $room_cost = $data['Cost_per_unit'];
             $room_type = $data['Room_type'];
             $room_image = $data['Room_photo_location'];
-            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='Reservations_hotel.php?room_id=".$room."'>Link</a></td></tr>";
+            $Room_options =($log->return_room_options($room));
+            $print_option = "";
+            while($option = mysql_fetch_array($Room_options)){
+                if ($print_option != "") {
+                    $print_option = $print_option . " " . $option['Room_Option'];
+                }
+                else{
+                    $print_option = $option['Room_Option'];
+                }
+            }
+
+            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td>".$print_option."</td><td><a href='Reservations_hotel.php?room_id=".$room."'>Link</a></td></tr>";
         }
         ?>
                 </tbody>
                 </table>
+            <a href="roominfo.php" class="btn btn-primary btn-lg" role="button">Create new Room</a>
             </div>
     </div>
 </div>

@@ -10,7 +10,41 @@ else {
         $Room_Cost = $_POST['Room_Cost'];
         $Room_Type = $_POST['Room_Type'];
         $Room_AC =$_POST['Room_AC'];
+        $Room_Number = 0;
+        $Room_weight= 0;
+        $RoomOptionsMain = array();
+        if($Room_AC == "A"){
+            array_push($RoomOptionsMain, "A/C");
+            $Room_weight += 1;
+        }
+
+        $Room_Option = $_POST['basic_options'];
+
+        if($Room_Option != "N/A"){
+            $RoomOptionsMain = array($Room_Option);
+            $Room_weight += 1;
+        }
+
+        elseif($Room_Option == "N/A"){
+
+
+        }
+        $Room_GndFlr = "N/A";
+        if(isset($_POST['GndFlr'])){
+            array_push($RoomOptionsMain, "GndFlr");
+            $Room_GndFlr = "A";
+            $Room_weight += 1;
+        }
+
+        $RoomOtherOptions = $_POST['options'];
+        $RoomOptionArray = explode(",", $RoomOtherOptions);
+        if (isset($_POST['options'])){
+            $Room_weight += count($RoomOptionArray);
+        }
+        $RoomOptionArray = array_merge($RoomOptionArray, $RoomOptionsMain);
+
         $Room_Desc = $_POST['Room_Description'];
+        //echo $_POST['Room_photo'];
         $Room_photo = $_FILES['Room_photo']['name'];
         //echo $Room_photo;
         $Photo = $_FILES['Room_photo']['tmp_name'];
@@ -20,12 +54,18 @@ else {
         //echo "<img src=images/".$Room_photo.">";
 
         //$Hotel = $_SESSION['hotel_email'];
-
+        //echo $RoomOptionsMain;
         //$hotel = new dbHotel();
         //$hotel->hotel_create_room($Room_Name, $Room_Desc, $Room_Price,$Hotel);
         $log = new dbHotel();
 
-        $log->hotel_create_room($Hotel_email, $Room_Name, $Room_Type, $Room_AC, $Room_photo, $Room_Desc, $target, $Room_Cost);
+        $log->hotel_create_room($Hotel_email, $Room_Name, "0", $Room_Type, $Room_photo, $Room_Desc, $target, $Room_Cost, $RoomOptionArray, $Room_weight);
+
+        $Hotel_ID=$_SESSION['hotel_id'];
+
+
+        header("Location:pROFILE.php?hotel_id=".$Hotel_ID."");
+        exit();
     }
 }
 ?>
@@ -86,7 +126,24 @@ else {
 	padding-right: 40px;
 }
 </style>
-    
+    <script>
+        function showOption(str){
+            if (str.length == 0){
+                document.getElementById("txtHint").innerHTML = "";
+                return;
+            }else {
+                var strarray = str.split(',');
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET", "room_options.php?opt=" + strarray[strarray.length - 1], true);
+                xmlhttp.send();
+            }
+        }
+    </script>
 </head>
 
 <body background="hotelimages/pic3.jpg">
@@ -121,7 +178,7 @@ else {
     <div class="container">
 	<div class="col-sm-8">
 	<div class="jumbotron">
-    <form name = "Room_create" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>  enctype=" multipart/form-data ">
+    <form name = "Room_create" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  enctype="multipart/form-data">
         <legend><h2 align="center">Create New Room</h2></legend>
         <div class="form-group">
             <label for="Room_Name" id="Room_Name" >Room Name</label>
@@ -141,15 +198,29 @@ else {
         </div>
         <div class="form-group">
             <label for="Room_Description" id="Room_Description">Room Description</label>
-            <textarea name="Room_Description" rows="5" cols="10" class="form-control"></textarea>
+            <textarea name="Room_Description" rows="5" cols="5" class="form-control"></textarea>
         </div>
         <div class="form-group">
             <label><input type="radio" name="Room_AC" value="A">Air Conditioning available</label><br>
             <label><input type="radio" name="Room_AC" value = "N/A">Air Conditioning not available</label>
         </div>
+        <div class="form_group">
+            <label for="basic_options">Basic Options</label><br>
+            <label><input type="radio" name="basic_options" value="SeaView">Sea view &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label><input type="checkbox" name="GndFlr" value = "GndFlr">Ground Floor</label><br>
+            <label><input type="radio" name="basic_options" value = "MountainView">Mountain view</label><br>
+            <label><input type="radio" name="basic_options" value = "N/A">Not Applicable</label><br>
+            <br><br>
+        </div>
+        <div class="form-group">
+            <label for="options">Other options:</label>
+            <a href="#" onclick="javascript:void window.open('instructions.html','1443469567306','width=700,height=500,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">How do I use this?</a>
+            <textarea name="options" rows ="5" cols = "5" class="form-control" onkeyup="showOption(this.value)"></textarea>
+            <p>Suggestions : <span id="txtHint"></span></p>
+        </div>
         <div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>
-            <input type="file" name="Room_photo" accept="image/*">
+            <input type="file" name="Room_photo" id="Room_photo" accept="image/*">
         </div>
         <button type="submit" class="btn btn-default" value="submit" >Submit</button>
     </form>

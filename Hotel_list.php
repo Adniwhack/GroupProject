@@ -7,13 +7,12 @@
  *
  *
  */
-require('config.php');
-require('server_access.php');
+
 require_once('function.php');
 
 $search = new dbSearch();
 $res = $search->return_hotel();
-$data = mysql_fetch_array($res) or die(mysql_error());
+
 
 ?>
 <!DOCTYPE html>
@@ -88,7 +87,7 @@ $data = mysql_fetch_array($res) or die(mysql_error());
          while($data = mysql_fetch_array($res)){
              $ID = $data['Hotel_ID'];
              $name = $data['Hotel_Name'];
-             echo '<a href="pROFILE.php?hotel_id='.$ID.'">'.$name.'</a>';
+             echo '<a href="Hotel-profile.php?hotel_id='.$ID.'">'.$name.'</a>';
          }
         ?>
     </div>
