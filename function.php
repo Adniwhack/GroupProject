@@ -62,13 +62,14 @@
                     $resx = $this->check_hotel($email);
                     if ($resx != false) {
 						$que = "INSERT INTO hotel(username, email, password, address, telephone_number, City,  Hotel_ID, Hotel_Name) values ('" . $username . "','" . $email . "','" . $password . "','" . $address . "','" . $contact . "','" . $city . "','" . $Hotel_ID . "','" . $hotel_name . "');";
-						//echo $que;
+						echo $que;
                         $res = mysql_query($que) or die(mysql_error());;
                         echo "<script>alert('You have been inserted into system.')</script>";
                         return $res;
                     }
                     else{
                         echo "<script>alert('Email already taken')</script>";
+						return null;
                     }
 				}
 

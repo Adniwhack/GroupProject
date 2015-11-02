@@ -6,33 +6,33 @@
  * Time: 7:04 PM
  */
 
-$opt = $_REQUEST['opt'];
+if ($_SERVER['REQUEST_METHOD'] == "POST"){
 
-require("function.php");
+    $str = $_POST['text'];
+    //echo $str;
+    $arry = explode( ",", $str);
+    $arr = array();
 
 
-$db= new dbConnect();
 
-$res = mysql_query("SELECT DISTINCT Room_Option FROM room_options WHERE Room_Option LIKE '".$opt."%'");
+    $len = count($arry);
 
-$str = "";
-
-while($data = mysql_fetch_row($res)){
-    if ($str == ""){
-        $str = $data[0];
+    for ($i = 0; $i < $len; $i++){
+        $arry[$i] = trim($arry[$i]);
+        if (!in_array($arry[$i], $arr) ){
+            array_push($arr, $arry[$i]);
+        }
+        //echo $arry[$i];
     }
-    else{
-        $str = $str.",".$data;
+
+    $len = count($arr);
+    for ($i = 0; $i< $len; $i++){
+        echo $arr[$i];
     }
+
+
 
 }
-
-if ($str == ""){
-    $str = "No suggestions";
-}
-echo $str;
-
-
 
 
 ?>

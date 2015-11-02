@@ -15,6 +15,8 @@
     </style>
     <script src="https://maps.googleapis.com/maps/api/js"></script>
     <script>
+      var markers = [];
+
       function initialize() {
         var mapCanvas = document.getElementById('map');
         var mapOptions = {
@@ -24,7 +26,20 @@
         }
         var map = new google.maps.Map(mapCanvas, mapOptions)
       }
+
+      function addmarker(lat, lng){
+          var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(lat, lng),
+              map: map
+          });
+          markers.push(marker);
+      }
+
+
+
+
       google.maps.event.addDomListener(window, 'load', initialize);
+      addmarker(6.14482,80.1034);
     </script>
 </head>
 <body>
