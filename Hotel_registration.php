@@ -104,6 +104,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $emailErr = "Invalid email format";
     }
 
+    function reArrayFiles(&$file_post) {
+
+        $file_ary = array();
+        $file_count = count($file_post['name']);
+        $file_keys = array_keys($file_post);
+
+        for ($i=0; $i<$file_count; $i++) {
+            foreach ($file_keys as $key) {
+                $file_ary[$i][$key] = $file_post[$key][$i];
+            }
+        }
+
+        return $file_ary;
+    }
+
 
 
 
@@ -113,6 +128,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             if ($res != null){
                 $id = md5($Hotel_name);
+                if ($_FILES['upload']) {
+                    $file_ary = reArrayFiles($_FILES['ufile']);
+                    $filepath = "images/".$id;
+                    foreach ($file_ary as $file) {
+                        $Room_photo = $file['name'];
+                        //echo $Room_photo;
+                        $Photo = $file['tmp_name'];
+                        $target = $filepath.basename();
+                        move_uploaded_file($file['tmp_name'], $target);
+                        $Que = "Insert into hotel_photo(email, photo_id, photo_address) VALUES ('','','')";
+                        $res = mysql_query($Que);
+                    }
+                }
                 header("Location:mapmark.php?id=".$id."");
             }
         }
@@ -192,7 +220,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <div class="col-md-6">
                     <!--  Create the form horizontally !-->
                     <br><br>
-                    <form name = "hotel_registration" class="form-horizontal col-md-10 col-md-offset-1" role="form" align = "left" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                    <form name = "hotel_registration" class="form-horizontal col-md-10 col-md-offset-1" role="form" align = "left" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
                         <legend> <font color=" #FFF"> <b> Enter your registration details here </b></font> </legend>
                         
                         <div class="form-group">
@@ -340,9 +368,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                                 Photos of the hotel </font>
                             </label>
                             <div class="col-md-8">
-                                
-                                
-                          <input type="file" name="pic[]" accept="image/*">
+
+
+                                <input type="file" name="pic[]" accept="image/*" multiple>
 
                         
                                                     </div>

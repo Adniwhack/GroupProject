@@ -1,12 +1,17 @@
 <?php
 include "function.php";
+if (isset($_SESSION['customer_login'])){
+    echo "<script>alert('You have already logged in')</script>";
+    sleep(1);
+    header("location:index.html");
+}
 if ($_SERVER['REQUEST_METHOD'] == "POST" ){
     $email = $_POST['email'];
     $password = $_POST['pwd'];
 
     $log = new dbFunction();
     $log->customer_login($email, $password);
-    if ($_SESSION['customer_login']){
+    if (isset($_SESSION['customer_login'])){
         header("location:index.html");
         exit();
     }

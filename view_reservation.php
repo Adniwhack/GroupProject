@@ -66,7 +66,7 @@ echo $QUE ;
 <div class="container">
     <div class="jumbotron">
         <h4>Reservations by you</h4>
-        <<table>
+        <table class="table">
             <tr>
                 <th>Reservation Hotel</th>
                 <th>Room</th>
@@ -78,7 +78,7 @@ echo $QUE ;
             <?php
                 while($data = mysql_fetch_assoc($res)){
 
-                    echo "<td>".$data['Hotel_Name']."</td><td>".$data['Room_name']."</td><td>".$data['Checkin']."</td><td>".$data['Checkout']."</td><td><a href='onlinepay.php?rid=".$data['ReservationID']."' >Link</a></td><td>Modify</td>";
+                    echo "<tr><td>".$data['Hotel_Name']."</td><td>".$data['Room_name']."</td><td>".$data['Checkin']."</td><td>".$data['Checkout']."</td><td><a href='onlinepay.php?rid=".$data['ReservationID']."' >Link</a></td><td>Modify</td></tr>";
                 }
             ?>
         </table>

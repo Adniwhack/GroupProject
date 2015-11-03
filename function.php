@@ -463,7 +463,8 @@ class dbHotel{
 		$results = mysql_num_rows($res);
 
 		if($results >= 1){
-			echo "<script>alert('Cannot Reserve. Room is not available')</script>";
+			header("location:reservation_not_available.php");
+
 
 		}
 		else{
@@ -511,13 +512,15 @@ class dbHotel{
 
 
 			public function user_reserve($HotelID, $UserID, $Room_ID, $Check_In, $Check_out, $notes){
-				$QUE = "SELECT * FROM reservation WHERE not Checkin > ".$Check_In." and RoomID = '".$Room_ID."' or  not Checkout < ".$Check_out." and RoomID = '".$Room_ID."'";
+				$QUE = "SELECT * FROM reservation WHERE ((Checkin >= '".$Check_In."' and Checkin <= '".$Check_out."') or   (Checkout >= '".$Check_In."' and Checkout <= '".$Check_out."' ) or ( Checkin <= '".$Check_In."' and Checkout >= '".$Check_out."')) and RoomID = '".$Room_ID."'";
 				$res = mysql_query($QUE);
 				$results = mysql_num_rows($res);
 
 				if($results >= 1){
-					header("location:reservation.php?room_id=".$Room_ID."&hotel_id=".$HotelID."");
+					//header("location:reservation.php?room_id=".$Room_ID."&hotel_id=".$HotelID."");
+					echo $QUE;
 					echo "<script>alert('Cannot Reserve. Room is not available')</script>";
+
 					exit();
 
 
