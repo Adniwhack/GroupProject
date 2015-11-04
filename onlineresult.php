@@ -184,7 +184,7 @@
 				$amount = test_input($_POST["amount"]);
 				$isValid[3] = True;
 			}
-                        
+            $rid = $_POST['rid'];
 			 
                          //echo count($isValid);
                         //echo count(array_keys($isValid, True)) ;
@@ -192,13 +192,13 @@
                                 
                                 require_once('mysqli_connection.php');
                                   
-				$query = "insert into payment 
-					(reserid, holdername, expdate, country, amount) 
-					values ( 'aa','".$_POST['CardHolder_name']."', '".$_POST['Expire_date']."', '".$_POST['country']."', '".$_POST['amount']."')";
+				$query = "insert into onlinepayment(reserid, holdername, expdate, country, amount)
+					values ( '".$rid."','".$_POST['CardHolder_name']."', '".$_POST['Expire_date']."', '".$_POST['country']."', '".$_POST['amount']."')";
                                    //echo $query;
 				if (mysqli_query($dbconn, $query)) {
 				    //echo "New record added successfully";
 				    $holdername = $expdate = $country = $amount="";
+					header("location:index.html");
 				} else {
 				    echo "Error: " . $query . "<br>" . mysqli_error($dbconn);
 				}

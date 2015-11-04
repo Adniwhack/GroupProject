@@ -14,4 +14,22 @@
             mysql_close();  
         }  
     }  
-?>  
+    class dbConnect2 {
+        function __construct(){
+            require_once('config.php');
+            $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_DATABSE);
+            if (!$conn ){
+                die("Cannot Connect to database");
+            }
+        }
+
+    }
+/*
+Replace with mysqli drivers
+
+
+*/
+
+?>
+
+

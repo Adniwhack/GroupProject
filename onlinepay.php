@@ -1,3 +1,27 @@
+<?php
+
+require_once("mysqli_connection.php");
+if (isset($_GET['rid'])) {
+
+	$rid = $_GET['rid'];
+	$res = mysqli_query($dbconn, "SELECT * FROM reservation where ReservationID = " . $rid . "");
+
+	$rea = mysqli_fetch_assoc($res);
+	$roid = $rea['RoomID'];
+	$checkin = $rea['Checkin'];
+	$checkout = $rea['Checkout'];
+
+	$dateout = new DateTime($checkout);
+	$diff = $dateout->diff(new DateTime($checkin));
+	$diff = $diff->d;
+	$res2  = mysqli_query($dbconn, "SELECT * from hotel_room WHERE Room_id = '".$roid."'");
+	$rea2 = mysqli_fetch_assoc($res2);
+
+	$cost = $rea2['Cost_per_unit'];
+	$amt = $diff * $cost;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +41,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 	
-	  
+	  <script>
+
+	  </script>
   <style>
 .navbar {
     color: #FFFFFF;
@@ -121,7 +147,7 @@
 								<font color = #fff> Amount(Rs):</font>
 							</label>
                             <div class="col-md-8">
-								<input type="number" class="form-control" name="amount"  step="0.01" required />
+								<input type="number" class="form-control" name="amount"  step="0.01" value="<?php echo $amt;?>"required />
 							</div>
 						</div>
                                            
@@ -131,7 +157,7 @@
 						
 						<br>
 						<br>
-			
+						<input type="hidden" name="rid" value="<?php echo $rid;?>" >
 						 <div class="col-sm-offset-9 col-sm-3">
 						
 						<input type="submit" name="submit" value="submit" class = "btn btn-primary btn-md"/>
