@@ -79,7 +79,7 @@ else {
         $Room_photo = $_FILES['Room_photo']['name'];
         //echo $Room_photo;
         $Photo = $_FILES['Room_photo']['tmp_name'];
-        $target = 'images/';
+        $target = 'images/'.$Hotel_ID.'/'.$Room_Name;
         $target = $target.basename($Room_photo);
         move_uploaded_file($_FILES['Room_photo']['tmp_name'], $target);
         //echo "<img src=images/".$Room_photo.">";
