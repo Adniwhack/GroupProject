@@ -1,3 +1,16 @@
+<?php 
+if ($_SERVER['REQUEST_METHOD'] == 'GET'){
+    
+    $rid = $_GET['rid'];
+}
+else{
+    header("location:index.html");
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +45,7 @@
 	
    </head>
     
-    <body background="images/sea.png">
+    <body background="">
         
         
         
@@ -50,12 +63,8 @@
 						<li><a href="#"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
 						
 						<li><form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div> 
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
+						
+						
 					</form></li>		
 					</ul>
                      </ul>
@@ -120,13 +129,15 @@
 							</label>
                             <div class="col-md-8">
 								<input type="number" class="form-control" name="discount"  step="0.01" required />
+                                                                <input type ="hidden" name="rid" value="<?php echo $rid;?>"
 							</div>
 						</div>
 						<br>
 						
 						
 						 <div class="col-sm-offset-9 col-sm-3">
-						<button type="submit" class="btn btn-primary btn-md">Submit</button></div>
+                                                     <br>
+						<button type="submit" class="btn btn-success btn-md">Submit</button></div>
 					</form>	
 						
 				</div>

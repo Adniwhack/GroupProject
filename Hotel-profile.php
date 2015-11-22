@@ -80,19 +80,12 @@ if ($_GET['hotel_id']){
     <!-- Adding google map -->
     <script>
         function initialize() {
-            var lat = <?php echo strval($Hotel_Lat);?>;
-            var lng = <?php echo strval($Hotel_Lng);?>;
-            
             var mapProp = {
-                center:new google.maps.LatLng(lat,lng),
-                zoom:15,
+                center:new google.maps.LatLng(51.508742,-0.120850),
+                zoom:5,
                 mapTypeId:google.maps.MapTypeId.ROADMAP
             };
             var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                map: map
-            })
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -143,7 +136,7 @@ if ($_GET['hotel_id']){
     </script>
     <!--Style for comment box preview -->
     <style>
-        //@import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
+        @import url(//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css);
 
         .detailBox {
             width:320px;
@@ -233,16 +226,27 @@ if ($_GET['hotel_id']){
 
         <div>
             <ul class="nav nav-pills navbar-left">
-                <li><a href="index.html"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>
-                <li><a href="hotel_welcome_page.php"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
-                
+                <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
+                <li ><a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><font size="3" color="#A7A79B">Price Range</font></b><strong class="caret" ></strong></a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b><font size="3" color="#A7A79B">City</font></b><strong class="caret" ></strong></a>
+                </li>
+                <li><form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-md">
+                            Search
+                        </button>
+                    </form></li>
             </ul>
             </ul>
         </div>
         <div>
             <ul class="nav nav-pills navbar-right">
-                <!--<li><a href="#"><span class="glyphicon glyphicon-log-in"><b><font size="4" color="#A7A79B">Login</font></b></span></a></li>
--->                <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"><b><font size="4" color="#A7A79B">Login</font></b></span></a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
 
 
@@ -361,7 +365,7 @@ if ($_GET['hotel_id']){
         <!-- Creating the form for the room availability -->
         <div class="col-md-6" align = "left">
             <br>   </br>
-            <form class="form-horizontal" action="rooms_user.php?hotel_id=<?php echo $hotelID;?> method="get">
+            <form class="form-horizontal " action="rooms_user.php?hotel_id=<?php echo $hotelID;?> method="get">
                 <fieldset>
 
                     <!-- Form Name -->
@@ -402,7 +406,7 @@ if ($_GET['hotel_id']){
 
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-4 ">
             <br></br>
         </div>
     </div>
