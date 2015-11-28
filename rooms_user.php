@@ -125,7 +125,7 @@ if (isset($_GET['hotel_id']) ){
         ?>
                 </tbody>
                 </table>
-            <a href="roominfo.php" class="btn btn-primary btn-lg" role="button">Create new Room</a>
+           
             </div>
     </div>
 </div>

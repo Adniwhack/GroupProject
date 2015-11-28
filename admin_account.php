@@ -1,158 +1,179 @@
-<?php
-require_once('function.php');
-
-
-
-$username = $email = $password = $passwordc =$hotel_name = $address =$city =$country = $contact ="";
-$usererr = $emaerr = $passerr = $conpasserr = $nameerr =$adder = $cityerr =$counerr = $conterr = "";
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $username = $_POST['username'];
-    $username = ($username);
-    if (!preg_match("/^[a-zA-Z0-9_]*$/",$username)) {
-        $usererr = "Only letters numbers and underscore allowed";
-    }
-    else{
-        $usererr = "";
-    }
-
-
-    $email = ($_POST["email"]);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-    }
-    $password = $_POST['password'];
-    $passwordc = $_POST['passwordc'];
-
-    $hotel_name = ($_POST["hotel_name"]);
-    $address = ($_POST['address']);
-    $city = ($_POST['city']);
-    $country = ($_POST['country']);
-    $contact = $_POST['contact'];
-
-
-
-    if ($password != $passwordc){
-        $passerr = "Passwords do not match";
-    }
-    else {
-
-        $ad = new dbFunction();
-        $ad->create_hotel($username, $email, $password, $address, $city, $country, $contact, $hotel_name);
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-    <!--  Adding bootstrap !-->
-  <head>
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script><xp:panel id="dynamicPanel">
+  <xp:button id="dynamicButton1">
+    <xp:this.styleClass>
+      <![CDATA[#{javascript:
+        if (viewScope.get("dynamicButton1") == "set") {
+          return "btn btn-success";
+        } else {
+          return "btn btn-primary";
+        }
+      }]]>
+    </xp:this.styleClass>
+    <xp:this.value>
+      <![CDATA[#{javascript:
+        if (viewScope.get("dynamicButton1") == "set") {
+          return " Sent successfully!";
+        } else {
+          return " Send message";
+        }
+      }]]>
+    </xp:this.value>
+    <xp:text id="dynamicIcon1" tagName="i">
+      <xp:this.styleClass>
+        <![CDATA[#{javascript:
+          if(viewScope.get("dynamicButton1") == "set") {
+            return "icon-ok";
+          } else {
+            return "icon-envelope";
+          }
+        }]]>
+      </xp:this.styleClass>
+    </xp:text>
+    <xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicPanel">
+      <xp:this.action>
+        <![CDATA[#{javascript:
+          if(viewScope.get("dynamicButton1") != "set") {
+            viewScope.put("dynamicButton1", "set");
+          } else {
+            viewScope.put("dynamicButton1", "");
+          }
+        }]]>
+      </xp:this.action>
+    </xp:eventHandler>
+  </xp:button>
+</xp:panel></script>
+  
   <script>
-      function validate(){
+  $('#fire').on('click', function (e) {
 
-      }
-  </script>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+     <?php
+$to      = 'sandaminihimashi@gmail.com';
+$subject = 'The Confirmation';
+$message = 'We have approved your request. Please go through the below link and login using your password';
+$headers = 'From: ohrms2015@gmail.com' . "\r\n" .
+    'Reply-To: ohrms2015@gmail.com' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
 
-  </head>
+mail($to, $subject, $message, $headers);
+?>
+<xp:panel id="dynamicPanel">
+  <xp:button id="dynamicButton1">
+    <xp:this.styleClass>
+      <![CDATA[#{javascript:
+        if (viewScope.get("dynamicButton1") == "set") {
+          return "btn btn-success";
+        } else {
+          return "btn btn-primary";
+        }
+      }]]>
+    </xp:this.styleClass>
+    <xp:this.value>
+      <![CDATA[#{javascript:
+        if (viewScope.get("dynamicButton1") == "set") {
+          return " Sent successfully!";
+        } else {
+          return " Send message";
+        }
+      }]]>
+    </xp:this.value>
+    <xp:text id="dynamicIcon1" tagName="i">
+      <xp:this.styleClass>
+        <![CDATA[#{javascript:
+          if(viewScope.get("dynamicButton1") == "set") {
+            return "icon-ok";
+          } else {
+            return "icon-envelope";
+          }
+        }]]>
+      </xp:this.styleClass>
+    </xp:text>
+    <xp:eventHandler event="onclick" submit="true" refreshMode="partial" refreshId="dynamicPanel">
+      <xp:this.action>
+        <![CDATA[#{javascript:
+          if(viewScope.get("dynamicButton1") != "set") {
+            viewScope.put("dynamicButton1", "set");
+          } else {
+            viewScope.put("dynamicButton1", "");
+          }
+        }]]>
+      </xp:this.action>
+    </xp:eventHandler>
+  </xp:button>
+</xp:panel>
+
+})</script>
+</head>
+<body>
+
+<div class="container">
     
-    <body>
-        
-        <div class="container-fluid">
-            
-	<!-- Adding the image to the page and align it -->
-    <div class="row">
-		<div class="col-md-12">
-			<div class="page-header" align = "center">
-                <img alt="Bootstrap Image Preview" src="E:\Downloads\logo.jpg" align = "left" width="150" height="150" /> 
-				<h1>
-					Online Hotel Reservation Management System - Admin portal
-				</h1>
-			</div>
-		</div> 
-	</div>
-            
-        <!-- Adding the buttons -->    
-        <div class="col-md-3" >
-          <ul class="nav nav-pills nav-stacked">
-                <p> </p>
-                  <li button type="button" class="btn btn-primary btn-lg" href="admin_account.php">
-                        Account Management
-                  </button>  </li>
-                <p> </p>  
-                <li button type="button" class="btn btn-primary btn-lg"> 
-                        System Management
-                  </button>  </li>
-                <p> </p>
-                <li button type="button" class="btn btn-primary btn-lg"> 
-                        Issue Response
-                  </button>  </li>
-                <p> </p>
-                <li button type="button" class="btn btn-primary btn-lg"> 
-                        Message Portal
-                  </button>  </li>
-          </ul>
-    </div>
-            <div class="col-md-9">
-                <form name="login" class="form-control" method="post" action="<?php htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-                <h1>Create New Hotel Account</h1><br><br>
-                <div class="form-group">
-                    <label for="username" id="username">Username</label>
-                    <input type = "text" id ="username" name="username" required><br>
-                </div>
+    
+    
+  <h2>Hotel Details of the System</h2>
+              
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>User Name</th>
+        <th>Hotel Name</th>
+        <th>City</th>
+        <th>Address</th>
+        <th>Confirmation</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
                 <?php
-                    if(!empty($usererr)){
-                        echo '<div class="alert alert-warning">'.$usererr.'</div>';
-                    }
-                ?>
-                <div class="form-group">
-                    <label for="email" id="email">Email Address</label>
-                    <input type = "email" id ="email" name="email" required><br>
-                </div>
-                <div class="form-group">
-                    <label for="password" id="password">Password</label>
-                    <input type = "password" id ="password" name="password" required><br>
-                    <?php
-                    if(!empty($passerr)){
-                        echo '<div class="alert alert-warning">'.$passerr.'</div>';
-                    }
-                    ?>
-                </div>
-                <div class="form-group">
-                    <label for="passwordc" id="passwordc">Confirm Password</label>
-                    <input type = "password" id ="passwordc" name="passwordc" required><br>
-                </div>
-                <div class="form-group">
-                    <label for="hotel_name" id="hotel_name">Hotel Name</label>
-                    <input type = "text" id ="hotel_name" name="hotel_name" required><br>
-                </div>
-                <div class="form-group">
-                    <label for="address" id="address">Address</label>
-                    <input type = "text" id ="address" name="address" required><br>
-                </div>
-                <div class="form-group">
-                    <label for="city" id="city">City</label>
-                    <input type = "text" id ="city" name="city" required><br>
-                </div>
-                <div class="form-group">
-                    <label for="country" id="country">Country</label>
-                    <input type = "text" id ="country" name="country" required><br>
-                </div>
-                <div class="form-group">
-                    <label for="contact" id="contact">Contact Number</label>
-                    <input type = "number" id ="contact" name="contact" required><br>
-                </div>
-                <div class="form-group">
-                   <button class="btn-primary" type="submit">Register</button>
-                </div>
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "ohrms";
 
-                </form>
-            </div>
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        } 
 
+        $sql = "SELECT * FROM hotel";
+        $result = $conn->query($sql);
+          
+        
+        //$conn->close();
+        ?>
+      <tr class="success">
+          <?php
+          if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                echo "<tr><td>".$row["email"]."</td>"."<td>".$row["username"]."</td>"."<td>".$row["Hotel_Name"]."</td>"."<td>".$row["City"]."</td>"."<td>".$row["address"]."</td>";
+                echo ("<td><button class='btn btn-success' type='button' id='fire' ><i class='icon-ok'></i> Send Email</button></td>");
+                echo ("<td><button class='btn btn-danger' type='button'><i class='icon-warning-sign'></i> <a href='delete.php?email=".$row['email']."'>Delete</a></button></td> </tr>");
+
+            }
+                //echo "id:" . $row["email"]. " - Name: " . $row["username"]. " " . $row["Hotel_Name"]. "<br>";
+            
+        } else {
+            echo "0 results";
+        }
+            
+          ?>
+    </tr>
+      
+    </tbody>
+  </table>
 </div>
 
 </body>
-    </html>
+</html>

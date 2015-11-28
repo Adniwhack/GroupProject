@@ -1,30 +1,83 @@
 <?php
 
+
 include "function.php";
+$Fname= $Lname = $Gender = $DOB = $Address = $Country = $Contact = $Email = $Password = $Passwordc  = "";
+$FnameErr= $LnameErr = $GenderErr = $DOBErr = $AddressErr = $CountryErr = $ContactErr = $EmailErr = $PasswordErr = $PasswordcErr = "";
+
+
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $Fname = $_POST['Fname'];
+
+    $Fname=$_POST['Fname'];
+    if (!isset($Fname)){
+      $FnameErr = "THis field is required.";
+    }
+    else{
+      $Fname = test_input($_POST["Fname"]);
+      if (!preg_match("/^[a-zA-Z ]*$/",$Fname)) {
+        $FnameErr = "You can use letters and space only";
+      }
+
+      }
+    
+
     $Lname = $_POST['Lname'];
+    if (!isset($Lname)){
+      $LnameErr = "THis field is required.";
+    }
+    else{
+      $Lname = test_input($_POST["Lname"]);
+      if (!preg_match("/^[a-zA-Z ]*$/",$Lname)) {
+        $LnameErr = "You can use letters and space only";
+      }
+    }
+
     $Gender = $_POST['Gender'];
     $DOB= $_POST['DOB'];
     $Address = $_POST['Address'];
     $Country = $_POST['Country'];
+
     $Contact = $_POST['Contact'];
+    if (isset($Contact)){
+      $Contact = test_input($_POST["Contact"]);
+      if (!preg_match("/^[0-9]{10}$/",$Contact)) {
+      $ContactErr = "You can enter 10 numbers only";
+      }
+    }
+
     $Email = $_POST['email'];
     $Password = $_POST['password'];
     $Passwordc = $_POST['passwordc'];
 
-    if ($Password == $Passwordc) {
+    if ($Password == $Passwordc and $Password != "" and $FnameErr == "" and $LnameErr=="" and $ContactErr=="") {
         $log = new dbFunction();
 
         $log->create_reg_user($Fname, $Lname, $Address, $Contact, $Country, $Email, $Password, "", $Gender, $DOB);
 
 
+       // header("location:index.html");
+       // echo "<script>alert('User Registered')</script>";
+
+
+        $to      = $Email;
+        //echo $to;
+        $subject = 'Register to the OHMRS';
+        $message = 'Congradulations! You have created a new account on OHMRS successfully.';
+        $headers = 'From: ohrms2015@gmail.com' . "\r\n" .
+        'Reply-To: ohrms2015@gmail.com' . "\r\n" .
+        'X-Maillocer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
+        
+    
         header("location:index.html");
-        echo "<script>alert('User Registered')</script>";
-        exit();
     }
+
+
 }
+
+
 
 ?>
 
@@ -87,11 +140,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
       <label for="name">First Name</label>
       <input type="text" class="form-control" id="Fname" name="Fname"
          placeholder="Enter First Name" required>
+         <div class="alert alert-warning" ><?php echo $FnameErr;?></div>
    </div>
   <div class="form-group">
       <label for="name">Last Name</label>
       <input type="text" class="form-control" id="Lname" name="Lname"
          placeholder="Enter Last Name" required>
+         <div class="alert alert-warning" ><?php echo $LnameErr;?></div>
    </div>
 <div class="form-group">
 <label for="gender">Gender</label>
@@ -122,6 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   <div class="form-group">
     <label for="name">contact number</label>
     <input type="text" name="Contact" class="form-control" >
+    <div class="alert alert-warning" ><?php echo $ContactErr;?></div>
   </div>
   
   

@@ -12,8 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" ){
     $log = new dbFunction();
     $log->customer_login($email, $password);
     if (isset($_SESSION['customer_login'])){
-        header("location:index.html");
-        exit();
+        if ($_SESSION['next'] != "reservation"){
+            header("location:index.html");
+            exit();
+        }else{
+            header("location:reservation.php?room_id=".$_SESSION['rroom']."&hotel_id=".$_SESSION['rhot']."");
+            exit();
+        }
     }
     else{
         echo "<script>alert('Username and password do not match')</script>";

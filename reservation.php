@@ -1,6 +1,9 @@
 <?php
 include "function.php";
 if (!isset($_SESSION['customer_login'])){
+    $_SESSION['next'] = "reservation";
+    $_SESSION['rroom'] = $_GET['room_id'];
+    $_SESSION['rhot'] = $_GET['hotel_id'];
 	header("location:user_login.php");
 }
 
@@ -231,7 +234,7 @@ else{
 						<div class="form-group" align = "center">
 							<label for="number" class="col-md-4 control-label" >Contact Number:</label>
                             <div class="col-md-8">
-								<input type="text" class="form-control" name="cnumber" placeholder required />
+								<input type="number" class="form-control" name="cnumber" placeholder required />
 							</div>
 						</div>
 

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Result</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -58,9 +58,7 @@
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
 						</div> 
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
+						
 					</form></li>		
 					</ul>
                      </ul>
@@ -150,7 +148,7 @@
 							</label>
                             <?php if(isset($_POST['amount'])){echo $_POST ["amount"]; }?>
 						</div>
-						<br>
+						
 						
 						<div class="form-group" align = "center">
 							<label for="Discount" class="col-md-4 control-label" >

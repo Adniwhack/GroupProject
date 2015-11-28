@@ -1,19 +1,16 @@
 <?php
 $Message = "";
 require_once('function.php');
-$log = new dbSearch();
+$db = new dbConnect();
 
  if($_SERVER['REQUEST_METHOD'] == 'POST'){
      $City = $_POST['city'];
 
      $Check_In = $_POST['checkin'];
      $Check_Out = $_POST['checkout'];
-     
-    if(isset($_POST['option'])){$Options = $_POST['option'];}
 
-    http_build_query()
-     
-     /*
+     if(isset($_POST['option'])){$Options = $_POST['option'];}
+
      $cquery = $nquery=$inquery = $outquery = $optquery = "";
      if(isset($City)){
          $cquery = "City = '".$City."'";
@@ -154,11 +151,7 @@ WHERE
          }else{
              $Message = "Search Successful";
          }
-     }*/
-
-     //send data to xmlrequest
-     
-     
+     }
  }
 
 ?>
@@ -182,75 +175,35 @@ WHERE
 </style>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
-    
+    var markers = [];
 
-    function load() {
-      var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(7.0, 81),
-        zoom: 5,
-        mapTypeId: 'roadmap'
-      });
-      var infoWindow = new google.maps.InfoWindow;
-
-      // Change this depending on the name of your PHP file
-      downloadUrl("adv_search.php", function(data) {
-        var xml = data.responseXML;
-        var markers = xml.documentElement.getElementsByTagName("marker");
-        var table="<tr><th>Name</th><th>Address</th></tr>";
-        for (var i = 0; i < markers.length; i++) {
-            
-          var name = markers[i].getAttribute("name");
-          var address = markers[i].getAttribute("address");
-          
-          var point = new google.maps.LatLng(
-              parseFloat(markers[i].getAttribute("lat")),
-              parseFloat(markers[i].getAttribute("lng")));
-          var html = "<b>" + name + "</b> <br/>" + address;
-          //var icon = customIcons[type] || {};
-          var marker = new google.maps.Marker({
-            map: map,
-            position: point,
-            //icon: icon.icon
-          });
-          bindInfoWindow(marker, map, infoWindow, html);
-          
-          table += "<tr><td>"+name + "</td><td>" + address + "</td></tr>";
-          
-          
+    function initialize() {
+        var mapCanvas = document.getElementById('map');
+        var mapOptions = {
+            center: new google.maps.LatLng(6.9218386, 79.8562055),
+            zoom: 13,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        document.getElementById("table").innerHTML = table;
-      });
+
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+
+
     }
 
-    function bindInfoWindow(marker, map, infoWindow, html) {
-      google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);
-      });
+    function addmarker(lat, lng, map){
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            animation: google.maps.Animation.DROP;
+        map: map
+    });
+    markers.push(marker);
     }
+    initialize();
 
-    function downloadUrl(url, callback) {
-      var request = window.ActiveXObject ?
-          new ActiveXObject('Microsoft.XMLHTTP') :
-          new XMLHttpRequest;
-
-      request.onreadystatechange = function() {
-        if (request.readyState == 4) {
-          request.onreadystatechange = doNothing;
-          callback(request, request.status);
-        }
-      };
-
-      request.open('GET', url, true);
-      request.send(null);
-    }
-
-    function doNothing() {}
-
-    //]]>
+    google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </head>
-<body onload="load()" onsubmit="load()">
+<body>
 
 <div class="container" >
     <div id="map" class="col-md-5"></div>

@@ -24,7 +24,7 @@ else {
     }
     $str = $str.'"';
 
-    echo $str;
+    //echo $str;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Hotel_email = $_SESSION['hotel_email'];
         $Room_Name = $_POST['Room_Name'];
@@ -79,7 +79,7 @@ else {
         $Room_photo = $_FILES['Room_photo']['name'];
         //echo $Room_photo;
         $Photo = $_FILES['Room_photo']['tmp_name'];
-        $target = 'images/'.$Hotel_ID.'/'.$Room_Name;
+        $target = 'images/';
         $target = $target.basename($Room_photo);
         move_uploaded_file($_FILES['Room_photo']['tmp_name'], $target);
         //echo "<img src=images/".$Room_photo.">";
@@ -284,7 +284,7 @@ else {
         				<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>
 			  		<!--li><a href="#"><span class="glyphicon glyphicon-cog"><b><font size="4" color="#A7A79B">Settings</font></b></a></li-->
 					<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></a></li>
-      				<li><a href="#"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
+      				<li><a href="hotel_logout.php"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
 					
     			</div>
   		</div>
@@ -331,15 +331,16 @@ else {
             <a href="#" onclick="javascript:void window.open('instructions.html','1443469567306','width=700,height=500,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">How do I use this?</a>
             <input id="options" name="options" size="100" class="form-control" >
         </div>
-
-        </div>
-        <div class="form-group">
+<div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>
 
             <input type="file" name="Room_photo" id="Room_photo" accept="image/*">
                 </div>
+            <button type="submit" class="btn btn-default" value="submit" >Submit</button>
         </div>
-        <button type="submit" class="btn btn-default" value="submit" >Submit</button>
+        
+        </div>
+        
     </form>
 	</div>
 	</div>
