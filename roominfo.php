@@ -4,6 +4,27 @@ if(!$_SESSION['hotel_login']){
     header("Location:hotel_login.php");
 }
 else {
+
+    $db= new dbConnect();
+
+    $res = mysql_query("SELECT DISTINCT Room_Option FROM room_options ");
+
+    $str = "";
+
+    while($data = mysql_fetch_row($res) ){
+        if ($data[0] != ""){
+            if ($str == ""){
+                $str = '"'.$data[0];
+            }
+            else{
+                $str = $str.'","'.$data[0];
+            }
+
+        }
+    }
+    $str = $str.'"';
+
+    //echo $str;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $Hotel_email = $_SESSION['hotel_email'];
         $Room_Name = $_POST['Room_Name'];
@@ -38,6 +59,16 @@ else {
 
         $RoomOtherOptions = $_POST['options'];
         $RoomOptionArray = explode(",", $RoomOtherOptions);
+        $len = count($RoomOptionArray);
+        $arr = array();
+        for ($i = 0; $i < $len; $i++){
+            $RoomOptionArray[$i] = trim($RoomOptionArray[$i]);
+            if (!in_array($RoomOptionArray[$i], $arr) ){
+                array_push($arr, $RoomOptionArray[$i]);
+            }
+            //echo $arry[$i];
+        }
+        $RoomOptionArray = $arr;
         if (isset($_POST['options'])){
             $Room_weight += count($RoomOptionArray);
         }
@@ -64,7 +95,7 @@ else {
         $Hotel_ID=$_SESSION['hotel_id'];
 
 
-        header("Location:pROFILE.php?hotel_id=".$Hotel_ID."");
+        header("Location:Hotel-profile.php?hotel_id=".$Hotel_ID."");
         exit();
     }
 }
@@ -82,13 +113,16 @@ else {
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
+
     <link href="css/style.css" rel="stylesheet">
+
+
     <!-- Adding recaptcha file in to the page -->
     <style>
         .captcha, #recaptcha_image, #recaptcha_image img {
             width:100% !important;
         }
-		 
+
 .navbar {
     color: #FFFFFF;
     background-color: #161640;
@@ -99,7 +133,7 @@ else {
 .nav {
     color: #FFFFFF;
     background-color: #161640;
-	
+
 .nav-pills > li > a {
   color: #A7A79Bf;
   font-family: 'Oswald', sans-serif;
@@ -116,7 +150,7 @@ else {
     position: absolute;
 
 }
-  
+
 }
 
 .jumbotron {
@@ -125,24 +159,104 @@ else {
     padding-bottom: 50px;
 	padding-right: 40px;
 }
-</style>
-    <script>
-        function showOption(str){
-            if (str.length == 0){
-                document.getElementById("txtHint").innerHTML = "";
-                return;
-            }else {
-                var strarray = str.split(',');
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function() {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
-                    }
-                }
-                xmlhttp.open("GET", "room_options.php?opt=" + strarray[strarray.length - 1], true);
-                xmlhttp.send();
-            }
+        .ui-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+            float: left;
+            display: none;
+            min-width: 160px;
+            _width: 160px;
+            padding: 4px 0;
+            margin: 2px 0 0 0;
+            list-style: none;
+            background-color: #ffffff;
+            border-color: #ccc;
+            border-color: rgba(0, 0, 0, 0.2);
+            border-style: solid;
+            border-width: 1px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding;
+            background-clip: padding-box;
+            *border-right-width: 2px;
+            *border-bottom-width: 2px;
+
+        .ui-menu-item > a.ui-corner-all {
+            display: block;
+            padding: 3px 15px;
+            clear: both;
+            font-weight: normal;
+            line-height: 18px;
+            color: #555555;
+            white-space: nowrap;
+
+        &.ui-state-hover, &.ui-state-active {
+                               color: #ffffff;
+                               text-decoration: none;
+                               background-color: #0088cc;
+                               border-radius: 0px;
+                               -webkit-border-radius: 0px;
+                               -moz-border-radius: 0px;
+                               background-image: none;
+                           }
         }
+        }
+</style>
+
+    <script>
+        $(function() {
+            var availableTags = [
+                <?php
+                echo $str;
+
+                ?>
+            ];
+            function split( val ) {
+                return val.split( /,\s*/ );
+            }
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
+
+            $( "#options" )
+                // don't navigate away from the field on tab when selecting an item
+                .bind( "keydown", function( event ) {
+                    if ( event.keyCode === $.ui.keyCode.TAB &&
+                        $( this ).autocomplete( "instance" ).menu.active ) {
+                        event.preventDefault();
+                    }
+                })
+                .autocomplete({
+                    minLength: 0,
+                    source: function( request, response ) {
+                        // delegate back to autocomplete, but extract the last term
+                        response( $.ui.autocomplete.filter(
+                            availableTags, extractLast( request.term ) ) );
+                    },
+                    focus: function() {
+                        // prevent value inserted on focus
+                        return false;
+                    },
+                    select: function( event, ui ) {
+                        var terms = split( this.value );
+                        // remove the current input
+                        terms.pop();
+                        // add the selected item
+                        terms.push( ui.item.value );
+                        // add placeholder to get the comma-and-space at the end
+                        terms.push( "" );
+                        this.value = terms.join( ", " );
+                        return false;
+                    }
+                });
+        });
     </script>
 </head>
 
@@ -170,7 +284,7 @@ else {
         				<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>
 			  		<!--li><a href="#"><span class="glyphicon glyphicon-cog"><b><font size="4" color="#A7A79B">Settings</font></b></a></li-->
 					<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></a></li>
-      				<li><a href="#"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
+      				<li><a href="hotel_logout.php"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
 					
     			</div>
   		</div>
@@ -212,17 +326,21 @@ else {
             <label><input type="radio" name="basic_options" value = "N/A">Not Applicable</label><br>
             <br><br>
         </div>
-        <div class="form-group">
+        <div class=form-group" id="options">
             <label for="options">Other options:</label>
             <a href="#" onclick="javascript:void window.open('instructions.html','1443469567306','width=700,height=500,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">How do I use this?</a>
-            <textarea name="options" rows ="5" cols = "5" class="form-control" onkeyup="showOption(this.value)"></textarea>
-            <p>Suggestions : <span id="txtHint"></span></p>
+            <input id="options" name="options" size="100" class="form-control" >
         </div>
-        <div class="form-group">
+<div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>
+
             <input type="file" name="Room_photo" id="Room_photo" accept="image/*">
+                </div>
+            <button type="submit" class="btn btn-default" value="submit" >Submit</button>
         </div>
-        <button type="submit" class="btn btn-default" value="submit" >Submit</button>
+        
+        </div>
+        
     </form>
 	</div>
 	</div>

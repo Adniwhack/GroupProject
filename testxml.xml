@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<markers>
+    <marker>
+        <name>Hotel Deshapriya</name>
+        <address>241/68, Kings Road, Matara</address>
+        <lat/>
+        <lng/>
+    </marker>
+    <marker>
+        <name>Neelas Guesthouse and Beach Restaurant</name>
+        <address>Hikkaduwa</address>
+        <lat>6.125</lat>
+        <lng>80.1087</lng>
+    </marker>
+    <marker>
+        <name>Hotel Niro</name>
+        <address>No. 10, Some Street, Narigama</address>
+        <lat>6.14482</lat>
+        <lng>80.1034</lng>
+    </marker>
+    <marker>
+        <name>Hotel Thilina</name>
+        <address>No. 3, Park Road, Kurunegala</address>
+        <lat/>
+        <lng/>
+    </marker>
+</markers>

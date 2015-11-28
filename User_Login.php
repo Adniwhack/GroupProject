@@ -1,14 +1,24 @@
 <?php
 include "function.php";
+if (isset($_SESSION['customer_login'])){
+    echo "<script>alert('You have already logged in')</script>";
+    sleep(1);
+    header("location:index.html");
+}
 if ($_SERVER['REQUEST_METHOD'] == "POST" ){
     $email = $_POST['email'];
     $password = $_POST['pwd'];
 
     $log = new dbFunction();
     $log->customer_login($email, $password);
-    if ($_SESSION['customer_login']){
-        header("location:index.html");
-        exit();
+    if (isset($_SESSION['customer_login'])){
+        if ($_SESSION['next'] != "reservation"){
+            header("location:index.html");
+            exit();
+        }else{
+            header("location:reservation.php?room_id=".$_SESSION['rroom']."&hotel_id=".$_SESSION['rhot']."");
+            exit();
+        }
     }
     else{
         echo "<script>alert('Username and password do not match')</script>";

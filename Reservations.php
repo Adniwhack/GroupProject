@@ -5,8 +5,8 @@
 		$_SESSION['Reservation'] = true;
         //Enter redirect here
 
-        header('location:hotel_login.php');
-		exit();
+        //header('location:hotel_login.php');
+		//exit();
     }
 	else{
 

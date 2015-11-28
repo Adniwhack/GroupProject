@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Grayscale - Start Bootstrap Theme</title>
+    <title>OHRMS Home Page</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -172,9 +172,9 @@ lert('Invalid date format!');
                 <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     <i class="fa fa-bars"></i>
                 </button-->
-				<ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li></ul>
+				<ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=100px width=100px align="left"></li></ul>
                 <a class="navbar-brand page-scroll" href="#page-top">
-                    <!--i class="fa fa-play-circle"></i-->  <span class="light">Online Hotel Reservation and Management System</span> 
+                    <!--i class="fa fa-play-circle"></i-->  <!--span class="light">Online Hotel Reservation and Management System</span--> 
                 </a>
             </div>
 
@@ -186,12 +186,17 @@ lert('Invalid date format!');
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Search</a>
+                        <a class="page-scroll" href="#loginsignup">Login & Sign up</a>
+                    </li>
+                    
+                
+                    <li>
+                        <a class="page-scroll" href="#search">Search</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#download">About Us</a>
+                        <a class="page-scroll" href="#contact">Contact Us</a>
                     </li>
-					
+				
                     
                 </ul>
             </div>
@@ -206,8 +211,8 @@ lert('Invalid date format!');
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
-                        <!--h1 class="brand-heading">Let's Get Started for your Next Holiday!!!</h1-->
-                        <p class="intro-text">Let's Get Started for your Next Holiday!!!</p>
+                        <!--h1 class="brand-heading">OHRMS </h1-->
+                        <p class="intro-text"> Online Hotel Reservation and Management System <br> <br>Let's get started for your next vacation!</p>
                         <a href="#about" class="btn btn-circle page-scroll">
                             <i class="fa fa-angle-double-down animated"></i>
                         </a>
@@ -217,16 +222,14 @@ lert('Invalid date format!');
         </div>
     </header>
 
-    <!-- About Section -->
-    <section id="about" class="container content-section text-center">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2">
-			
+    <!-- search Section -->
+    <section id="search" class="container content-section text-center" >
+      
 				<!--form-->
 		<form action="hotel_list-on-search.php" name="search" method="post">
   			<div class="form-group">
 				<!--searchin city-->
-				<label for="searchin"><font size="4" color="black"><b>Search in:</b></font></label><br>
+				<label for="searchin"><font size="4" color="black" ><b>Search in:</b></font></label><br>
 				
 				<select class="form-control" name="city" >
 					
@@ -262,14 +265,32 @@ lert('Invalid date format!');
 				
 			</div>
 		</form>
-		
-                <!--h2>About Grayscale</h2>
-                <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
-                <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
-            </div-->
-        </div>
-    </section>
+		</section>
+		<!--section id="about" class="content-section text-center">
+                 <ul>
+        <li> <a href="#">
+          <div class="story-img"><img src="images/pic1.jpg"/></div>
+          <div class="story-box">
+            <h4>Who are we?</h4>
+            <p>A leading Sri Lankan company who provides software-as-a-service, aimed at hotels to automate their reservation process, to promote their services online, and to get access to vast customer segment.</p>
+          </div>
+          </a> </li>
+        <li> <a href="#">
+          <div class="story-img"><img src="images/pic2.jpg"/></div>
+          <div class="story-box">
+            <h4>Are you bothering to find the best place to spend your this vacation?</h4>
+            <p>Now you can search a place through the Online Hotel Reservation and Management System.You can search hotels relavent to several categories such as rating(star),location,prices.</p>
+          </div>
+          </a> </li>
+        <li> <a href="#">
+          <div class="story-img"><img src="images/pic3.jpg"/></div>
+          <div class="story-box">
+            <h4>Are you searching for a best place for your businesses?</h4>
+            <p>OHRMS is a best place for hotels also.You can have your own profiles in the OHRMS and manage them easily . We supply the rating and customer feedback features to your hotels ,then a foreigner can validate your hospitality through the OHRMS.</p>
+          </div>
+          </a> </li>
+      </ul>
+    </section-->
 
     <!-- Download Section -->
     <!--section id="download" class="content-section text-center">
@@ -283,30 +304,51 @@ lert('Invalid date format!');
             </div>
         </div>
     </section-->
-
-    <!-- Contact Section -->
-    <!--section id="contact" class="container content-section text-center">
+	<!-- login sign up Section -->
+	<section id="loginsignup" class="container content-section text-center" >
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
-                <h2>Contact Start Bootstrap</h2>
-                <p>Feel free to email us to provide some feedback on our templates, give us suggestions for new templates and themes, or to just say hello!</p>
-                <p><a href="mailto:feedback@startbootstrap.com">feedback@startbootstrap.com</a>
+               <h2>login and Sign Up</h2>
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="hotel_login.php" class="btn btn-default btn-lg"><span class="network-name">Hotel</span></a>
+                    </li>
+                    <li>
+                        <a href="user_login.php" class="btn btn-default btn-lg"><span class="network-name">Visitor</span></a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+		
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Contact Us</h2>
+                <p>Feel free to contact us!</p>
+                <p><a href="mailto:ohrms2015@gmail.com">ohrms2015@gmail.com</a>
                 </p>
                 <ul class="list-inline banner-social-buttons">
                     <li>
-                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-facebook fa-fw"></i> <span class="network-name">Facebook</span></a>
                     </li>
                     <li>
-                        <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
                     </li>
                     <li>
-                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Google+</span></a>
                     </li>
                 </ul>
             </div>
         </div>
 		</div>
-    </section-->
+    </section>
 
     <!-- Map Section -->
     <!--div id="map"></div-->

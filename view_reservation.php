@@ -10,7 +10,7 @@ $log = new dbFunction();
 $user_id = $_SESSION["customer_ID"];
 $QUE = "SELECT * FROM reservation INNER JOIN hotel_room on hotel_room.Room_id= reservation.RoomID INNER Join hotel on hotel.Hotel_ID = reservation.HotelID WHERE UserID = '".$user_id."'";
 $res = mysql_query($QUE);
-echo $QUE ;
+//echo $QUE ;
 
 
 
@@ -66,7 +66,7 @@ echo $QUE ;
 <div class="container">
     <div class="jumbotron">
         <h4>Reservations by you</h4>
-        <<table>
+        <table class="table">
             <tr>
                 <th>Reservation Hotel</th>
                 <th>Room</th>
@@ -78,7 +78,7 @@ echo $QUE ;
             <?php
                 while($data = mysql_fetch_assoc($res)){
 
-                    echo "<td>".$data['Hotel_Name']."</td><td>".$data['Room_name']."</td><td>".$data['Checkin']."</td><td>".$data['Checkout']."</td><td><a href='onlinepay.php?rid=".$data['ReservationID']."' >Link</a></td><td>Modify</td>";
+                    echo "<tr><td>".$data['Hotel_Name']."</td><td>".$data['Room_name']."</td><td>".$data['Checkin']."</td><td>".$data['Checkout']."</td><td><a href='onlinepay.php?rid=".$data['ReservationID']."' >Link</a></td><td>Modify</td></tr>";
                 }
             ?>
         </table>
