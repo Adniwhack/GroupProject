@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 }
   
-}
+
 
 .jumbotron {
     padding-left: 0px;

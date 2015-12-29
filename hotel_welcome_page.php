@@ -77,7 +77,7 @@ include('function.php');
 				
     			<div class="col-sm-2 col-sm-offset-4 text-center"><br><br><div class="btn-group-vertical" role="group" aria-label="...">
 					<a href="Hotel-profile.php?hotel_id=<?php echo $_SESSION['hotel_id']; ?>" class="btn btn-primary btn-lg" role="button">Profile Page</a>
-					<a href="payment.php" class="btn btn-primary btn-lg" role="button">Add manual payment</a>
+                                        <a href="manual_reserve.php" class="btn btn-primary btn-lg" role="button">Add Reservation Details</a>
 					
 					<a href="#" class="btn btn-primary btn-lg" role="button">View Feedback</a></div>
 
