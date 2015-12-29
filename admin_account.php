@@ -129,6 +129,7 @@ mail($to, $subject, $message, $headers);
         <th>City</th>
         <th>Address</th>
         <th>Confirmation</th>
+        <th>Approve</th>
         <th>Delete</th>
       </tr>
     </thead>
@@ -146,7 +147,7 @@ mail($to, $subject, $message, $headers);
             die("Connection failed: " . $conn->connect_error);
         } 
 
-        $sql = "SELECT * FROM hotel";
+        $sql = "SELECT * FROM hotel where Approve=0";
         $result = $conn->query($sql);
           
         
@@ -159,6 +160,7 @@ mail($to, $subject, $message, $headers);
             while($row = $result->fetch_assoc()) {
                 echo "<tr><td>".$row["email"]."</td>"."<td>".$row["username"]."</td>"."<td>".$row["Hotel_Name"]."</td>"."<td>".$row["City"]."</td>"."<td>".$row["address"]."</td>";
                 echo ("<td><button class='btn btn-success' type='button' id='fire' ><i class='icon-ok'></i> Send Email</button></td>");
+                echo ("<td><button class='btn btn-success' type='button' id='fire' ><i class='icon-ok'></i><a href='approve.php?email=".$row['email']."'> Approve</a></button></td>");
                 echo ("<td><button class='btn btn-danger' type='button'><i class='icon-warning-sign'></i> <a href='delete.php?email=".$row['email']."'>Delete</a></button></td> </tr>");
 
             }
