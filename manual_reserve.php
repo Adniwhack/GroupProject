@@ -228,29 +228,23 @@ $(function() {
         </div>
     <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
 	<ul class="nav nav-pills navbar-right">
-        
-        		<!--<li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>-->
-        		<!--li><a href="#"><span class="glyphicon glyphicon-user"><b><font size="4" color="#A7A79B">Profile</font></b></span></a></li-->
-        		<!--<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>-->
-                <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
 				<li><a href="#"><span class="glyphicon glyphicon-phone-alt"><b><font size="4" color="#FFF" face="calibri light"> ContactUs</font></b></a></li></ul>
 					
     			
   	</div>
 	</nav>
-     <h2 align = "center">Room Details of the System</h2>  
-     <form class="navbar-form" role="search"align = "center"  action="<?php  htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
-						<div class="form-group">
-                                                    <input type="text" name="datefilter" value="" class="form-control"/>
-
-                                                    <input type="text" align = "right" class="form-control" id="roomid" name = "roomid" placeholder="Category Name, Room ID"/>
-         
-						</div> 
-						<button type="submit" class="btn btn-default">
-							Search
-						</button>
-					</form>
+    <h2 align = "center">Room Details of the System</h2>  
+    <form class="navbar-form" role="search"align = "center"  action="<?php  htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <div class="form-group">
+            <input type="text" name="datefilter" value="" class="form-control"/>
+            <input type="text" align = "right" class="form-control" id="roomid" name = "roomid" placeholder="Category Name, Room ID"/>
+        </div> 
+	<button type="submit" class="btn btn-default">
+            Search
+	</button>					
+    </form>
      
   
 
