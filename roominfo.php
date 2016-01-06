@@ -325,7 +325,7 @@ else {
     		
       				<ul class="nav nav-pills navbar-right">
         
-        				<li><a href="hotel_rooms.php"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
+                                    <li><a href="rooms_hotel.php"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
         				<!--li><a href="#"><span class="glyphicon glyphicon-user"><b><font size="4" color="#A7A79B">Profile</font></b></span></a></li-->
         				<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>
 			  		<!--li><a href="#"><span class="glyphicon glyphicon-cog"><b><font size="4" color="#A7A79B">Settings</font></b></a></li-->
@@ -353,7 +353,7 @@ else {
             </select>
         </div>
         <div class="form-group">
-            <label for="Room_Cost" id="Room_Cost">Cost per stay</label>
+            <label for="Room_Cost" id="Room_Cost">Cost per stay(Rs)</label>
             <input type="text" id="Room_Cost" name="Room_Cost">
         </div>
         <div class="form-group">
