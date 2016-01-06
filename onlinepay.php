@@ -44,7 +44,8 @@ if (isset($_GET['rid'])) {
 	  <script>
 
 	  </script>
-  <style>
+<style>
+      
 .navbar {
     color: #FFFFFF;
     background-color: #161640;
@@ -62,54 +63,39 @@ if (isset($_GET['rid'])) {
   font-size: 0.8em ;
   padding: 1px 1px 1px ;
 }
+
+
 </style>
-	
    </head>
     
-    <body background="hotelimages/water.jpg">
+    <body style="background-color:white"><!--changed-->
 	<!-- Navigation bar which is in the top of the page -->
                
-        <nav class="navbar navbar-default">
-		<div class="container-fluid">
-				<div class="navbar-header">
-					<ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
-					</ul>
-				</div>
-		
-		<div>
-					 <ul class="nav nav-pills navbar-left">
-                        <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>  
-						<li><a href="#"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
-						
-						<li><form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div> 
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
-					</form></li>		
-					</ul>
-                     </ul>
-				</div>
-				<div>
-						<ul class="nav nav-pills navbar-right">
-						   
-						 <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
-						 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
-				
-				
-				
-				</div>
-                        
-				</div>
-				
-				
-				</div>
-				
-			</nav>
-          
+<nav class="navbar navbar-default navbar-fixed-top navbar-responsive">
+	<div class="container-fluid">
+    <div class="navbar-header ">
+    <ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
+	</ul>
+        
+    <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+	</div>
+	<ul class="nav nav-pills navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></span></a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#FFF" face="calibri light">Back</font></b></span></a></li>
+						 <li><a href="aboutuus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light">AboutUs</font></b></span></a></li>
+						 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#FFF" face="calibri light">Rooms</font></b></span></a></li>
 			
+	</ul>
+                        
+						
+	
+
+			
+	</div>
+		
+</nav>
+          
+	<br><br><br><br>		
 			<div class="row">
 			
 			<div class="col-sm-offset-2 col-sm-6">
@@ -118,11 +104,13 @@ if (isset($_GET['rid'])) {
                     
                     
                     <form class="form-horizontal col-md-10 col-md-offset-1" data-toggle="validator" role="form" align = "center" method="post" action="onlineresult.php" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }">
-					   <legend><font color=#00003D> Online Payment Details </font></legend>
+					   <legend><font color=#00003D> <b>Online Payment Details </b></font></legend>
+					   <p><h5><b><font color="red">  All fields are required to be filled</font></b></h5></p><!--changed-->
+						<br><br>
                          
 						<div class="form-group" align = "center">
 							<label for="CardHolder_name" class="col-md-4 control-label" >
-								<font color = #fff> Card Holder's name: </font>
+								<font color = "green"> Card Holder's name: </font><!--changed-->
 							</label>
                             <div class="col-md-8">
 								<input type="text" class="form-control" name="CardHolder_name" required />
@@ -130,21 +118,21 @@ if (isset($_GET['rid'])) {
 						</div>
                                             <div class="form-group" align = "center">
 							<label for="Expire_date" class="col-md-4 control-label" >
-								<font color = #fff> Expiration Date:</font></label>
+								<font color = "green"> Expiration Date:</font></label><!--changed-->
                                                 <div class="col-md-8">
 								<input type="date" class="form-control" name="Expire_date" placeholder="dd/mm/yyyy or dd-mm-yyyy" required />
 							</div>
 						</div>
 						<div class="form-group" align = "center">
 							<label for="country" class="col-md-4 control-label">
-								<font color = #fff> Country</font></label>
+								<font color = "green"> Country</font></label><!--changed-->
 							<div class="col-md-8">
 								<input type="text" class="form-control" name="country" required />
 							</div>
 						</div>
                                             <div class="form-group" align = "center">
 							<label for="Amount" class="col-md-4 control-label" >
-								<font color = #fff> Amount(Rs):</font>
+								<font color = "green"> Amount(Rs):</font><!--changed-->
 							</label>
                             <div class="col-md-8">
 								<input type="number" class="form-control" name="amount"  step="0.01" value="<?php echo $amt;?>"required />
@@ -153,14 +141,14 @@ if (isset($_GET['rid'])) {
                                            
 												
 						<input type="checkbox" name="checkbox" value="check" id="agree" /> 
-						<font color = #fff> <b>I have read and agree to the Terms and Conditions and Privacy Policy</b></font>
+						<font color = "black"> <b>I have read and agree to the Terms and Conditions and Privacy Policy</b></font>
 						
 						<br>
 						<br>
 						<input type="hidden" name="rid" value="<?php echo $rid;?>" >
 						 <div class="col-sm-offset-9 col-sm-3">
 						
-						<input type="submit" name="submit" value="submit" class = "btn btn-primary btn-md"/>
+						<input type="submit" name="submit" value="submit" class = "btn btn-success btn-md"/>
 					</form>	
 						
 				</div>

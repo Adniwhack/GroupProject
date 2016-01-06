@@ -22,10 +22,7 @@ if (isset($_GET)){
     $hotel = $city=  "";
     $opt = [];
     
-    if (isset($_GET['hotel_name'])){
-        //echo name
-        $hotel = $_GET['hotel_name'];
-    }
+    
     if (isset($_GET['city'])){
         //echo city
         $city = $_GET['city'];
@@ -35,9 +32,18 @@ if (isset($_GET)){
         $opt = $_GET['options'];
 
     }
+    if (isset($_GET['check_in'])){
+        $checkin = $_GET['check_in'];
+    }
+    if (isset($_GET['check_out'])){
+        $checkout = $_GET['check_out'];
+    }
+    if (isset($_GET['options'])){
+       $opt =  $_GET['options'];
+       
+    }
 
-
-    $res = $search->advanced_search($hotel, $city, $opt, "","");
+    $res = $search->adv_search( $city, $checkin, $checkout, $seaview, $MtnView, $GndFlr, $Single, $double, $triple, $ac);
 
     header("Content-type: text/xml");
 

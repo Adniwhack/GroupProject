@@ -26,11 +26,9 @@ $out = $p->render('c2');
     <script src="lib/js/jquery.min.js"></script>
     <script src="lib/js/chartphp.js"></script>
     <link rel="stylesheet" href="lib/js/chartphp.css">
-    
-    
   </head>
     
-    <body background="green.jpg">
+    <body>
         
         <div class="container-fluid">
             
@@ -38,7 +36,7 @@ $out = $p->render('c2');
     <div class="row">
 		<div class="col-md-12">
 			<div class="page-header" align = "center">
-                <img alt="Bootstrap Image Preview" src="logotra.png" align = "left" width="150" height="150" /> 
+                <img alt="Bootstrap Image Preview" src="E:\Downloads\logo.jpg" align = "left" width="150" height="150" /> 
 				<h1>
 					Online Hotel Reservation Management System - Admin portal
 				</h1>
@@ -50,25 +48,30 @@ $out = $p->render('c2');
         <div class="col-md-3" >
           <ul class="nav nav-pills nav-stacked">
                 <p> </p>
-                <li><a class="btn btn-primary btn-lg" button type="button"  href="admin_account.php" role="button">Account Management</a></li>
-               
+                  <li button type="button" class="btn btn-primary btn-lg" href="admin_account.php">
+                        Account Management
+                  </button>  </li>
                 <p> </p>  
-                <li><a class="btn btn-primary btn-lg" button type="button"  href="under_cons.php" role="button">System Management</a></li>
+                <li button type="button" class="btn btn-primary btn-lg"> 
+                        System Management
+                  </button>  </li>
                 <p> </p>
-                <li><a class="btn btn-primary btn-lg" button type="button"  href="under_cons.php" role="button">Issue Response</a></li>
-      
+                <li button type="button" class="btn btn-primary btn-lg"> 
+                        Issue Response
+                  </button>  </li>
                 <p> </p>
-                <li><a class="btn btn-primary btn-lg" button type="button"  href="under_cons.php" role="button">Message Portal</a></li>
-
+                <li button type="button" class="btn btn-primary btn-lg"> 
+                        Message Portal
+                  </button>  </li>
           </ul>
             </div >
-             <div class="col-md-3"></div><!--Space to insert notification system here-->
+             <div class="col-md-6"></div><!--Space to insert notification system here-->
             <div class = "col-md-3">
             <style>
                 /* white color data labels */
                 .jqplot-data-label{color:white;}
             </style>
-            <div id="chart" style="width:40%; min-width:350px;">
+            <div id="chart" style="width:40%; min-width:450px;">
                 <?php echo $out; ?>
             </div>
             </div>

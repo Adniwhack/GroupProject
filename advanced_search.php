@@ -1,16 +1,25 @@
 <?php
 $Message = "";
 require_once('function.php');
-$db = new dbConnect();
+$log = new dbSearch();
 
  if($_SERVER['REQUEST_METHOD'] == 'POST'){
      $City = $_POST['city'];
 
      $Check_In = $_POST['checkin'];
      $Check_Out = $_POST['checkout'];
+     
+    if(isset($_POST['option'])){$Options = $_POST['option'];}
 
-     if(isset($_POST['option'])){$Options = $_POST['option'];}
-
+    if(isset($_POST['View'])){$view = $_POST['View'];}
+    if(isset($_POST['Bed'])){$bed = $_POST['Bed'];}
+    
+    $quearray = array('city'=>$City, 'check_in'=>$Check_In, 'check_out'=>$Check_Out, 'options'=>$Options, 'view'=>$view, 'bed'=>$bed);
+    $opt = http_build_query($quearray);
+    $url = "adv_search.php?".$opt;
+    echo $url;
+     
+     /*
      $cquery = $nquery=$inquery = $outquery = $optquery = "";
      if(isset($City)){
          $cquery = "City = '".$City."'";
@@ -151,7 +160,11 @@ WHERE
          }else{
              $Message = "Search Successful";
          }
-     }
+     }*/
+
+     //send data to xmlrequest
+     
+     
  }
 
 ?>
@@ -175,35 +188,75 @@ WHERE
 </style>
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 <script>
-    var markers = [];
+    
 
-    function initialize() {
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-            center: new google.maps.LatLng(6.9218386, 79.8562055),
-            zoom: 13,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+    function load() {
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(7.0, 81),
+        zoom: 5,
+        mapTypeId: 'roadmap'
+      });
+      var infoWindow = new google.maps.InfoWindow;
+
+      // Change this depending on the name of your PHP file
+      downloadUrl("adv_search.php", function(data) {
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName("marker");
+        var table="<tr><th>Name</th><th>Address</th></tr>";
+        for (var i = 0; i < markers.length; i++) {
+            
+          var name = markers[i].getAttribute("name");
+          var address = markers[i].getAttribute("address");
+          
+          var point = new google.maps.LatLng(
+              parseFloat(markers[i].getAttribute("lat")),
+              parseFloat(markers[i].getAttribute("lng")));
+          var html = "<b>" + name + "</b> <br/>" + address;
+          //var icon = customIcons[type] || {};
+          var marker = new google.maps.Marker({
+            map: map,
+            position: point,
+            //icon: icon.icon
+          });
+          bindInfoWindow(marker, map, infoWindow, html);
+          
+          table += "<tr><td>"+name + "</td><td>" + address + "</td></tr>";
+          
+          
         }
-
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-
-
+        document.getElementById("table").innerHTML = table;
+      });
     }
 
-    function addmarker(lat, lng, map){
-        var marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat, lng),
-            animation: google.maps.Animation.DROP;
-        map: map
-    });
-    markers.push(marker);
+    function bindInfoWindow(marker, map, infoWindow, html) {
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent(html);
+        infoWindow.open(map, marker);
+      });
     }
-    initialize();
 
-    google.maps.event.addDomListener(window, 'load', initialize);
+    function downloadUrl(url, callback) {
+      var request = window.ActiveXObject ?
+          new ActiveXObject('Microsoft.XMLHTTP') :
+          new XMLHttpRequest;
+
+      request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+          request.onreadystatechange = doNothing;
+          callback(request, request.status);
+        }
+      };
+
+      request.open('GET', url, true);
+      request.send(null);
+    }
+
+    function doNothing() {}
+
+    //]]>
 </script>
 </head>
-<body>
+<body onload="load()" onsubmit="load()">
 
 <div class="container" >
     <div id="map" class="col-md-5"></div>
@@ -217,11 +270,15 @@ WHERE
 
             <label for="checkin">Check In Date</label><input type="date" name="checkin" required><br>
            <label for="checkout">Check Out Date</label><input type="date" name="checkout" required><br>
-            <input type="checkbox" value="SeaView" name="option[]"><label for="option">Sea View</label><br>
-            <input type="checkbox" value="Mountain" name="option[]"><label for="option">Mountain</label><br>
+           <input type="radio" value="Sea" name="View"><label for="option">Sea View</label><br>
+            <input type="radio" value="Mtn" name="View"><label for="option">Mountain</label><br>
             <input type="checkbox" value="GndFlr" name="option[]"><label for="option">Ground Floor</label><br>
+            <input type="checkbox" value="AC" name="option[]"><label for="option">Room A/C</label><br>
+            <input type="radio" value="S" name="Bed"><label for="Bed">Single Bed</label><br>
+            <input type="radio" value="D" name="Bed"><label for="Bed">Double Bed</label><br>
+            <input type="radio" value="T" name="Bed"><label for="Bed">Triple Bed</label><br>
             <label for="others">Other Options</label><input type="text" name="others"><br>
-            <input type="submit" placeholder="Search">
+            <input type="submit" value="Search">
         </form>
         </div>
         <h2>The hotel list</h2>

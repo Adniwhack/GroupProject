@@ -65,7 +65,7 @@ include('function.php');
         				<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>
 			  		<!--li><a href="#"><span class="glyphicon glyphicon-cog"><b><font size="4" color="#A7A79B">Settings</font></b></a></li-->
 					<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></a></li>
-      				<li><a href="hotel_logout.php"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
+      				<li><a href="#"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
 					
     			</div>
   		</div>
@@ -76,8 +76,8 @@ include('function.php');
 		<div class="container"><p class="text-center">
 				
     			<div class="col-sm-2 col-sm-offset-4 text-center"><br><br><div class="btn-group-vertical" role="group" aria-label="...">
-					<a href="Hotel-profile.php?hotel_id=<?php echo $_SESSION['hotel_id']; ?>" class="btn btn-primary btn-lg" role="button">Profile Page</a>
-                                        <a href="manual_reserve.php" class="btn btn-primary btn-lg" role="button">Add Reservation Details</a>
+					<a href="#" class="btn btn-primary btn-lg" role="button">Create/Edit a Reservation</a>
+					<a href="#" class="btn btn-primary btn-lg" role="button">View Unchecked Reservations</a>
 					
 					<a href="#" class="btn btn-primary btn-lg" role="button">View Feedback</a></div>
 

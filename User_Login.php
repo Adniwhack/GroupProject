@@ -40,46 +40,82 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" ){
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
+<style>
+      
+.navbar {
+    color: #FFFFFF;
+    background-color: #161640;
+}
+
+/* OR*/
+
+.nav {
+    color: #FFFFFF;
+    background-color: #161640;
+	
+.nav-pills > li > a {
+  color: #A7A79Bf;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em ;
+  padding: 1px 1px 1px ;
+}
+
+
+</style>
+
 </head>
-<body background="images/ghv.jpg">
-<nav class="navbar navbar-default" >
-   <div class="navbar-header">
-	         		<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
-					</ul>
-      <a class="navbar-brand" href="#">Online Hotel Reservation and Management System </a>
-   </div>
+<!--body background="images/ghv.jpg"-->
+<body style="background-color:	white"><!--changed-->
+<nav class="navbar navbar-default navbar-fixed-top navbar-responsive">
+	<div class="container-fluid">
+    <div class="navbar-header ">
+    <ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
+	</ul>
+    
+    <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a></div>
+	<ul class="nav nav-pills navbar-right ">
+				<li><a href="#"><span class="glyphicon glyphicon-home"></span><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+				<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"></span><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-phone-alt"></span><b><font size="4" color="#FFF" face="calibri light"> ContactUs</font></b></a></li>
+	</ul>
+        				
+    </div>   
 </nav>
 
-
+<br><br><br><br><br><br>
 
 <div class="container" >
 
-<div class="col-md-4 col-md-offset-8 text-center">
+<div class="col-md-4 col-md-offset-4 text-center">
 
 <div class="jumbotron">
 
-<form role="form" align="center"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ;?>" method="post"><div class="header"><font size="20px">Log In</font></div>
-  <div class="form-group">
-    <label class="control-label" for="email">Email:</label>
+<form role="form" align="center"  action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) ;?>" method="post"><div class="header"><font size="20px">LogIn</font></div>
+  <div class="control-group success">
+    <label class="control-label" for="email"><font color="green">Email</font></label>
+	<div class="controls">
     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
-    
+    </div>
   </div>
-  <div class="form-group">
-    <label class="control-label" for="pwd">Password:</label>
+  <div class="control-group success">
+    <label class="control-label" for="pwd"><font color="green">Password</font></label>
+	<div class="controls">
 	<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Enter password">
-   
+    </div>
   </div>
   <div class="form-group">
     <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-      </div>
+    <label><input type="checkbox"><font color="green"> Remember me</font></label>
+    </div>
     
   </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-info">Sign in</button>
-    
-  </div>
-  <br><a href="user_registration.php"><font align="center">New User?</font></a>
+   <div class="control-group success">
+   <div class="controls">
+		<button type="submit" class="btn btn-success">Sign in</button>
+   </div> 
+   </div>
+  <br><a href="forgot_password.php" ><font align="center" color="green">Forgot password?</font></align></a>
+  <br><a href="user_registration.php"><font align="center" color="green">New User?</font></a>
 </form>
 </div>
 </div>

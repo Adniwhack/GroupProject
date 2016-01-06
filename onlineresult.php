@@ -18,6 +18,7 @@
 
 	
 	<style>
+      
 .navbar {
     color: #FFFFFF;
     background-color: #161640;
@@ -35,58 +36,38 @@
   font-size: 0.8em ;
   padding: 1px 1px 1px ;
 }
-.myBackground {
-  background-color: rgba(255,255,255, 0.5);
-  color: inherit;
-}
 
 
 </style>
-   </head>
+ </head>
     
-    <body background="hotelimages/water.jpg">
+    <body style="background-color:white"><!--changed-->
 	<!-- Navigation bar which is in the top of the page -->
         
                
-        <nav class="navbar navbar-default">
-		<div class="container-fluid">
-				<div class="navbar-header">
-					<ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
-					</ul>
-				</div>
-		
-		<div>
-					 <ul class="nav nav-pills navbar-left">
-                        <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>  
-						<li><a href="onlinepay.php"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-responsive">
+	<div class="container-fluid">
+    <div class="navbar-header ">
+    <ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
+	</ul>
+        
+    <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+	</div>
+	<ul class="nav nav-pills navbar-right">
+                        <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></span></a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#FFF" face="calibri light">Back</font></b></span></a></li>
+						 <li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light">AboutUs</font></b></span></a></li>
+						 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#FFF" face="calibri light">Rooms</font></b></span></a></li>
+			
+	</ul>
+                        
 						
-						<li><form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div> 
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
-					</form></li>		
-					</ul>
-                     </ul>
-				</div>
-				<div>
-						<ul class="nav nav-pills navbar-right">
-						   
-						 <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
-						 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
-				
-				
-				
-				</div>
-                         
-				</div>
-				
-				
-				</div>
-				
-			</nav>
+	
+			
+	</div>
+		
+	</nav>
+	<br><br><br><br>
             
 			
 			<div class="row">
@@ -97,14 +78,14 @@
                     
                     
                     <form class="form-horizontal col-md-10 col-md-offset-1" data-toggle="validator" role="form" align = "center"  >
-					   <legend><font color=#00003D> Online Payment Details </font></legend>
+					   <legend><font color=#00003D><b> Online Payment Details </b></font></legend>
 					   
 					   
 					   
-					   <div class="jumbotron myBackground">
+					   <!--div class="jumbotron myBackground"-->
 					   	<div class="form-group" align = "center">
 							<label for="CardHolder_name" class="col-md-4 control-label">
-							<font color = #fff> Card Holder's name: </font>
+							<font color = "green"> Card Holder's name: </font>
 							</label>
 							<div class="col-md-8">
                             <?php if(isset($_POST["CardHolder_name"])){echo $_POST ["CardHolder_name"]; }?>
@@ -112,7 +93,7 @@
 						</div>
 						<div class="form-group" align = "center">
 							<label for="Expire_date" class="col-md-4 control-label" >
-							<font color = #fff>	Expiration Date:</font>
+							<font color = "green">	Expiration Date:</font>
 							</label></label>
 							<div class="col-md-8">
                             <?php if(isset($_POST["Expire_date"])){echo $_POST ["Expire_date"]; }?>
@@ -120,7 +101,7 @@
 						</div>
 					<div class="form-group" align = "center">
 							<label for="country" class="col-md-4 control-label">
-							<font color = #fff>	Country</font>
+							<font color = "green">	Country</font>
 							</label></label>
 								<div class="col-md-8">
 							<?php if(isset($_POST["country"])){echo $_POST ["country"]; }?>
@@ -129,7 +110,7 @@
                         
 						<div class="form-group" align = "center">
 							<label for="Amount" class="col-md-4 control-label" >
-							<font color = #fff>	Amount(Rs):</font>
+							<font color = "green">	Amount(Rs):</font>
 							</label>
 							</label>
 							<div class="col-md-8">

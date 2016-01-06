@@ -12,7 +12,7 @@ include_once('function.php');
         session_destroy();
     }
 */
-$Hotel_name= $Hotel_address= $Hotel_city= $Hotel_Country= $Hotel_email= $Hotel_contact= $Hotel_Description= $Hotel_Password= $Hotel_PasswordCon = "";
+$Hotel_name= $Hotel_address= $Hotel_city= $Hotel_Country= $Hotel_email= $Hotel_contact= $Hotel_Username= $Hotel_Password= $Hotel_PasswordCon = "";
 $nameErr = $addressErr = $cityErr = $CountryErr = $emailErr = $contactErr = $usererr =$passerr  = $conpasserr = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
@@ -55,8 +55,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         else{
             $contactErr = "Fill this field";
         }
-        if (!empty($_POST['description'])){
-            $Hotel_Description = $_POST['description'];
+        if (!empty($_POST['username'])){
+            $Hotel_Username = $_POST['username'];
         }
         else{
             $usererr = "Fill this field";
@@ -76,10 +76,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $conpasserr = "Fill this field";
         }
         $Hotel_name = ($Hotel_name);
-        $Hotel_Description =($Hotel_Description);
+        $Hotel_Username =($Hotel_Username);
         $Hotel_email = ($Hotel_email);
 
-        
+        if (!preg_match("/^[a-zA-Z0-9_]*$/",$Hotel_Username)) {
+            $usererr = "Only letters numbers and underscore allowed";
+        }
+         else{
+            if (strlen($Hotel_Username) < 8 or strlen($Hotel_Username) > 20 ){
+                $usererr = "Length of username should be between 8 - 20 characters";
+            }
+         }
 
         if (strlen($Hotel_Password) < 8){
             $passerr = "Password length should be greater than 8 characters";
@@ -117,29 +124,41 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if($nameErr == "" and $addressErr == "" and $cityErr == "" and $CountryErr == "" and  $emailErr == "" and  $contactErr == "" and  $usererr =="" and $passerr  == "" and  $conpasserr == ""){
             $log = new dbFunction();
-            $res = $log->create_hotel($Hotel_Description, $Hotel_email , $Hotel_Password, $Hotel_address, $Hotel_city , $Hotel_Country , $Hotel_contact, $Hotel_name);
+            $res = $log->create_hotel($Hotel_Username, $Hotel_email , $Hotel_Password, $Hotel_address, $Hotel_city , $Hotel_Country , $Hotel_contact, $Hotel_name);
             
             if ($res != null){
                 $id = md5($Hotel_name);
-                if ($_FILES['upload']) {
-                    $file_ary = reArrayFiles($_FILES['ufile']);
+                if (!empty($_FILES)) {
+                    //$file_ary = reArrayFiles($_FILES);
                     $filepath = "images/".$id;
-                    foreach ($file_ary as $file) {
-                        $Room_photo = $file['name'];
-                        //echo $Room_photo;
-                        $Photo = $file['tmp_name'];
-                        $target = $filepath.basename();
-                        move_uploaded_file($file['tmp_name'], $target);
-                        $Que = "Insert into hotel_photo(email, photo_id, photo_address) VALUES ('','','')";
-                        $res = mysql_query($Que);
+                    if (!file_exists($filepath)){
+                        $fl = mkdir($filepath);}
+                
                     }
+                    $extarray = array("jpeg","jpg","png","gif");
+                    foreach($_FILES["pic"]["tmp_name"] as $key=>$tmp_name){
+                        $file_name= $_FILES["pic"]["name"][$key];
+                        $file_tmp = $_FILES["pic"]["tmp_name"][$key];
+                        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                        if(in_array($ext, $extarray)){
+                        $target = $filepath."/".$file_name;
+                        move_uploaded_file($file_tmp= $_FILES["pic"]["tmp_name"][$key],$target);
+                        $Que = "Insert into hotel_photo(email, photo_id, photo_address) VALUES ('$Hotel_email','$file_name','$target')";
+                        echo $Que;
+                        $res = mysql_query($Que);
+                        }
+                    
+                        }
                 }
                 header("Location:mapmark.php?id=".$id."");
+            }
+            else{
+                
             }
         }
 
 
-    }
+    
 
  ?>
 
@@ -199,9 +218,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         				<!--<li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>-->
         				<!--li><a href="#"><span class="glyphicon glyphicon-user"><b><font size="4" color="#A7A79B">Profile</font></b></span></a></li-->
         				<!--<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>-->
-                                <li><a href="index.html"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
-				<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
-      				</ul>
+                                <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
+      				<li><a href="#"><span class="glyphicon glyphicon-phone-alt"><b><font size="4" color="#FFF" face="calibri light"> ContactUs</font></b></a></li></ul>
 					
     			
   		</div>
@@ -278,7 +297,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <div class="col-md-8">
                             <select class="form-control" name="Country">
                                 <option>Sri Lanka</option>
-                           
+                                <option>India</option>
                             </select>
                             </div>
                         </div>
@@ -315,12 +334,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         
                         <div class="form-group">
                             <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
-                                Description </font>
+                                User name </font>
                             </label>
-                            
                             <div class="col-md-8">
-                                
-                                <textarea name="description" rows="5" cols="5" class="form-control"/></textarea>
+                                <input type="inputName" class="form-control" id="inputName" name = "username"/>
                             </div>
                         </div>
                         <?php

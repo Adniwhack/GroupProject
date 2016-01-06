@@ -6,37 +6,17 @@ $search = new dbSearch();
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $City = $_POST['city'];
     $Name = $_POST['hotelname'];
-    $res= $search->search_hotel_city_name($City, $Name);
-    if ($res == null){
-        $res = $search->search_hotel_city($City);
-        if($res == null) {
-            $res = $search->search_hotel_name($Name);
-            if ($res == null) {
-                echo "<script></script>";
-            }
-        }
-    }
-}
+    $Check_In = $_POST['checkin'];
+    $Check_Out = $_POST['checkout'];
+    $res = $search->advanced_search($Name, $City, array(), $Check_In, $Check_Out);
+}   
 else{
     $res = $search->return_hotel();
+    
 }
 
 ?>
-<?php
-           $cx= $cy = 0;
-           $count = 0;
-           $str = "";
-          while ($data = mysql_fetch_array($res)){
-                $lat = $data['Hotel_Lat'];
-                $lng = $data['Hotel_Lng'];
-                
-                if($lat != null and $lng != null){
-                    if ($count == 0){$cx = $lat; $cy = $lng;}
-                    $str.= "addmarker(".strval($lat).",".strval($lng).", map);";
-                    $count += 1;
-                }
-             }
-          ?>
+
 
 
 <!DOCTYPE html>
@@ -57,37 +37,81 @@ else{
         height: 800px;
       }
     </style>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
-    <script>
-        var markers = [];
+    
+   <script>
+    
 
-      function initialize() {
-        var mapCanvas = document.getElementById('map');
-        var mapOptions = {
-          center: new google.maps.LatLng(<?php echo $cx;?>, <?php echo $cy;?>),
-          zoom: 13,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        }
+    function load() {
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(6.9218386, 79.8562055)),
+        zoom: 13,
+        mapTypeId: 'roadmap'
+      });
+      var infoWindow = new google.maps.InfoWindow;
 
-        var map = new google.maps.Map(mapCanvas, mapOptions);
-        <?php echo $str;?>
+      // Change this depending on the name of your PHP file
+      downloadUrl("adv_search.php", function(data) {
+        var xml = data.responseXML;
+        var markers = xml.documentElement.getElementsByTagName("marker");
+        var table="<tr><th>Name</th><th>Address</th></tr>";
+        for (var i = 0; i < markers.length; i++) {
+            
+          var name = markers[i].getAttribute("name");
+          var address = markers[i].getAttribute("address");
+          var lat = markers[i].getAttribute("lat");
+          var lng = markers[i].getAttribute("lng")
+          if(lat != "" and  lng != ""){
+          var point = new google.maps.LatLng(
+              parseFloat(lat),
+              parseFloat(lng));
+          var marker = new google.maps.Marker({
+            map: map,
+            position: point,
+            //icon: icon.icon
+          });
+          }
+          var html = "<b>" + name + "</b> <br/>" + address;
+          //var icon = customIcons[type] || {};
           
-      }
-
-        function addmarker(lat, lng, map){
-            var marker = new google.maps.Marker({
-                position: new google.maps.LatLng(lat, lng),
-                
-                map: map
-            });
-            markers.push(marker);
+          bindInfoWindow(marker, map, infoWindow, html);
+          
+          table += "<tr><td>"+name + "</td><td>" + address + "</td></tr>";
+          
+          
         }
+        document.getElementById("table").innerHTML = table;
+      });
+    }
 
+    function bindInfoWindow(marker, map, infoWindow, html) {
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent(html);
+        infoWindow.open(map, marker);
+      });
+    }
 
-      google.maps.event.addDomListener(window, 'load', initialize);
-    </script>
+    function downloadUrl(url, callback) {
+      var request = window.ActiveXObject ?
+          new ActiveXObject('Microsoft.XMLHTTP') :
+          new XMLHttpRequest;
+
+      request.onreadystatechange = function() {
+        if (request.readyState == 4) {
+          request.onreadystatechange = doNothing;
+          callback(request, request.status);
+        }
+      };
+
+      request.open('GET', url, true);
+      request.send(null);
+    }
+
+    function doNothing() {}
+
+    //]]>
+</script>
 </head>
-<body>
+<body onload="load()">
 
 <div class="container" >
     <div id="map" class="col-md-5"></div>
@@ -106,6 +130,8 @@ else{
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $City = $_POST['city'];
             $Name = $_POST['hotelname'];
+            $Checkin = $_POST["checkin"];
+            $Checkout = $_POST["checkout"];
             $res= $search->search_hotel_city_name($City, $Name);
             if ($res == null){
                 $res = $search->search_hotel_city($City);

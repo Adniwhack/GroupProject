@@ -83,7 +83,7 @@
 				$ID = md5($FirstName . $Lastname);
 				$password_hashed = password_hash($password, PASSWORD_BCRYPT);
 				$QUE = "INSERT INTO customer(Customer_ID, Customer_address, Customer_FirstName, Customer_Contact, Customer_LastName, Customer_Country) VALUES ('".$ID."', '".$Address."','".$FirstName."', '".$Contact."', '".$Lastname."', '".$Country."')";
-				//echo $QUE;
+				echo $QUE;
 				$RES = mysql_query($QUE);
 				$QUE = "INSERT INTO registered_customer(Customer_ID, Customer_email, Customer_password, Customer_username, Gender, Customer_DOB) VALUES ('".$ID."','".$email."','".$password_hashed."', '".$username."', '".$gender."', '".$dob."')";
 				//echo $QUE;
@@ -243,52 +243,13 @@
 				return $res;
 			}
 
-			function unreserved_room($Room_id, $Check_in , $Check_out, $hotel_email){
-                        $QUE = "Select * FROM hotel_room inner join reservation on hotel_room.Room_id= reservation.RoomID where hotel_room.Room_id = '$Room_id' and ('$Check_out'>=Checkin>= '$Check_in') or (Checkin <='$Check_out' and Checkout >= '$Check_out') or (Checkin >= '$Check_in' and Checkout <= '$Check_out')) and hotel_room.Hotel_email = '$hotel_email'";
-
-                            $QUE = "Select * FROM hotel_room inner join reservation on hotel_room.Room_id= reservation.RoomID where hotel_room.Room_id = '$Room_id' and ((Checkin<= '$Check_in' and Checkout >= '$Check_out') or (Checkin <='$Check_out' and Checkout >= '$Check_out') or (Checkin >= '$Check_in' and Checkout <= '$Check_out')) and hotel_room.Hotel_email = '$hotel_email'";
-                            echo $QUE;
-                            $res = mysql_query($QUE);
-                            $count = mysql_num_rows($res);
-                            
-                            if ($count == 0){
-                                $que = "SELECT * FROM hotel_room where Room_id = '$Room_id'";
-                                
-                                $res = mysql_query($que);
-                                return $res;
-                            }
-                            else{
-                                return NULL;
-                            }
-                        }
-                     /*   public function return_unreserved_room($hotel_email, $Check_in, $Check_out){
+			public function return_unreserved_room($hotel_email, $Check_in, $Check_out){
 				//Return unreserved rooms
-                            
-                $QUE = "SELECT * FROM reservation INNER JOIN hotel_room on hotel_room.Room_id = reservation.RoomID WHERE hotel_room.Hotel_email = '".$hotel_email."' AND ((Checkin<= '$Check_in' and Checkout >= '$Check_out') or (Checkin <='$Check_out' and Checkout >= '$Check_in') or (Checkin >= '$Check_in' and Checkout <= '$Check_out')or (Checkin >= '$Check_in' and Checkout >= '$Check_out'))";
-                
-                echo $QUE;
+                $QUE = "SELECT * FROM reservation INNER JOIN hotel_room on hotel_room.Room_id= reservation.RoomID WHERE hotel_room.Hotel_email = $hotel_email and not ((Checkin< $Check_in and Checkout > $Check_out) or (Checkin <$Check_out and Checkout > $Check_out) or (Checkin > $Check_in and Check_out < $Check_out))";
                 $res = mysql_query($QUE);
-                echo $res;
-                $array = array();
-                if ($res != FALSE){
-                    while ($data = mysql_fetch_array($res)){
-                        $array[] = "NOT Room_id = '".$data['Room_id']."'";
-                    }
-                }
-                if ($array != array()){
-                    $que = "SELECT * FROM hotel_room WHERE ".implode("AND", $array)." AND hotel_email = '$hotel_email'";
-                
-                }
-                else{
-                    //echo "aa";
-                    //echo "Sorry we don't have rooms for the mentioned dates";
-                    $que = "SELECT * FROM hotel_room WHERE hotel_email = '$hotel_email'";
-                }
-               //s echo $que;
-                //$res = mysql_query($que);
-                //return $res;
+                return $res;
 			}
-                            */
+
 			public function return_room_options($Room_ID){
 				$Res = mysql_Query("Select Room_Option from room_options where Room_ID='".$Room_ID."'");
 				return $Res;
@@ -315,6 +276,7 @@
 				}
 
 				$QUE = "SELECT hotel.email, hotel.Hotel_Name, hotel.City, hotel.address from hotel inner join hotel_room on hotel.email = hotel_room.Hotel_email WHERE hotel.City='".$City."', hotel_room.Cost_per_unit < ".$Price."  ".$Optionc." ".$Namec." ";
+
 			}
 
 
@@ -326,97 +288,139 @@
 			 * @param $MtnView
 			 * @param $GndFlr
              * @return null|resource
-             */
-			public function adv_search($Price, $City, $Options, $Seaview, $MtnView, $GndFlr){
-
-				echo $Options;
-				echo $Seaview;
-				echo $MtnView;
-				echo $GndFlr;
-
-				$optc = ""; $seac = ""; $mtnc = ""; $gndc = "";
-				if ($Price == 0){
-					if($City == ""){
-						if (($Options == null) && ($Seaview == null) && ($MtnView = null) && ($GndFlr = null)){
-							echo 0;
-							return null;  //return nothing
-						}
-						else{
-							echo 1;
-							return mysql_query("SELECT * FROM hotel_room inner join hotel on hotel.email = hotel_room.Hotel_email inner join room_options on hotel_room.Room_id = room_options.Room_ID where Room_Option = '".$Options."' "); //Query 1
-						}
-					}
-					else{
-						if ($Options == null && $Seaview == null && $MtnView = null && $GndFlr = null){
-							return mysql_query("Select * from hotel where City = '".$City."'");
-						}
-						else{
-							if ($Options != ""){
-								$optc = "Room_Option = '".$Options."',";
-							}
-							if ($Seaview != ""){
-								$seac = "Sea_View = 'A',";
-							}
-							if ($MtnView != ""){
-								$seac = "Mountain_View = 'A',";
-							}
-							if ($GndFlr != ""){
-								$seac = "Ground_Floor = 'A',";
-							}
-							$Que = "SELECT * FROM hotel inner join hotel_room on hotel.email = hotel_room.Hotel_email inner join room_options on hotel_room.Room_id = room_options.Room_ID WHERE".$optc."".$seac."".$mtnc."".$gndc." hotel.City = '".$City."'";
-							echo $Que;
-							return mysql_query($Que);
-						}
-					}
-				}
-				else{
-					if($City == ""){
-						if ($Options == null && $Seaview == null && $MtnView = null && $GndFlr = null){
-							return mysql_query("SELECT * FROM hotel_room inner join hotel on hotel.email = hotel_room.Hotel_email where Cost_per_unit <= ".$Price."");
-						}
-						else{
-							if ($Options != ""){
-								$optc = "Room_Option = '".$Options."''";
-							}
-							if ($Seaview != ""){
-								$seac = "Sea_View = 'A'";
-							}
-							if ($MtnView != ""){
-								$seac = "Mountain_View = 'A'";
-							}
-							if ($GndFlr != ""){
-								$seac = "Ground_Floor = 'A'";
-							}
-							$Que = "SELECT * FROM hotel_room inner join hotel on hotel.email = hotel_room.Hotel_email inner join room_options on hotel_room.Room_id = room_options.Room_ID WHERE".$optc.",".$seac.",".$mtnc.",".$gndc.",  Cost_per_unit <= ".$Price."";
-							return mysql_query($Que);
-						}
-					}
-					else{
-						if ($Options == null && $Seaview == null && $MtnView = null && $GndFlr = null){
-							return mysql_query("SELECT * FROM hotel_room inner join hotel on hotel.email = hotel_room.Hotel_email where Cost_per_unit <= ".$Price." ,  city LIKE '%".$City."'%");
-						}
-						else{
-							if ($Options != ""){
-								$optc = "Room_Option = '".$Options."''";
-							}
-							if ($Seaview != ""){
-								$seac = "Sea_View = 'A'";
-							}
-							if ($MtnView != ""){
-								$seac = "Mountain_View = 'A'";
-							}
-							if ($GndFlr != ""){
-								$seac = "Ground_Floor = 'A'";
-							}
-							$Que = "SELECT * FROM hotel_room inner join hotel on hotel.email = hotel_room.Hotel_email inner join room_options on hotel_room.Room_id = room_options.Room_ID WHERE".$optc.",".$seac.",".$mtnc.",".$gndc.",  Cost_per_unit <= ".$Price.", city LIKE '%".$City."'%";
-							return mysql_query($Que);
-						}
-					}
-				}
-
-
+             */         
+                        function unreserved_room($Room_id, $Check_in , $Check_out){
+                            $QUE = "Select * FROM hotel_room inner join reservation on hotel_room.Room_id= reservation.RoomID where hotel_room.Room_id = '$Room_id' and ((Checkin<= '$Check_in' and Checkout >= '$Check_out') or (Checkin <='$Check_out' and Checkout >= '$Check_out') or (Checkin >= '$Check_in' and Checkout <= '$Check_out'))";
+                            
+                            $res = mysql_query($QUE);
+                            $count = mysql_num_rows($res);
+                            
+                            if ($count == 0){
+                                $que = "SELECT * FROM hotel_room where Room_id = '$Room_id'";
+                                
+                                $res = mysql_query($que);
+                                return $res;
+                            }
+                            else{
+                                return NULL;
+                            }
+                        }
+			public function adv_search($hotel_name="",  $city="", $checkin="", $checkout="",$seaview="0", $MtnView="0", $GndFlr="0", $Single="0", $double="0", $triple="0", $ac="0"){
+                            $head = "1111111111111111111111111111111111111111111111111111111111";
+                            $Signature = intval($seaview . $MtnView . $GndFlr . $Single . $double . $triple . $ac, 2);
+                            $Bad_sig = array(intval($head.$seaview. "000000", 2), intval($head."0".$MtnView."00000", 2), intval($head. "00".$GndFlr."0000",2),intval($head. "000".$Single."000", 2), intval($head."0000".$double."00", 2), intval($head. "00000".$triple."0",2),intval($head."000000".$ac, 2));
+                            $good_sig = array(intval($seaview. "000000", 2), intval("0".$MtnView."00000", 2), intval( "00".$GndFlr."0000",2),intval( "000".$Single."000", 2), intval("0000".$double."00", 2), intval("00000".$triple."0",2),intval("000000".$ac, 2));
+                            foreach($Bad_sig as $bad){
+                                echo "<p>$bad</p><br>";
+                            }
+                            $Hotel_cond = $search_cond = "";
+                            if ($checkin != '' ){
+                                $search_cond = "NOT";
+                                $Hotel_cond = "INNER JOIN reservation on hotel_room.Room_id = reservation.RoomID ";
+                            
+                            }
+                            $ConditionArray = array();
+                            
+                            if ($hotel_name != ''){ $ConditionArray[] = "(Hotel_Name LIKE '%$hotel_name%')";}
+                            if ($city != ''){ $ConditionArray[] = "hotel.City = '$city'";}
+                            if ($checkin != '' && $checkout != ''){
+                                if ($checkin < $checkout){
+                                    $ConditionArray[] = " ((Checkin > $checkin and Checkout < $checkout) or (Checkin < $checkin and Checkout > $checkin) or (Checkin < $checkout and Checkout > $checkout))";
+                                }
+                            }
+                            //$ConditionArray[] = "hotel_room.Signature = $Signature";
+                            $sigcond = array();
+                            for ($i = 0; $i < count($good_sig); $i++){
+                                $sigcond[] = "~(hotel_room.Signature ^ $good_sig[$i] = $Bad_sig[$i])";
+                            }
+                            $sigcond[] = " ~(hotel_room.Signature ^ $Signature) =$Signature";
+                            $ConditionArray[] = implode(" OR ", $sigcond);
+                            
+                            $query =  "SELECT  * FROM hotel INNER JOIN hotel_room on hotel.email = hotel_room.Hotel_email $Hotel_cond WHERE ".implode(' AND ', $ConditionArray) . " ORDER BY hotel_room.Room_weight";
+                            echo $query;
+                            //Correct This to Set such that room op
+                            $res = mysql_query($query);
+                            $hotel_array = array();
+                            while ($data = mysql_fetch_array($res)){
+                                $hotel_array[] = "$search_cond hotel.email= '".$data['email']."'";
+                                            
+                            }
+                            if ($checkin != "" and $checkout != ""){
+                            $QUE = "SELECT DISTINCT Hotel_ID, Hotel_Name, address, Hotel_Lat, Hotel_Lng FROM hotel WHERE City = '$city' and ". implode(" OR ", $hotel_array);
+                                        echo $QUE;
+                            $res = mysql_query($QUE);
+                                        
+                            return $res;
+                            }
+                                
 			}
+			function advanced_search($hotel_name, $city, $options, $checkin, $checkout){
+                                
+				$ConditionArray = array();
+				if ($hotel_name != '') $ConditionArray[] = "(Hotel_Name LIKE '%$hotel_name%')";
+				if ($city != '') $ConditionArray[] = "hotel.City = '$city'";
+				if ($options != []) {
+					foreach($options as $option) {
+						$ConditionArray[] = "Room_Option = '$option'";
+					}
+				};
+				if ($checkin != '' && $checkout != ''){
+                                    if ($checkin < $checkout){
+                                        $ConditionArray[] = " ((Checkin > $checkin and Checkout < $checkout) or (Checkin < $checkin and Checkout > $checkin) or (Checkin < $checkout and Checkout > $checkout))";
+                                    }
+                                } //code checkin and checkout
+
+				if (count($ConditionArray) > 0 and $checkin != '' and $checkout != '' )
+				{
+					$query = "SELECT  * FROM hotel INNER JOIN hotel_room on hotel.email = hotel_room.Hotel_email INNER join Room_Options on hotel_room.Room_id = Room_Options.Room_ID INNER JOIN reservation on hotel_room.Room_id = reservation.RoomID WHERE ".implode(' AND ', $ConditionArray);
+					//echo $query;
+                                        $res = mysql_query($query);
+                                        $hotel_array = array();
+                                        while ($data = mysql_fetch_array($res)){
+                                            $hotel_array[] = "NOT hotel.email= '".$data['email']."'";
+                                            
+                                        }
+                                        $QUE = "SELECT DISTINCT Hotel_ID, Hotel_Name, address, Hotel_Lat, Hotel_Lng FROM hotel WHERE City = '$city' and ". implode(" OR ", $hotel_array);
+                                        //echo $QUE;
+                                        $res = mysql_query($QUE);
+                                        
+					return $res;
+				}
+                                else{
+                                    if(count($ConditionArray) > 0){
+                                        $query = "SELECT DISTINCT Hotel_ID, Hotel_Name, address, Hotel_Lat, Hotel_Lng  FROM hotel INNER JOIN hotel_room on hotel.email = hotel_room.Hotel_email INNER join Room_Options on hotel_room.Room_id = Room_Options.Room_ID INNER JOIN reservation on hotel_room.Room_id = reservation.RoomID WHERE ".implode(' AND ', $ConditionArray);
+					//echo $query;
+                                        $res = mysql_query($query);
+                                        return $res;
+                                    }
+                                    else{
+					$res = mysql_query("SELECT DISTINCT Hotel_ID, Hotel_Name, address, Hotel_Lat, Hotel_Lng  FROM hotel");
+					return $res;
+                                }
+                                
+                                }
+			}
+                        
+                        
+                        public function simplified_search($Hotel_Name = "", $City = ""){
+                            $Conditionarray = array();
+                            if ($Hotel_Name != ""){
+                                $string = "Hotel_name like '%$Hotel_Name%'";
+                                $Conditionarray[] = $string;
+                            }
+                            if ($City != ""){
+                                $string = "city = '$City'";
+                                $Conditionarray[] = $string;
+                            }
+                            
+                            $que = "SELECT * FROM hotel WHERE ". implode(' AND ', $ConditionArray);
+                            $res = mysql_query($que);
+                            return $res;
+                            
+                        }
+
 		}
+
 
 
 
@@ -428,16 +432,31 @@ class dbHotel{
     }
     function __destruct(){}
 
-    public function hotel_create_room($Hotel_email ,$Room_Name, $Room_Number, $Room_type,  $Room_Photo, $Room_desc,$Room_photo_loc, $Cost_per_stay, $OptionsArray,$Room_weight){
+    public function hotel_create_room($Hotel_email ,$Room_Name, $Room_Number, $Room_type,  $Room_Photo, $Room_desc,$Room_photo_loc, $Cost_per_stay, $Room_weight,$Discount, $SeaView, $MtnView, $GndFlr, $Single, $Double, $Triple, $AC){
 			$Room_ID = md5($Room_Name . " " . strval($Room_Number));
 		//echo $Hotel_email, $Room_ID;
-			$QUE = "INSERT INTO hotel_room(Room_id,Room_name, Room_number, Hotel_email,Room_type,  Room_description, Cost_per_unit, Room_photo_id, Room_photo_location, Room_weight) VALUES ('" . $Room_ID . "','" . $Room_Name . "','" . $Room_Number . "','" . $Hotel_email . "','" . $Room_type . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "', '".$Room_weight."') ";
-			//echo $QUE;
+                        $Signature = "";
+                        if ($SeaView == 1){$Signature .= "1";} else{$Signature .= "0";}
+                        if ($MtnView == 1){$Signature .= "1";} else{$Signature .= "0";}
+                        if ($GndFlr == 1){$Signature .= "1";} else{$Signature .= "0";}
+                        if ($Single == 1){$Signature .= "1";} else{$Signature .= "0";}
+                        if ($Double == 1) {$Signature .= "1";} else{$Signature .= "0";}
+                        if ($Triple == 1){$Signature .= "1";} else{$Signature .= "0";}
+                        if ($AC == 1){$Signature .= "1";} else{$Signature .= "0";}
+                        echo $Signature;
+                        $signature2 = intval($Signature, 2);
+                        echo $signature2;
+                        
+			$QUE = "INSERT INTO hotel_room(Room_id,Room_name, Room_number, Hotel_email,Room_type,  Room_description, Cost_per_unit, Room_photo_id, Room_photo_location, Room_weight, Discount, Signature, SeaView, MountainView, GroundFloor, SingleBed, DoubleBed, TripleBed, Room_AC ) VALUES "
+                                . "('" . $Room_ID . "','" . $Room_Name . "','" . $Room_Number . "','" . $Hotel_email . "','" . $Room_type . "', '" . $Room_desc . "','" . $Cost_per_stay . "','" . $Room_Photo . "', '" . $Room_photo_loc . "', '".$Room_weight."', ".$Discount.",$signature2, ".$SeaView.", ".$MtnView.", ".$GndFlr.", ".$Single." , ".$Double." , ".$Triple." , ".$AC." ) ";
+			echo $QUE;
 			$res = mysql_query($QUE);
+                        
+                        /*
 			foreach($OptionsArray as $Option ){
 				echo $Option;
 				$res2 = mysql_query("INSERT INTO room_options(Room_ID, Room_Option) VALUES ('" . $Room_ID . "', '" . $Option . "')");
-				}
+				}*/
 			$res3 = mysql_query("ALTER TABLE hotel_room ORDER BY Hotel_email ASC, Room_weight DESC");
 			return $res;
 
@@ -487,6 +506,12 @@ class dbHotel{
         return $hotel_data;
 
     }
+    
+    public function get_hotel_photo($Hotel_email){
+        $QUE = "SELECT * FROM hotel_photo where email='$Hotel_email'";
+        $res = mysql_query($QUE);
+        return $res;
+    }
 
 	public function get_hotel_room($Hotel_ID){
 		$Res = $this->get_hotel_data($Hotel_ID);
@@ -496,34 +521,25 @@ class dbHotel{
 
 	}
 	public function create_new_reservation($HotelID, $Room_ID, $First_Name, $Last_Name, $Country, $Address, $Check_in, $Check_out, $Status, $Contact){
-		$QUE = "SELECT * FROM reservation WHERE ((Checkin >= '".$Check_in."' and Checkin <= '".$Check_out."') or   (Checkout >= '".$Check_in."' and Checkout <= '".$Check_out."' ) or ( Checkin <= '".$Check_in."' and Checkout >= '".$Check_out."')) and RoomID = '".$Room_ID."'";
+		$QUE = "SELECT FROM reservation WHERE Checkin = '".$Check_in."' && Checkout = '".$Check_out."'";
 		$res = mysql_query($QUE);
 		$results = mysql_num_rows($res);
 
 		if($results >= 1){
 			header("location:reservation_not_available.php");
-                        exit();
 
 
 		}
 		else{
 			$User_ID = md5($First_Name.$Last_Name);
-			$res = mysql_query("Select Customer_ID from customer where Customer_ID = '".$User_ID."'");
+			$res = mysql_query("Select Customer_ID from	customer where Customer_ID = '".$User_ID."'");
 			$num = mysql_num_rows($res);
 			if ($num == 0){
-                            $q = "INSERT INTO customer(Customer_ID, Customer_address, Customer_FirstName, Customer_Contact, Customer_LastName,Customer_Country) VALUES ('".$User_ID."', '".$Address."','".$First_Name."', '".$Contact."', '".$Last_Name."','".$Country."')";
-                            //echo $q;
-                            $res = mysql_query($q);
+				$res = mysql_query("INSERT INTO customer(Customer_ID, Customer_address, Customer_FirstName, Customer_Contact, Customer_Country) VALUES ('".$User_ID."', '".$Address."','".$First_Name."', '".$Contact."', '".$Last_Name."','".$Country."')");
 			}
-			$QUE = "INSERT INTO reservation(UserID, HotelID, RoomID, Checkin, Checkout, Status) VALUES ('".$User_ID."', '$HotelID' , '$Room_ID' , '$Check_in' , '$Check_out' , '$Status')";
-                        //echo $QUE;
+			$QUE = "INSERT INTO reservation(UserID, HotelID, RoomID, Checkin, Checkout, Status) VALUES ('".$User_ID."')";
 			$res = mysql_query($QUE);
-                        $QUE = "SELECT ReservationID from reservation where UserID='$User_ID' AND HotelID='$HotelID' AND  RoomID='$Room_ID' AND Checkin = '$Check_in' ";
-                        $res = mysql_query($QUE);
-                        $data = mysql_fetch_array($res);
-                        $rID = $data['ReservationID'];
 			echo "<script>alert('New reservation made successfully')</script>";
-                        return $rID;
 		}
 
 	}
@@ -575,8 +591,30 @@ class dbHotel{
 				else {
 					$QUERY = "INSERT INTO reservation(UserID, HotelID, RoomID, Checkin, Checkout, Status, Notes) VALUES ('" . $UserID . "','" . $HotelID . "','" . $Room_ID . "','" . $Check_In . "','" . $Check_out . "','NCNF' , '".$notes."')";
 					$res = mysql_query($QUERY);
+					$QUERY = "SELECT email ,Hotel_Name hotel where Hotel_ID='".$HotelID."'";
+					$email = mysql_fetch_array(mysql_query($QUERY))['email'];
+					$name = mysql_fetch_array(mysql_query($QUERY))['Hotel_Name'];
+					$to = $email;
+					$subject = "New Reservation";
+
+					$message = "
+					<html>
+					<head>
+					<title>New Reservation</title>
+					</head>
+					<body>
+					<p>You have successfully made a new reservation at ".$name." for the dates ".$Check_In." to ".$Check_out.". Please do payment in order to get your reservation confirmed.</p>
+					</body>
+					</html>
+					";
 
 
+					$headers = "MIME-Version: 1.0" . "\r\n";
+					$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+					$headers .= 'From: <ohrms2015@gmail.com>' . "\r\n";
+					
+
+					mail($to,$subject,$message,$headers);
 				}
 			}
 
@@ -589,7 +627,8 @@ class dbHotel{
 			public function user_pay_reservation($ReservationID){
 
 			}
-
+                        
+                        public function user_add_comment($user_id, $hotel_id){}
 		}
 
 

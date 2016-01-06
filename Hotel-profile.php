@@ -17,7 +17,8 @@ if ($_GET['hotel_id']){
     $_SESSION['hotel_email_view'] = $Hotel_email;
     $_SESSION['hotel_id_view'] = $hotelID;
     $_SESSION['hotel_view'] = $Hotel_name;
-
+    $photos = $Hotel->get_hotel_photo($Hotel_email);
+    
 }
 
 ?>
@@ -36,6 +37,19 @@ if ($_GET['hotel_id']){
     <link href="css/style.css" rel="stylesheet">
     <!--Adding google map to the profile -->
     <script src="http://maps.googleapis.com/maps/api/js"></script>
+    
+    <!-- Include Required Prerequisites -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap/latest/css/bootstrap.css" />
+ 
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    
+    
+
+
     <style>
         .carousel-inner > .item > img,
         .carousel-inner > .item > a > img {
@@ -214,9 +228,7 @@ if ($_GET['hotel_id']){
 
 
     </style>
-    <style>
-        body{background-color:#CCCCFF;}
-    </style>
+
 
 </head>
 
@@ -245,54 +257,8 @@ if ($_GET['hotel_id']){
 -->                <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
 
-
-
         </div>
-
-        <!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button-->
     </div>
-
-    <!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-        <ul class="nav navbar-nav">
-
-            <li >
-
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Price Range<strong class="caret" ></strong></a>
-            </li>
-
-            <li>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">City<strong class="caret" ></strong></a>
-            </li>
-
-        </ul-->
-
-    <!--form class="navbar-form navbar-left" role="search">
-    <div class="form-group">
-        <input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-    </div>
-    <button type="submit" class="btn btn-primary btn-md">
-        Search
-    </button>
-</form-->
-    <!--ul class="nav navbar-nav navbar-right">
-        <button type="submit" class="btn btn-primary btn-md">
-            <span class=" glyphicon glyphicon-log-in"></span> Login
-        </button>
-        <button type="submit" class="btn btn-primary btn-md">
-            <span class=" glyphicon glyphicon-thumbs-up"></span> About us
-
-        </button>
-        <button type="submit" class="btn btn-primary btn-md">
-            <span class=" glyphicon glyphicon-modal-window"></span> Rooms
-
-        </button>
-
-    </ul-->
-    </div>
-
 </nav>
 
 <!-- The bar which contains the photos -->
@@ -301,173 +267,455 @@ if ($_GET['hotel_id']){
         <h3 class="text-primary" align = "center" ><b><?php echo $Hotel_name ?></b></h3>
     </div>
 </div>
-<div id="carousel-713107" class="carousel slide" style="width: 900px; height :auto; margin:  auto">
 
-    <ol class="carousel-indicators">
-        <li class="active" data-slide-to="0" data-target="#carousel-713107">
-        </li>
-        <li data-slide-to="1" data-target="#carousel-713107">
-        </li>
-        <li data-slide-to="2" data-target="#carousel-713107">
-        </li>
+<?php 
+    $Count = mysql_num_rows($photos);
+    
+?>
+<div id="Carousel" class="carousel slide carousel-fade col-offset-0">
+    <ol class="carousel-indicators" >
+        <?php 
+            if ($Count <= 0){
+                echo '<li data-target="Carousel" data-slide-to="0" class="active"></li>';
+            }
+            else{
+                echo '<li data-target="Carousel" data-slide-to="0" class="active"></li>';
+                for ($i = 1; $i <= $Count; $i++){
+                    echo '<li data-target="Carousel" data-slide-to="'.$i.'"></li>';
+                }
+            }
+        ?>
     </ol>
+    
     <div class="carousel-inner">
-        <div class="item active">
-            <img alt="Carousel Bootstrap First" src="hotelimages/neela.jpg" />
-
-        </div>
-        <div class="item">
-            <img alt="Carousel Bootstrap Second" src="hotelimages/surf.jpg" />
-
-        </div>
-        <div class="item">
-            <img alt="Carousel Bootstrap Third" src="hotelimages/neela7.jpg" />
-
-        </div>
-    </div> <a class="left carousel-control" href="#carousel-713107" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-713107" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-</div>
-</div>
-</div>
-
-<!--Hotel Description-->
-<div class="row">
-    <div class="col-md-8">
-        <legend>Hotel Description</legend><br>
-        <?php echo $Hotel_desc?>
+        <?php 
+            if ($Count <= 0){
+                echo '<div class="item active">
+                    <img src="https://pbs.twimg.com/profile_images/2260555298/N_A_Facebook_blk_400x400.jpg" class="img-responsive">
+                    </div>';
+            }
+            else{
+                while ($photo = mysql_fetch_array($photos)){
+                    echo '<div class="item active">
+                    <img src="'.$photo["photo_address"].'" class="img-responsive">
+                    </div>';
+                }
+            }
+        ?>
     </div>
-    <div class="col-md-4">
+    
+    <a class="left carousel-control" href="#Carousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    
+    <a class="right carousel-control" href="#Carousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
+</div>
+<!--
+
+<div id="Carousel" class="carousel slide carousel-fade  col-offset-0">
+        <ol class="carousel-indicators">
+            <li data-target="Carousel" data-slide-to="0" class="active"></li>
+            <li data-target="Carousel" data-slide-to="1"></li>
+            <li data-target="Carousel" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="item active">
+                <img src="img/download.jpg" class="img-responsive">
+            </div>
+           <div class="item">
+               <img src="img/downloadss.jpg" class="img-responsive">
+            </div>
+           <div class="item">
+             <img src="img/downloadsss.jpg" class="img-responsive">
+            </div>
+        </div>
+
+        <a class="left carousel-control" href="#Carousel" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="right carousel-control" href="#Carousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+</div>
+
+-->
+
+<style>
+.carousel-fade .carousel-inner .item {
+  opacity: 0;
+  -webkit-transition-property: opacity;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+.carousel-fade .carousel-inner .active {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  opacity: 0;
+  z-index: 1;
+}
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+</style>
+<br><br>
+
+<form class="navbar-form" role="search"align = "center"  action="<?php  htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+        <div class="form-group">
+            <input type="text" name="datefilter" value="" class="form-control"/>
+            <input type="text" align = "right" class="form-control" id="roomid" name = "roomid" placeholder="Category Name, Room ID"/>
+        </div> 
+	<button type="submit" class="btn btn-default">
+            Search
+	</button>					
+    </form>
+<script type="text/javascript">
+$(function() {
+
+  $('input[name="datefilter"]').daterangepicker({
+      autoUpdateInput: false,
+      locale: {
+          cancelLabel: 'Clear'
+      }
+  });
+
+  $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+      $(this).val(picker.startDate.format('MM/DD/YYYY') + ' - ' + picker.endDate.format('MM/DD/YYYY'));
+      var startDate=$startDate.val();
+      document.getElementById('demo').innerHTML='<p>'+startDate+'</p>';
+      
+  });
+
+  $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+      $(this).val('');
+  });
+
+});
+</script>
+</div>
+</div>
+<br><br><br><br>
+<!--Hotel Description-->
+<div class="container">
+    <div class="page-header">
+    <h1>Description <small>Will help you to find a better place</small></h1>
+</div>
+    <br> <br>
+    <blockquote>
+         <?php echo $Hotel_desc?>
+        <div class="col-xs-6">
         <!-- Form which contains the get connected -->
         <form class="form-horizontal">
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Get Connected</legend>
+                <br><br>
                 <address>
                     <strong><?php echo $Hotel_name?></strong><br /> <?php echo $Hotel_address?><br /> <abbr title="Phone">Phone:</abbr><?php echo $hotel_Telephone ?>
                 </address>
             </fieldset>
         </form>
     </div>
-    <!--Creating the form to the google map -->
+    </blockquote>  
+  
+</div>
+<div class="container">
+<!--starting of photo gallery -->
 
-    <div class="row">
-
-        <div class="col-md-6">
-            <br></br>
-            <legend>Google Map</legend>
-            <div id="googleMap" style="width:400px ;height:400px ; margin:  left"></div>
+  <div class="page-header">
+        <h1>Image Gallery <small>Will help you to find a better place</small></h1>
+        </div>
+    
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="This is my title" data-caption="Some lovely red flowers" data-image="http://onelive.us/wp-content/uploads/2014/08/flower-delivery-online.jpg" data-target="#image-gallery">
+                <img class="img-responsive" src="http://onelive.us/wp-content/uploads/2014/08/flower-delivery-online.jpg" alt="Short alt text">
+            </a>
+        </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="The car i dream about" data-caption="If you sponsor me, I can drive this car" data-image="http://www.picturesnew.com/media/images/car-image.jpg" data-target="#image-gallery">
+                <img class="img-responsive" src="http://www.picturesnew.com/media/images/car-image.jpg" alt="A alt text">
+            </a>
+        </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-caption="And if there is money left, my girlfriend will receive this car" data-image="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" data-target="#image-gallery">
+                <img class="img-responsive" src="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" alt="Another alt text">
+            </a>
+        </div>
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-caption="And if there is money left, my girlfriend will receive this car" data-image="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" data-target="#image-gallery">
+                <img class="img-responsive" src="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" alt="Another alt text">
+            </a>
         </div>
 
-        <!-- Creating the form for the room availability -->
-        <div class="col-md-6" align = "left">
-            <br>   </br>
-            <form class="form-horizontal" action="rooms_user.php?hotel_id=<?php echo $hotelID;?> method="get">
-                <fieldset>
-
-                    <!-- Form Name -->
-                    <legend>Room Availability</legend>
-
-                    <nav class="navbar navbar-top" role="navigation" >
+</div>
 
 
-                        <div class="navbar-header">
+<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="image-gallery-title"></h4>
+            </div>
+            <div class="modal-body">
+                <img id="image-gallery-image" class="img-responsive" src="">
+            </div>
+            <div class="modal-footer">
 
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                                <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <!-- Get in the calender -->
-                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                            <form class="navbar-form navbar-left" role="search" name="Room_availability" method="post" action="rooms_user.php" >
-                                <label for="checkin">Check in<span class="glyphicon glyphicon-calendar"></span>:</label>
-                                <input type="date" id="for" class="form-control">
-                                <br></br>
-                                <label for="checkout">Check out<span class="glyphicon glyphicon-calendar"></span>:</label>
-                                <input type="date" id="checkout" class="form-control" >
-                                <input type="hidden" name="hotel_id" value="<?php echo $hotelID;?>">
-
-                                <br></br>
-                                <button type="submit" class="btn btn-default">
-                                    Search
-                                </button>
-                            </form>
-
-                        </div>
-
-                    </nav>
-
-                </fieldset>
-            </form>
-
-        </div>
-
-        <div class="col-md-4">
-            <br></br>
-        </div>
-    </div>
-
-
-
-    <!-- Star rating system -->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="page-header">Ratings</h2>
-
-                <div class="text-right">
-                    <div class="col-md-8">
-                        <form accept-charset="UTF-8" action="" method="post">
-                            <input id="ratings-hidden" name="rating" type="hidden">
-
-                            <div class="text-right">
-                                <div class="stars starrr" data-rating="4">Location  </div>
-                                <div class="stars starrr" data-rating="5">Sleep quality  </div>
-                                <div class="stars starrr" data-rating="3">Rooms  </div>
-                                <div class="stars starrr" data-rating="2">Service  </div>
-                                <div class="stars starrr" data-rating="3">Cleanliness  </div>
-
-                            </div>
-                        </form>
-                        <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
-                    </div>
-
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
                 </div>
 
-                <div class="row" id="post-review-box" style="display:none;">
-                    <div class="col-md-8">
-                        <form accept-charset="UTF-8" action="" method="post">
-                            <input id="ratings-hidden" name="rating" type="hidden">
+                <div class="col-md-8 text-justify" id="image-gallery-caption">
+                    This text will be overwritten by jQuery
+                </div>
 
-                            <div class="text-right">
-                                <div class="stars starrr" data-rating="0">Location  </div>
-                                <div class="stars starrr" data-rating="0">Sleep quality  </div>
-                                <div class="stars starrr" data-rating="0">Rooms  </div>
-                                <div class="stars starrr" data-rating="0">Service  </div>
-                                <div class="stars starrr" data-rating="0">Cleanliness  </div>
-                                <button class="btn btn-success btn-md" type="submit">Add</button>
-                            </div>
-                        </form>
-                    </div>
-
+                <div class="col-md-2">
+                    <button type="button" id="show-next-image" class="btn btn-default">Next</button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+</div>
+    <script>
+        $(document).ready(function(){
+
+    loadGallery(true, 'a.thumbnail');
+
+    //This function disables buttons when needed
+    function disableButtons(counter_max, counter_current){
+        $('#show-previous-image, #show-next-image').show();
+        if(counter_max == counter_current){
+            $('#show-next-image').hide();
+        } else if (counter_current == 1){
+            $('#show-previous-image').hide();
+        }
+    }
+
+    /**
+     *
+     * @param setIDs        Sets IDs when DOM is loaded. If using a PHP counter, set to false.
+     * @param setClickAttr  Sets the attribute for the click handler.
+     */
+
+    function loadGallery(setIDs, setClickAttr){
+        var current_image,
+            selector,
+            counter = 0;
+
+        $('#show-next-image, #show-previous-image').click(function(){
+            if($(this).attr('id') == 'show-previous-image'){
+                current_image--;
+            } else {
+                current_image++;
+            }
+
+            selector = $('[data-image-id="' + current_image + '"]');
+            updateGallery(selector);
+        });
+
+        function updateGallery(selector) {
+            var $sel = selector;
+            current_image = $sel.data('image-id');
+            $('#image-gallery-caption').text($sel.data('caption'));
+            $('#image-gallery-title').text($sel.data('title'));
+            $('#image-gallery-image').attr('src', $sel.data('image'));
+            disableButtons(counter, $sel.data('image-id'));
+        }
+
+        if(setIDs == true){
+            $('[data-image-id]').each(function(){
+                counter++;
+                $(this).attr('data-image-id',counter);
+            });
+        }
+        $(setClickAttr).on('click',function(){
+            updateGallery($(this));
+        });
+    }
+});
+        </script>
+
+        <!-- end of photo gallery -->
+ 
+    <!--Creating the form to the google map -->
+        <br><br>
+        <div class ="container">
+            <div class="page-header">
+                    <h1>Find Us </h1>
+                </div>
+            <div id="googleMap" class="col-md-12" style="width:1150px ;height:400px ; margin:  left"></div>
+        </div>
+
+   
+   
 
 
+<div class="container">
+
+<div class="page-header">
+    <h1>Rating <small>Will help you to find better place</small></h1>
+</div>
+
+<!-- Rating - START -->
+<div class="container col-md-12" id="container1">
+    
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="text-center">Skills<span class="glyphicon glyphicon-saved pull-right"></span></h4>
+            </div>
+            <div class="panel-body text-center">
+                <p class="lead">
+                    <strong>Technology Overview</strong>
+                </p>
+            </div>
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item">
+                    <div class="skillLineDefault">
+                        <div class="skill pull-left text-center">HTML5</div>
+                        <div class="rating" id="rate1"></div>
+                    </div>
+                </li>
+                <li class="list-group-item text-center">
+                    <div class="skillLineDefault">
+                        <div class="skill pull-left text-center">CSS</div>
+                        <div class="rating" id="rate2"></div>
+                    </div>
+                </li>
+                <li class="list-group-item text-center">
+                    <div class="skillLineDefault">
+                        <div class="skill pull-left text-center">jQuery</div>
+                        <div class="rating" id="rate3"></div>
+                    </div>
+                </li>
+                <li class="list-group-item text-center">
+                    <div class="skillLineDefault">
+                        <div class="skill pull-left text-center">C#</div>
+                        <div class="rating" id="rate4"></div>
+                    </div>
+                </li>
+            </ul>
+            <div class="panel-footer text-center">
+                <button type="button" class="btn btn-primary btn-lg btn-block">
+                    Submit
+                </button>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <div class=" page-header col-md-6">
+        <br><br><br>
+
+        <h2 style="font-size: 85px; bold"><small>Overall rating:  </small> 5/6 </h2>
+        
+        <style>
+            h2 {
+                text-align: center;
+            }
+        </style>
+    </div>
+    
+</div>
+
+<style>
+    #container1 {
+        margin-bottom: 120px;
+        padding:20px;
+        background-color:#f5f5f5;
+    }
+
+    .rating {
+        margin-left: 30px;
+    }
+
+    div.skill {
+        background: #5cb85c;
+        border-radius: 3px;
+        color: white;
+        font-weight: bold;
+        padding: 3px 4px;
+        width: 70px;
+    }
+
+    .skillLine {
+        display: inline-block;
+        width: 100%;
+        min-height: 90px;
+        padding: 3px 4px;
+    }
+
+    skillLineDefault {
+        padding: 3px 4px;
+    }
+</style>
+
+<!-- you need to include the shieldui css and js assets in order for the charts to work -->
+<link rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/light/all.min.css" />
+<script type="text/javascript" src="http://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+
+<script type="text/javascript">
+    initializeRatings();
+
+    function initializeRatings() {
+        $('#rate1').shieldRating({
+            max: 7,
+            step: 0.1,
+            value: 6.3,
+            markPreset: false
+        });
+        $('#rate2').shieldRating({
+            max: 7,
+            step: 0.1,
+            value: 6,
+            markPreset: false
+        });
+        $('#rate3').shieldRating({
+            max: 7,
+            step: 0.1,
+            value: 4.5,
+            markPreset: false
+        });
+        $('#rate4').shieldRating({
+            max: 7,
+            step: 0.1,
+            value: 5,
+            markPreset: false
+        });
+    }
+</script>
+
+<!-- Rating - END -->
+
+</div>
+        <br>
+        <br>
+<div class="container">
             <!-- Comment box -->
-            <div class="col-md-6">
-                <div class="container">
-                    <h2 class="page-header">Comments</h2>
-
+            <div class="col-md-12">
+                
+                    <h1 class="page-header">User Comments</h1>
+                    <div class="container" id="container1">
                     <div class="detailBox">
-                        <div class="titleBox">
-                            <label>Comment Box</label>
-                            <button type="button" class="close" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="commentBox">
-
-
-                        </div>
+                        
+                        
                         <div class="actionBox">
                             <ul class="commentList">
 
@@ -475,19 +723,34 @@ if ($_GET['hotel_id']){
                                     <div class="commenterImage">
                                         <img src="http://lorempixel.com/50/50/people/7" />
                                     </div>
-                                    <div class="commentText">
+                                    <div class="">
                                         <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+                                    </div>
+                                </li>
 
+                            </ul>
+                            <ul class="commentList">
+
+                                <li>
+                                    <div class="commenterImage">
+                                        <img src="http://lorempixel.com/50/50/people/7" />
+                                    </div>
+                                    <div class="">
+                                        <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
                                     </div>
                                 </li>
 
                             </ul>
                             <form class="form-inline" role="form">
                                 <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="Your comments" required/>
+                                    <textarea class="form-control" type="text" placeholder="Your comments" required></textarea>
                                 </div>
-                                <div class="form-group">
-                                    <button class="btn btn-success btn-md" type="submit" >Add</button>
+                                <br>
+                                <br>
+                                <div class="panel-footer">
+                                    <button type="button" class="btn btn-primary btn-lg">
+                                        Submit
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -497,12 +760,7 @@ if ($_GET['hotel_id']){
             </div>
 
         </div>
-    </div>
-
-
-
-
-
+    
 
 </body>
 

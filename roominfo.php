@@ -24,8 +24,9 @@ else {
     }
     $str = $str.'"';
 
-    //echo $str;
+    echo $str;
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+         $Hotel_ID=$_SESSION['hotel_id'];
         $Hotel_email = $_SESSION['hotel_email'];
         $Room_Name = $_POST['Room_Name'];
         $Room_Cost = $_POST['Room_Cost'];
@@ -33,15 +34,38 @@ else {
         $Room_AC =$_POST['Room_AC'];
         $Room_Number = 0;
         $Room_weight= 0;
+        $view = $_POST["view"];
+        $Seaview = 0;
+        $MTnView = 0;
+        $GndFlr = $_POST["gndflr"];
+        if ($view == "SeaView"){
+            $Seaview = 1;
+            $MTnView = 0;
+        } 
+        else{
+            if ($view == "Mountain"){
+                $Seaview = 0;
+                $MTnView = 1;
+            }
+            else{
+                $Seaview = 0;
+                $MTnView = 0;
+            }
+            }
+        $single= $double= $triple = 0;
+        if ($Room_Type == "Single"){$single = 1; $double = 0; $triple=0;}
+        else{if($Room_Type == "Double"){$single = 0; $double = 1; $triple=0;} else{$single = 0; $double = 0; $triple=1;}}
+        
+        
         $RoomOptionsMain = array();
         if($Room_AC == "A"){
             array_push($RoomOptionsMain, "A/C");
             $Room_weight += 1;
         }
 
-        $Room_Option = $_POST['basic_options'];
+        //$Room_Option = $_POST['basic_options'];
 
-        if($Room_Option != "N/A"){
+        /*if($Room_Option != "N/A"){
             $RoomOptionsMain = array($Room_Option);
             $Room_weight += 1;
         }
@@ -50,6 +74,8 @@ else {
 
 
         }
+         * 
+         
         $Room_GndFlr = "N/A";
         if(isset($_POST['GndFlr'])){
             array_push($RoomOptionsMain, "GndFlr");
@@ -73,15 +99,12 @@ else {
             $Room_weight += count($RoomOptionArray);
         }
         $RoomOptionArray = array_merge($RoomOptionArray, $RoomOptionsMain);
-
+*/
         $Room_Desc = $_POST['Room_Description'];
-        //echo $_POST['Room_photo'];
-        $Room_photo = $_FILES['Room_photo']['name'];
-        //echo $Room_photo;
-        $Photo = $_FILES['Room_photo']['tmp_name'];
-        $target = 'images/';
-        $target = $target.basename($Room_photo);
-        move_uploaded_file($_FILES['Room_photo']['tmp_name'], $target);
+        //echo $_POST[
+        //
+       
+        
         //echo "<img src=images/".$Room_photo.">";
 
         //$Hotel = $_SESSION['hotel_email'];
@@ -90,11 +113,34 @@ else {
         //$hotel->hotel_create_room($Room_Name, $Room_Desc, $Room_Price,$Hotel);
         $log = new dbHotel();
 
-        $log->hotel_create_room($Hotel_email, $Room_Name, "0", $Room_Type, $Room_photo, $Room_Desc, $target, $Room_Cost, $RoomOptionArray, $Room_weight);
+        $log->hotel_create_room($Hotel_email, $Room_Name, "0", $Room_Type, $Room_photo, $Room_Desc, $target, $Room_Cost,  $Room_weight, 0, $Seaview, $MTnView, $GndFlr, $single, $double, $triple, $Room_AC);
+         $extarray = array("jpeg","jpg","png","gif");
+        $filepath = 'images/'.$Hotel_ID.'/'.$Room_Name;
+        mkdir($filepath);
+        
+        foreach ($_FILES['Room_photo']['tmp_name'] as $key=>$tmp_name){
+            $Room_photo = $_FILES['Room_photo']['name'][$key];
+             //echo $Room_photo;
+            $Photo = $_FILES['Room_photo']['tmp_name'][$key];
+            $ext = pathinfo($Room_photo, PATHINFO_EXTENSION);
+            if(in_array($ext, $extarray)){
+                
+                $target = $filepath."/".$file_name;
+                //$target = $target.basename($file_tmp = $_FILES['Room_photo']['tmp_name'][$key]);
+                
+                move_uploaded_file($_FILES['Room_photo']['tmp_name'][$key], $target);
+                $que = "";
+                $res = mysql_query();
+                
+                }
+            
+            
+            
+        }
+        
+       
 
-        $Hotel_ID=$_SESSION['hotel_id'];
-
-
+            
         header("Location:Hotel-profile.php?hotel_id=".$Hotel_ID."");
         exit();
     }
@@ -284,15 +330,15 @@ else {
         				<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>
 			  		<!--li><a href="#"><span class="glyphicon glyphicon-cog"><b><font size="4" color="#A7A79B">Settings</font></b></a></li-->
 					<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></a></li>
-      				<li><a href="hotel_logout.php"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
+      				<li><a href="#"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#A7A79B">Logout</font></b></a></li></ul>
 					
     			</div>
   		</div>
 	</nav>
     <div class="container">
 	<div class="col-sm-8">
-	<div class="jumbotron">
-    <form name = "Room_create" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  enctype="multipart/form-data">
+	
+    <form name = "Room_create" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>"  enctype="multipart/form-data" />
         <legend><h2 align="center">Create New Room</h2></legend>
         <div class="form-group">
             <label for="Room_Name" id="Room_Name" >Room Name</label>
@@ -301,9 +347,9 @@ else {
         <div class="form-group">
             <label for="Room_Type" id="Room_Type">Room Type</label>
             <select name="Room_Type">
-                <option>Single</option>
-                <option>Double</option>
-                <option>Triple</option>
+                <option >Single</option>
+                <option >Double</option>
+                <option >Triple</option>
             </select>
         </div>
         <div class="form-group">
@@ -315,32 +361,33 @@ else {
             <textarea name="Room_Description" rows="5" cols="5" class="form-control"></textarea>
         </div>
         <div class="form-group">
-            <label><input type="radio" name="Room_AC" value="A">Air Conditioning available</label><br>
-            <label><input type="radio" name="Room_AC" value = "N/A">Air Conditioning not available</label>
+            <label><input type="radio" name="Room_AC" value=1>Air Conditioning available</label><br>
+            <label><input type="radio" name="Room_AC" value = 0>Air Conditioning not available</label>
         </div>
         <div class="form_group">
             <label for="basic_options">Basic Options</label><br>
-            <label><input type="radio" name="basic_options" value="SeaView">Sea view &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-            <label><input type="checkbox" name="GndFlr" value = "GndFlr">Ground Floor</label><br>
-            <label><input type="radio" name="basic_options" value = "MountainView">Mountain view</label><br>
-            <label><input type="radio" name="basic_options" value = "N/A">Not Applicable</label><br>
+            <label><input type="radio" name="view" value="SeaView">Sea view &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            <label><input type="checkbox" name="gndflr" value = 1>Ground Floor</label><br>
+            <label><input type="radio" name="view" value = "Mountain">Mountain view</label><br>
+            <label><input type="radio" name="view" value = "N/A">Not Applicable</label><br>
             <br><br>
         </div>
-        <div class=form-group" id="options">
+        <!--
+        <div class="form-group" id="options">
             <label for="options">Other options:</label>
             <a href="#" onclick="javascript:void window.open('instructions.html','1443469567306','width=700,height=500,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">How do I use this?</a>
             <input id="options" name="options" size="100" class="form-control" >
         </div>
-<div class="form-group">
+-->
+        
+        <div class="form-group">
             <label for="Room_photo" id="Room_photo">Room Photo</label>
 
-            <input type="file" name="Room_photo" id="Room_photo" accept="image/*">
+            <input type="file" name="Room_photo[]" id="Room_photo" accept="image/*" multiple/>
                 </div>
-            <button type="submit" class="btn btn-default" value="submit" >Submit</button>
-        </div>
         
+        <button type="submit" class="btn btn-default" value="submit" >Submit</button>
         </div>
-        
     </form>
 	</div>
 	</div>

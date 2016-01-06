@@ -10,7 +10,7 @@ $log = new dbFunction();
 $user_id = $_SESSION["customer_ID"];
 $QUE = "SELECT * FROM reservation INNER JOIN hotel_room on hotel_room.Room_id= reservation.RoomID INNER Join hotel on hotel.Hotel_ID = reservation.HotelID WHERE UserID = '".$user_id."'";
 $res = mysql_query($QUE);
-//echo $QUE ;
+echo $QUE ;
 
 
 
