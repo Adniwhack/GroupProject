@@ -17,10 +17,16 @@ if ($_GET['hotel_id']){
     $_SESSION['hotel_email_view'] = $Hotel_email;
     $_SESSION['hotel_id_view'] = $hotelID;
     $_SESSION['hotel_view'] = $Hotel_name;
-
+    $photos = $Hotel->get_featured_photo($Hotel_email);
+    $Count = mysql_num_rows($photos);
+    
 }
-
+else{
+    header("location:index.html");
+    exit();
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <!--  Adding bootstrap !-->
@@ -31,12 +37,14 @@ if ($_GET['hotel_id']){
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <!--Adding google map to the profile -->
     <script src="http://maps.googleapis.com/maps/api/js"></script>
-    
+    <link rel="stylesheet" href="css/star-rating.min.css" media="all" rel="stylesheet" type="text/css"/>
+   
+    <script src="js/star-rating.min.js" type="text/javascript"></script>
     <!-- Include Required Prerequisites -->
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -58,25 +66,7 @@ if ($_GET['hotel_id']){
 
     </style>
 
-    <style>
-        .navbar {
-            color: #FFFFFF;
-            background-color: #161640;
-        }
-
-        /* OR*/
-
-        .nav {
-            color: #FFFFFF;
-            background-color: #161640;
-
-        .nav-pills > li > a {
-            color: #A7A79Bf;
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.8em ;
-            padding: 1px 1px 1px ;
-        }
-    </style>
+    
 
     <style> .animated {
             -webkit-transition: height 0.2s;
@@ -234,31 +224,80 @@ if ($_GET['hotel_id']){
 <body>
 
 <!-- Navigation bar which is in the top of the page -->
+  <style>
+.navbar {
+    color: #FFFFFF;
+    background-color: #161640;
+}
 
-<nav class="navbar navbar-default">
+/* OR*/
+
+.nav {
+    color: #FFFFFF;
+    background-color: #161640;
+  
+.nav-pills > li > a {
+  color: #A7A79Bf;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em ;
+  padding: 1px 1px 1px ;
+}
+</style>
+
+<nav class="navbar navbar-default responsive">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
-            </ul>
-        </div>
-
-        <div>
-            <ul class="nav nav-pills navbar-left">
-                <li><a href="index.html"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>
-                <li><a href="hotel_welcome_page.php"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
+          <div class="navbar-header">
+              <ul class="nav navbar-nav navbar-left">
                 
-            </ul>
-            </ul>
-        </div>
-        <div>
-            <ul class="nav nav-pills navbar-right">
-                <!--<li><a href="#"><span class="glyphicon glyphicon-log-in"><b><font size="4" color="#A7A79B">Login</font></b></span></a></li>
--->                <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
+                <li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
+          </ul>
+          <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+          </div>
+    <div>
+        
+        <ul class="nav nav-pills navbar-right">
+              
+            <?php if(isset($_SESSION['hotel_id'])){echo '<li><a href="report.php"><span class="glyphicon glyphicon-list-alt"><b><font size="4" color="#FFF" face="calibri light"> Report</font>
+                </b></a></li>'; }else{echo "";}?>
+              
+                <?php if(isset($_SESSION['hotel_id'])){echo '<li><a href="rooms_all.php"><span class="glyphicon glyphicon-modal-window"><b>
+              <font size="4" color="#FFF" face="calibri light"> Rooms</font>
+                </b></a></li>'; }else{echo "";}?>
+                
+                <?php if(isset($_SESSION['hotel_id'])){echo '<li><a href="Hotel_Edit.php"><span class="glyphicon glyphicon-edit"><b>
+              <font size="4" color="#FFF" face="calibri light"> Edit profile</font>
+                </b></a></li>'; }else{echo "";}?>
+                
+                  <?php if(isset($_SESSION['hotel_id'])){echo '<li><a href="manual_reserve.php"><span class="glyphicon glyphicon glyphicon-file"><b>
+              <font size="4" color="#FFF" face="calibri light"> Reservation</font>
+                </b></a></li>'; }
+                  else{
+                      
+                  }?>
+                
+                <li><a href="homepage.php"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></span></a></li>
+                
+                <li><a href=<?php if(isset($_SESSION['hotel_id'])){echo "hotel_logout.php";}
+                  elseif(isset($_SESSION['customer_login'])){
+                      echo "user_logout.php";
+                  }
+                  else{
+                      echo "User_Login.php";
+                  }?>><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#FFF" face="calibri light"><?php if(isset($_SESSION['hotel_id'])){echo "Logout";}
+                  elseif(isset($_SESSION['customer_login'])){
+                      echo "Logout";
+                  }
+                  else{
+                      echo "Login";
+                  }?></font></b></a></li></ul>
+          
+      </div>
+    
+    
+    
+      </div>
+  </nav>
 
-        </div>
-    </div>
-</nav>
 
 <!-- The bar which contains the photos -->
 <div class="row">
@@ -266,32 +305,58 @@ if ($_GET['hotel_id']){
         <h3 class="text-primary" align = "center" ><b><?php echo $Hotel_name ?></b></h3>
     </div>
 </div>
-<div id="Carousel" class="carousel slide carousel-fade  col-offset-0">
-        <ol class="carousel-indicators">
-            <li data-target="Carousel" data-slide-to="0" class="active"></li>
-            <li data-target="Carousel" data-slide-to="1"></li>
-            <li data-target="Carousel" data-slide-to="2"></li>
-        </ol>
 
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="img/download.jpg" class="img-responsive">
-            </div>
-           <div class="item">
-               <img src="img/downloadss.jpg" class="img-responsive">
-            </div>
-           <div class="item">
-             <img src="img/downloadsss.jpg" class="img-responsive">
-            </div>
-        </div>
+<?php 
+if($photos==FALSE){$Count = mysql_num_rows($photos);}else{}
+    
+    
+?>
 
-        <a class="left carousel-control" href="#Carousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#Carousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+<div id="Carousel" class="carousel slide carousel-fade col-offset-0">
+    <ol class="carousel-indicators" >
+        <?php 
+            if ($Count <= 0){
+                echo '<li data-target="Carousel" data-slide-to="0" class="active"></li>';
+            }
+            else{
+                echo '<li data-target="Carousel" data-slide-to="0" class="active"></li>';
+                for ($i = 1; $i <= $Count; $i++){
+                    echo '<li data-target="Carousel" data-slide-to="'.$i.'"></li>';
+                }
+            }
+        ?>
+    </ol>
+    
+    <div class="carousel-inner">
+        <?php 
+            if ($Count <= 0){
+                echo '<div class="item active">
+                    <img src="https://pbs.twimg.com/profile_images/2260555298/N_A_Facebook_blk_400x400.jpg" class="img-responsive">
+                    </div>';
+            }
+            else{
+                $C=0;
+                while ($photo = mysql_fetch_array($photos)){
+                    echo '<div class="item';
+                    if ($C == 0){echo " active";}
+                    echo '">
+                    <img src="'.$photo["photo_address"].'" class="img-responsive" height=800px width=600px >
+                    </div>';
+                    $C++;
+                }
+            }
+        ?>
+    </div>
+    
+    <a class="left carousel-control" href="#Carousel" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    
+    <a class="right carousel-control" href="#Carousel" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
 </div>
+
 <style>
 .carousel-fade .carousel-inner .item {
   opacity: 0;
@@ -322,12 +387,13 @@ if ($_GET['hotel_id']){
 </style>
 <br><br>
 
-<form class="navbar-form" role="search"align = "center"  action="<?php  htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+<form class="navbar-form" role="search" align = "center"  action="rooms_user.php"  method="post">
         <div class="form-group">
-            <input type="text" name="datefilter" value="" class="form-control"/>
-            <input type="text" align = "right" class="form-control" id="roomid" name = "roomid" placeholder="Category Name, Room ID"/>
+            <input type="text" name="datefilter" value="" class="form-control" required placeholder="Checkin - Checkout"/>
+            
+            <input type="hidden" name="hotel_id" value="<?php echo $hotelID; ?>">
         </div> 
-	<button type="submit" class="btn btn-default">
+	<button type="submit" class="btn btn-primary">
             Search
 	</button>					
     </form>
@@ -356,13 +422,13 @@ $(function() {
 </script>
 </div>
 </div>
-<br><br><br><br>
+<br><br>
 <!--Hotel Description-->
 <div class="container">
     <div class="page-header">
-    <h1>Description <small>Will help you to find a better place</small></h1>
+    <h1>Description </h1>
 </div>
-    <br> <br>
+    
     <blockquote>
          <?php echo $Hotel_desc?>
         <div class="col-xs-6">
@@ -383,31 +449,22 @@ $(function() {
 </div>
 <div class="container">
 <!--starting of photo gallery -->
-
+<br><br>
   <div class="page-header">
-        <h1>Image Gallery <small>Will help you to find a better place</small></h1>
+        <h1>Image Gallery </h1>
         </div>
-    
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="This is my title" data-caption="Some lovely red flowers" data-image="http://onelive.us/wp-content/uploads/2014/08/flower-delivery-online.jpg" data-target="#image-gallery">
-                <img class="img-responsive" src="http://onelive.us/wp-content/uploads/2014/08/flower-delivery-online.jpg" alt="Short alt text">
-            </a>
-        </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="The car i dream about" data-caption="If you sponsor me, I can drive this car" data-image="http://www.picturesnew.com/media/images/car-image.jpg" data-target="#image-gallery">
-                <img class="img-responsive" src="http://www.picturesnew.com/media/images/car-image.jpg" alt="A alt text">
-            </a>
-        </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-caption="And if there is money left, my girlfriend will receive this car" data-image="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" data-target="#image-gallery">
-                <img class="img-responsive" src="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" alt="Another alt text">
-            </a>
-        </div>
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="Im so nice" data-caption="And if there is money left, my girlfriend will receive this car" data-image="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" data-target="#image-gallery">
-                <img class="img-responsive" src="http://upload.wikimedia.org/wikipedia/commons/7/78/1997_Fiat_Panda.JPG" alt="Another alt text">
-            </a>
-        </div>
+        <?php 
+            $photo2 = $Hotel->get_hotel_photo($Hotel_email);
+            while ($photo = mysql_fetch_array($photo2)){
+                echo '<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="" data-caption="" data-image="'.$photo['photo_address'].'" data-target="#image-gallery">
+                        <img class="img-responsive" src="'.$photo['photo_address'].'" alt="Short alt text">
+                    </a>
+                </div>';
+                    
+                }
+        ?>
+        
 
 </div>
 
@@ -439,7 +496,7 @@ $(function() {
         </div>
     </div>
 </div>
-</div>
+
     <script>
         $(document).ready(function(){
 
@@ -513,58 +570,79 @@ $(function() {
    
    
 
-
+<br><br><br><br>
 <div class="container">
 
 <div class="page-header">
     <h1>Rating <small>Will help you to find better place</small></h1>
 </div>
-
+<?php 
+    $que = "SELECT * FROM comment WHERE HotelID='$hotelID'";
+    $res = mysql_query($que);
+    $location = $clean = $qual = $service =  0;
+    $c = 0;
+    while ($data = mysql_fetch_array($res)){
+        $location += $data['Location'];
+        $clean += $data['Cleanliness'];
+        $qual += $data['Rooms'];
+        $service += $data['Service'];
+        $c += 1;
+        
+    }
+    if ($c != 0){
+        $location = $location / $c;
+        $clean = $clean / $c;
+        $qual = $qual / $c;
+        $service = $service / $c;
+    }
+    
+    $overall = round(($location +$clean + $qual + $service)/ 4, 1);
+    
+    
+    
+    
+    
+?>
 <!-- Rating - START -->
 <div class="container col-md-12" id="container1">
     
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h4 class="text-center">Skills<span class="glyphicon glyphicon-saved pull-right"></span></h4>
+                <h4 class="text-center">Reviews<span class="glyphicon glyphicon-saved pull-right"></span></h4>
             </div>
             <div class="panel-body text-center">
                 <p class="lead">
-                    <strong>Technology Overview</strong>
+                    <strong>Average User Ratings</strong>
                 </p>
             </div>
             <ul class="list-group list-group-flush text-center">
                 <li class="list-group-item">
                     <div class="skillLineDefault">
-                        <div class="skill pull-left text-center">HTML5</div>
-                        <div class="rating" id="rate1"></div>
+                        <div class="skill pull-left text-center">Location</div>
+                        <input id="location" value="<?php echo round($location, 1);?>" type="number" class="rating" min=0 max=5 step="0.1" data-size="sm" disabled="disabled">
                     </div>
                 </li>
                 <li class="list-group-item text-center">
                     <div class="skillLineDefault">
-                        <div class="skill pull-left text-center">CSS</div>
-                        <div class="rating" id="rate2"></div>
+                        <div class="skill pull-left text-center">Cleanliness</div>
+                        <input id="cleanliness" value="<?php echo round($clean, 1);?>" type="number" class="rating" min=0 max=5 step="0.1" data-size="sm" disabled="disabled">
                     </div>
                 </li>
                 <li class="list-group-item text-center">
                     <div class="skillLineDefault">
-                        <div class="skill pull-left text-center">jQuery</div>
-                        <div class="rating" id="rate3"></div>
+                        <div class="skill pull-left text-center">Room Quality</div>
+                        <input id="room" value="<?php echo round($qual, 1);?>" type="number" class="rating" min=0 max=5 step="0.1" data-size="sm" disabled="disabled">
                     </div>
                 </li>
                 <li class="list-group-item text-center">
                     <div class="skillLineDefault">
-                        <div class="skill pull-left text-center">C#</div>
-                        <div class="rating" id="rate4"></div>
+                        <div class="skill pull-left text-center">Service</div>
+                        <input id="service" value="<?php echo round($service, 1);?>" type="number" class="rating" min=0 max=5 step="0.1" data-size="sm" disabled="disabled">
                     </div>
                 </li>
             </ul>
-            <div class="panel-footer text-center">
-                <button type="button" class="btn btn-primary btn-lg btn-block">
-                    Submit
-                </button>
-                
-            </div>
+           
             
         </div>
         
@@ -573,7 +651,7 @@ $(function() {
     <div class=" page-header col-md-6">
         <br><br><br>
 
-        <h2 style="font-size: 85px; bold"><small>Overall rating:  </small> 5/6 </h2>
+        <h2 style="font-size: 85px; bold"><small>Overall rating:  </small> <?php echo "$overall/5" ;?> </h2>
         
         <style>
             h2 {
@@ -666,42 +744,59 @@ $(function() {
                         
                         
                         <div class="actionBox">
-                            <ul class="commentList">
+                            
+                            
+                            <?php
+                                $que = "SELECT * FROM comment WHERE HotelID='$hotelID'";
+                                $res = mysql_query($que);
+                                $i = 1;
+                                while ($data = mysql_fetch_array($res)){
+                                    echo '<ul class="commentList">
 
                                 <li>
-                                    <div class="commenterImage">
-                                        <img src="http://lorempixel.com/50/50/people/7" />
-                                    </div>
+                                    
                                     <div class="">
-                                        <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
+                                        <p class="">'.$data['Comment'].'</p> <span class="date sub-text">on '.$data['Date'].'</span>
                                     </div>
                                 </li>
 
-                            </ul>
-                            <ul class="commentList">
-
-                                <li>
-                                    <div class="commenterImage">
-                                        <img src="http://lorempixel.com/50/50/people/7" />
-                                    </div>
-                                    <div class="">
-                                        <p class="">Hello this is a test comment and this comment is particularly very long and it goes on and on and on.</p> <span class="date sub-text">on March 5th, 2014</span>
-                                    </div>
-                                </li>
-
-                            </ul>
-                            <form class="form-inline" role="form">
-                                <div class="form-group">
-                                    <textarea class="form-control" type="text" placeholder="Your comments" required></textarea>
-                                </div>
+                            </ul>';
+                                }
+                            ?>
+                            <?php
+                            if(!isset($_SESSION['hotel_login']) or $_SESSION['hotel_id'] != $_GET['hotel_id']){
+                                $disable = "";
+                                $commentplaceholder = "";
+                                if (!isset($_SESSION['customer_ID'])){
+                                    $disable = "disabled='disabled'";
+                                    $commentplaceholder = "You must sign in to make a comment.";
+                                }
+                                else{
+                                    $disable = "";
+                                    $commentplaceholder = "Enter your comments here";
+                                }
+                                echo '<form class="form-inline" role="form" action="comment.php" method="post">'
+                                . '<div class="form-group">'
+                                        . '<textarea class="form-control" name="comment" placeholder="'.$commentplaceholder.'" '.$disable.' required></textarea>'
+                                        . '</div>
                                 <br>
                                 <br>
+                                <label>Location</label><input id="input-21d" value="0" '.$disable.' name="rating1" type="number" class="rating" min=0 max=5 step=1 data-size="sm"><br>'
+                                        . '<label>Cleanliness</label><input id="input-22d" value="0" '.$disable.'name="rating2" type="number" class="rating" min=0 max=5 step=1 data-size="sm"><br>'
+                                        . '<label>Service</label><input id="input-21d" value="0" '.$disable.' name="rating3" type="number" class="rating" min=0 max=5 step=1 data-size="sm"><br>'
+                                        . '<label>Room Quality </label><input id="input-22d" value="0" '.$disable.' name="rating4" type="number" class="rating" min=0 max=5 step=1 data-size="sm" ><br>'
+                                        . '<input type="hidden" name="hotel_id" value ="'.$hotelID.'">
                                 <div class="panel-footer">
-                                    <button type="button" class="btn btn-primary btn-lg">
+                                    <button type="submit"  class="btn btn-primary btn-lg" '.$disable.' >
                                         Submit
                                     </button>
                                 </div>
-                            </form>
+                               
+                               
+                            </form>';
+                            }?>
+                                    
+                            
                         </div>
                     </div>
                 </div>
@@ -709,7 +804,71 @@ $(function() {
             </div>
 
         </div>
-    
+<!--Footer-->
+  <div class="container">
+<div class="col-sm-8 col-sm-offset-2 text-center">
+<h4>
+<a href="homepage.php">OHRMS</a>
+</h4>
+<p><b><font color="#161640">"Smarter choice for your business and vacation plans in Sri Lanka"</font></b></p>
+<hr>
+<!-- starting of facebook icons-->
+<p> Join Us On </p>
+<ul class="list-inline center-block">
+<li><a href="#"><img src="hotelimages/facebook.png"></a></li>
+<li><a href="#"><img src="hotelimages/twitter.png"></a></li>
+<li><a href="#"><img src="hotelimages/google.png"></a></li>
+<li><a href="#"><img src="hotelimages/youtube.png"></a></li>
+</ul>
+
+</div><!--/col-->
+</div><!--/container-->
+<!-- scroll up button-->
+<ul class="nav pull-right scroll-top">
+<li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
+</ul>
+<script>
+$('.scroll-top').click(function(){
+$('body,html').animate({scrollTop:0},1000);
+})
+</script>
+<!--footer-->
+<div id="footer">
+<div class="container">
+<div class="row">
+<div class="col-sm-4">
+<p><a href="homepage.php"> Online Hotel Reservation and Management System</a></p>
+</div> 
+<div class="col-sm-4">
+</div>
+<div class="col-sm-4">
+<font color="#fff">© 2016 All Rights Reserved</font>
+</div>
+</div>
+</div>
+
+
+</div>
+<!--footer end-->
+<style>
+#footer {
+height: 80px;
+background-color: #161640;
+margin-top:50px;
+padding-top:20px;
+
+
+}
+#footer {
+background-color:#161640;
+}
+#footer a {
+color:#efefef;
+}
+#footer > .container {
+
+}
+</style>   
 
 </body>
 

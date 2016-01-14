@@ -1,19 +1,10 @@
 <?php
 
 include_once('function.php');
-
-    
-
-    /*if($_POST['welcome']){
-        // remove all session variables
-        session_unset(); 
-
-        // destroy the session 
-        session_destroy();
-    }
-*/
-$Hotel_name= $Hotel_address= $Hotel_city= $Hotel_Country= $Hotel_email= $Hotel_contact= $Hotel_Description= $Hotel_Password= $Hotel_PasswordCon = "";
-$nameErr = $addressErr = $cityErr = $CountryErr = $emailErr = $contactErr = $usererr =$passerr  = $conpasserr = "";
+//create variable which use in the hotel registration
+$Hotel_name= $Hotel_address= $Hotel_city= $Hotel_email= $Hotel_contact= $Hotel_Description= $Hotel_Password= $Hotel_PasswordCon = "";
+$nameErr = $addressErr = $cityErr= $emailErr = $contactErr = $usererr =$passerr  = $conpasserr = "";
+//check the variables are containing the values 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
         if (!empty($_POST['hotel_name'])){
@@ -36,13 +27,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         else{
             $cityErr = "Fill this field";
         }
-        if (!empty($_POST['Country'])){
-            $Hotel_Country = $_POST['Country'];
-        }
-        else{
-            $CountryErr = "Fill this field";
-        }
-
         if (!empty($_POST['email'])){
             $Hotel_email = $_POST['email'];
         }
@@ -88,255 +72,250 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if ($Hotel_Password != $Hotel_PasswordCon){
             $passerr ="Passwords do not match!";
         }
-    }
-    if (!preg_match("/^[0-9_]*$/",$Hotel_contact)) {
-        $contactErr = "Only numbers and underscore allowed";
-    }
+        }
+        if (!preg_match("/^[0-9_]*$/",$Hotel_contact)) {
+            $contactErr = "Only numbers and underscore allowed";
+        }
 
-    if (!filter_var($Hotel_email, FILTER_VALIDATE_EMAIL)) {
-        $emailErr = "Invalid email format";
-    }
+        if (!filter_var($Hotel_email, FILTER_VALIDATE_EMAIL)) {
+            $emailErr = "Invalid email format";
+        }
 
-    function reArrayFiles(&$file_post) {
+function reArrayFiles(&$file_post) {
 
-        $file_ary = array();
-        $file_count = count($file_post['name']);
-        $file_keys = array_keys($file_post);
+    $file_ary = array();
+    $file_count = count($file_post['name']);
+    $file_keys = array_keys($file_post);
 
-        for ($i=0; $i<$file_count; $i++) {
-            foreach ($file_keys as $key) {
-                $file_ary[$i][$key] = $file_post[$key][$i];
+    for ($i=0; $i<$file_count; $i++) {
+        foreach ($file_keys as $key) {
+            $file_ary[$i][$key] = $file_post[$key][$i];
             }
         }
 
         return $file_ary;
-    }
+    }    
 
 
 
-
-        if($nameErr == "" and $addressErr == "" and $cityErr == "" and $CountryErr == "" and  $emailErr == "" and  $contactErr == "" and  $usererr =="" and $passerr  == "" and  $conpasserr == ""){
+        //check whether values give errors if not it'll call the create_hotel function in the function.php 
+        if($nameErr == "" and $addressErr == "" and $cityErr == "" and $emailErr == "" and  $contactErr == "" and  $usererr =="" and $passerr  == "" and  $conpasserr == ""){
             $log = new dbFunction();
-            $res = $log->create_hotel($Hotel_Description, $Hotel_email , $Hotel_Password, $Hotel_address, $Hotel_city , $Hotel_Country , $Hotel_contact, $Hotel_name);
-            
+            //call the function create_hotel in function.php
+            $res = $log->create_hotel($Hotel_Description, $Hotel_email , $Hotel_Password, $Hotel_address, $Hotel_city, $Hotel_contact, $Hotel_name);
+            //insert images to database
             if ($res != null){
                 $id = md5($Hotel_name);
-                if ($_FILES['upload']) {
-                    $file_ary = reArrayFiles($_FILES['ufile']);
+                if (!empty($_FILES)) {
+                    //$file_ary = reArrayFiles($_FILES);
                     $filepath = "images/".$id;
-                    foreach ($file_ary as $file) {
-                        $Room_photo = $file['name'];
-                        //echo $Room_photo;
-                        $Photo = $file['tmp_name'];
-                        $target = $filepath.basename();
-                        move_uploaded_file($file['tmp_name'], $target);
-                        $Que = "Insert into hotel_photo(email, photo_id, photo_address) VALUES ('','','')";
-                        $res = mysql_query($Que);
+                    if (!file_exists($filepath)){
+                        $fl = mkdir($filepath);}
+                
                     }
+                    $v = 1;
+                    $c = 3;
+                    $extarray = array("jpeg","jpg","png","gif");
+                    foreach($_FILES["pic"]["tmp_name"] as $key=>$tmp_name){
+                        $file_name= $_FILES["pic"]["name"][$key];
+                        $file_tmp = $_FILES["pic"]["tmp_name"][$key];
+                        $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                        if(in_array($ext, $extarray)){
+                        $target = $filepath."/".$file_name;
+                        move_uploaded_file($file_tmp= $_FILES["pic"]["tmp_name"][$key],$target);
+                        $Que = "Insert into hotel_photo(email, photo_id, photo_address, featured) VALUES ('$Hotel_email','$file_name','$target',$v)";
+                        echo $Que;
+                        $res = mysql_query($Que);
+                        if ($c == 0){
+                            $v = 0;
+                        }
+                        $c--;
+                        }
+                    
+                        }
                 }
                 header("Location:mapmark.php?id=".$id."");
             }
+            else{
+                
+            }
         }
 
-
-    }
 
  ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <!--  Adding bootstrap !-->
- <head>
-   
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-      
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-      <!-- Adding recaptcha file in to the page -->
-      <style>
-      .captcha, #recaptcha_image, #recaptcha_image img {
-    width:100% !important;
-}
-.navbar {
-    color: #FFFFFF;
-    background-color: #161640;
-}
+    
+    <head>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>  
+        <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+            <!-- Adding recaptcha file in to the page -->
+    <style>
+            .captcha, #recaptcha_image, #recaptcha_image img {
+             width:100% !important;
+         }
+         .navbar {
+             color: #FFFFFF;
+             background-color: #161640;
+         }
 
-/* OR*/
+         /* OR*/
 
-.nav {
-    color: #FFFFFF;
-    background-color: #161640;
-	
-.nav-pills > li > a {
-  color: #A7A79Bf;
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.8em ;
-  padding: 1px 1px 1px ;
-}
+         .nav {
+             color: #FFFFFF;
+             background-color: #161640;
 
+         .nav-pills > li > a {
+           color: #A7A79Bf;
+           font-family: 'Oswald', sans-serif;
+           font-size: 0.8em ;
+           padding: 1px 1px 1px ;
+    }
 
-      </style>
+    </style>
+
     </head>
     
-    <body background="images/123.jpg">
-    <nav class="navbar navbar-default">
+<body bgcolor="#fff">
+
+<!-- Building the nav bar of the page-->
+
+	<nav class="navbar navbar-default">
 		<div class="container-fluid">
     			<div class="navbar-header">
-      				<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
-					</ul>
+      				<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li></ul>
                         </div>
-                    <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
-		
-
-    		
-      				<ul class="nav nav-pills navbar-right">
-        
-        				<!--<li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>-->
-        				<!--li><a href="#"><span class="glyphicon glyphicon-user"><b><font size="4" color="#A7A79B">Profile</font></b></span></a></li-->
-        				<!--<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>-->
-                                <li><a href="index.html"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
-				<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
-      				</ul>
-					
-    			
+                        <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+                        <ul class="nav nav-pills navbar-right">
+                            <li><a href="homepage.php"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+                            <li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> About Us</font></b></a></li>
+                            <li><a href="aboutus.html"><span class="glyphicon glyphicon-envelope"><b><font size="4" color="#FFF" face="calibri light"> Contact Us</font></b></a></li>
+                        </ul>
   		</div>
 	</nav>
 
         
-            <!--Create account for hotel -->
-                <div class="container">
-                <div class="col-md-6">
-                    <!--  Create the form horizontally !-->
-                    <br><br>
-                    <form name = "hotel_registration" class="form-horizontal col-md-10 col-md-offset-1" role="form" align = "left" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
-                        <legend> <font color=" #FFF"> <b> Enter your registration details here </b></font> </legend>
-                        
-                        <div class="form-group">
-                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
-                                Hotel name 
-                                </font>
-                            </label>
-                            <div class="col-md-8">
-                                <input type="inputName" class="form-control" id="inputName" name ="hotel_name" />
-                            </div>
+<!--Form for creating account for hotel -->
+
+<div class="container">
+    <div class="col-md-7">
+<!--  Create the form horizontally !-->              
+        <form id="contactForm" name = "hotel_registration" class="form-horizontal col-md-10 col-md-offset-1" role="form" align = "left" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data">
+            <legend> <font color=" #000"> <b> Enter your registration details here </b></font> 
+            </legend>
+            <font color="red"> <b> * All fields are required to be filled</b></font>
+			<br><br><br>
+            
+            <div class="jumbotron">
+            <!--creating form lables and inputs-->
+                <div class="form-group">
+                    <label for="inputName" class="col-md-4 control-label" > 
+                        <font color=" #000">Hotel name </font>
+                    </label>
+                        <div class="col-md-8">
+                            <input type="inputName" class="form-control" id="inputName" name ="hotel_name"  required />
                         </div>
-                        <?php
+                </div>        					
+                    <?php
                         if(!empty($nameErr)){
                             echo '<div class="alert alert-warning">'.$nameErr.'</div>';
                         }
-                        ?>
-                        
-    <!--<div class="form-group">
-      <label for="name">Star ratings(If applicable)</label>
-      <select class="form-control">
-         <option>One star</option>
-         <option>Two stars</option>
-         <option>Three stars</option>
-         <option>Four stars</option>
-         <option>Five stars</option>
-      </select>
-	</div>-->
-                        
-                        <div class="form-group">
-                            <label for="inputAddress" class="col-md-4 control-label"> <font color=" #FFF">
-                                Address </font>
-                            </label>
-                            
-                            <div class="col-md-8">
-                                <input type="inputAddress" class="form-control" id="inputAddress" placeholder="No 10, Down Street, Colombo 10" name = "address"/>
-                            </div>
+                    ?>
+            
+                <div class="form-group">
+                    <label for="inputAddress" class="col-md-4 control-label" > 
+                        <font color=" #000">Address </font>
+                    </label>
+                        <div class="col-md-8">
+                            <input type="inputAddress" class="form-control" id="inputAddress" placeholder="No 10, Down Street, Colombo 10" name = "address" required />
                         </div>
-                        <?php
+                </div>
+						
+                    <?php
                         if(!empty($addressErr)){
                             echo '<div class="alert alert-warning">'.$addressErr.'</div>';
                         }
-                        ?>
+                    ?>
                         
-                        <div class="form-group" >
-                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
-                                City </font>
-                            </label>
-                            <div class="col-md-8">
-                                <input type="inputName" class="form-control" id="inputName" name = "city"/>
-                            </div>
+                <div class="form-group" >
+                    <label for="inputName" class="col-md-4 control-label" > 
+                        <font color=" #000">City </font>
+                    </label>
+                        <div class="col-md-8">
+                            <input type="inputName" class="form-control" id="inputName" name = "city" required/>
                         </div>
-                        <?php
+                </div>
+						
+                    <?php
                         if(!empty($cityErr)){
                             echo '<div class="alert alert-warning">'.$cityErr.'</div>';
                         }
-                        ?>
-
-                        <div class="form-group" align = "center">
-                            <label for="inputName" class="col-md-4 control-label" ><font color=" #FFF">
-                                    Country</font>
-                            </label>
-                            <div class="col-md-8">
-                            <select class="form-control" name="Country">
-                                <option>Sri Lanka</option>
-                           
-                            </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="inputEmail3" class="col-md-4 control-label" align = "right"> <font color=" #FFF">
-                                Email ID </font>
-                            </label>
-                            
-                            <div class="col-md-8">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="abc@xyz.com" name = "email" />
-                            </div>
-                        </div>
-                        <?php
+                    ?>			
+                    <?php
                         if(!empty($emailErr)){
                             echo '<div class="alert alert-warning">'.$emailErr.'</div>';
                         }
-                        ?>
+                    ?>
 
-                        <div class="form-group">
-                            <label for="inputNumber" class="col-md-4 control-label"> <font color=" #FFF">
-                                Contact No </font>
-                            </label>
-                            
-                            <div class="col-md-8">
-                                <input type="number" class="form-control" id="inputNumber" placeholder="00947777123456" name = "contact" />
-                            </div>
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-md-4 control-label" align = "right"> 
+                        <font color=" #000">Email ID </font>
+                    </label>
+                        <div class="col-md-8">
+                           <input type="email" class="form-control" id="inputEmail3" placeholder="abc@xyz.com" name = "email" required />
                         </div>
-                        <?php
+                </div>
+							
+                    <?php
+                        if(!empty($emailErr)){
+                            echo '<div class="alert alert-warning">'.$emailErr.'</div>';
+                        }
+                    ?>
+
+                <div class="form-group">
+                    <label for="inputNumber" class="col-md-4 control-label" > 
+                        <font color=" #000">Contact No</font></label>
+                        <div class="col-md-8">
+                            <input id="inputNumber" class="form-control" type="tel" pattern="^\d{10}$" name = "contact" required placeholder="0718257237">
+                        </div>
+                </div>
+							
+                    <?php
                         if(!empty($contactErr)){
                             echo '<div class="alert alert-warning">'.$contactErr.'</div>';
                         }
-                        ?>
+                    ?>
                         
-                        <div class="form-group">
-                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
-                                Description </font>
-                            </label>
-                            
-                            <div class="col-md-8">
-                                
-                                <textarea name="description" rows="5" cols="5" class="form-control"/></textarea>
-                            </div>
-                        </div>
-                        <?php
+                <div class="form-group">
+                    <label for="inputName" class="col-md-4 control-label" required> 
+                        <font color=" #000">Description </font>
+                    </label>
+                        <div class="col-md-8">
+                            <textarea name="description" rows="5" cols="5" class="form-control"/></textarea>
+                        </div>			
+                </div>
+							
+                    <?php
                         if(!empty($usererr)){
                             echo '<div class="alert alert-warning">'.$usererr.'</div>';
                         }
-                        ?>
+                    ?>
                         
-                        <div class="form-group" >
-                            <label for="inputPassword" class="col-md-4 control-label"> <font color=" #FFF">
-                                Password </font>
+                <div class="form-group" >
+                    <label for="inputPassword" class="col-md-4 control-label" required>
+                        <font color=" #000">Password </font>
                             </label>
                             <div class="col-md-8">
-                                <input type="password" class="form-control" id="inputName"  name = "password" type = "password"/>
+                            <input type="password" class="form-control"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"  id="inputName"  name = "password" type = "password"/>
                             </div>
-                        </div>
+						</div>
+							
                         <?php
                         if(!empty($passerr)){
                             echo '<div class="alert alert-warning">'.$passerr.'</div>';
@@ -344,77 +323,242 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         ?>
                         
                         <div class="form-group" >
-                            
-                            <label for="inputPassword" class="col-md-4 control-label"> <font color=" #FFF">
-                                Confirm password </font>
+                            <label for="inputPassword" class="col-md-4 control-label" required> <font color=" #000">
+                            Confirm password </font>
                             </label>
                             <div class="col-md-8">
-                                <input type="password" class="form-control" id="inputName" name = "passwordc" type = "password"/>
+                            <input type="password" class="form-control" id="inputName" name = "passwordc" type = "password"/>
                             </div>
-                            
                         </div>
-                        <?php
+							
+						<p> <font size=2'>Please note that password should consist at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</font></p>
+
+							<?php
                         if(!empty($conpasserr)){
                             echo '<div class="alert alert-warning">'.$conpasserr.'</div>';
                         }
                         ?>
+						
                         <div class="form-group" >
-                            <label for="inputName" class="col-md-4 control-label"> <font color=" #FFF">
-                                Photos of the hotel </font>
+                            <label for="inputName" class="col-md-4 control-label" required> <font color=" #000">
+                            Photos of the hotel </font>
                             </label>
                             <div class="col-md-8">
+							<input type="file" name="pic[]" accept="image/*" multiple>
+							</div>
+						</div>
+						
+						<p> <font size='3' color="red">*First three photos will be allocated for the image slider </font></p>
+						
+						
+						<hr>	
+						<p> <font size='3'>Please complete the following task for verification.</font></p>
+							
+							
+						<div class="form-group">
+							<label class="col-md-4 control-label" id="captchaOperation"></label>
+							<div class="col-xs-8">
+							<input type="text" class="form-control" name="captcha" />
+							</div>
+						</div>
+						
+						<?php
+                        if(!empty($conpasserr)){
+                            echo '<div class="alert alert-warning">'.$conpasserr.'</div>';
+                        }
+                        ?>
+							
+						
+						<div class="form-group">
+							<div class="col-md-9 col-md-offset-3">
+							<div id="messages"></div>
+							</div>
+						</div>
+						
+<!--to do real time validation (ajax)-->
+					
+<script type="text/javascript">
+			$(document).ready(function() {
+				$('#contactForm').bootstrapValidator({
+					container: '#messages',
+					feedbackIcons: {
+						valid: 'glyphicon glyphicon-ok',
+						invalid: 'glyphicon glyphicon-remove',
+						validating: 'glyphicon glyphicon-refresh'
+					},
+					fields: {
+						hotel_name: {
+							validators: {
+								notEmpty: {
+									message: 'The first name is required and cannot be empty'
+								}
+							}
+						},
+						
+						password: {
+							validators: {
+								notEmpty: {
+									message: 'The password is required and cannot be empty'
+								}
+							}
+						},
+						
+						
+					passwordc: {
+						validators: {
+							notEmpty: {
+								message: 'The confirm password is required and cannot be empty'
+						},
+						identical: {
+							field: 'password',
+								message: 'The password and its confirm must be the same'
+						}
+						}
+						},
+						captcha: {
+							validators: {
+								callback: {
+									message: 'Wrong answer',
+									callback: function(value, validator, $field) {
+										var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+										return value == sum;
+									}
+								}
+							}
+						}
+						}
+						})
+						// Enable the password/confirm password validators if the password is not empty
+						.on('keyup', '[name="password"]', function() {
+						var isEmpty = $(this).val() == '';
+						$('#form2')
+						.formValidation('enableFieldValidators', 'password', !isEmpty)
+						.formValidation('enableFieldValidators', 'passwordc', !isEmpty);
+
+						// Revalidate the field when user start typing in the password field
+						if ($(this).val().length == 7) {
+						$('#form2').formValidation('validateField', 'password')
+						.formValidation('validateField', 'passwordc');
+						}
+						});
+						});
+		</script>
 
 
-                                <input type="file" name="pic[]" accept="image/*" multiple>
+<!--capcha-->
 
+<script>
+// Check the captcha
+function checkCaptcha(value, validator, $field) {
+    var items = $('#captchaOperation').html().split(' '),
+        sum   = parseInt(items[0]) + parseInt(items[2]);
+    return value == sum;
+}
+
+$(document).ready(function() {
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+    $('#basicBootstrapForm').formValidation();
+});
+</script>
+
+
+					
+					
                         
-                                                    </div>
-                        </div>
-                        <p>  <font color=" #FFF">  I have read and accept the terms of the </font><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="test content <a href='' title='test add link'>link on content</a>"data-original-title="test title"> <font color=" #FFF"> <u>User Agreement</u> </font></a></p>
-                        
-                                        <div class="form-group">
-                    <div class="captcha">
-                        <div id="recaptcha_image"></div>
-                    </div>
-                </div>
-                        
-                        <!-- Adding recaptcha into the page -->
-                                    <div class="form-group">
-                                        <div class="recaptcha_only_if_image"> <font color=" #FFF">Enter the words above</font></div>
-                                        <div class="recaptcha_only_if_audio"><font color=" #FFF">Enter the numbers you hear</font></div>
-                <div class="input-group">
-                    <input type="text" id="recaptcha_response_field" name="recaptcha_response_field" class="form-control input-lg" /> <a class="btn btn-default input-group-addon" href="javascript:Recaptcha.reload()"><span class="icon-refresh"></span></a>
-             <a class="btn btn-default input-group-addon recaptcha_only_if_image" href="javascript:Recaptcha.switch_type('audio')"><span class="icon-volume-up"></span></a>
-             <a class="btn btn-default input-group-addon recaptcha_only_if_audio" href="javascript:Recaptcha.switch_type('image')"><span class="icon-picture"></span></a>
-
-                </div>
-                <script>
-                    var RecaptchaOptions = {
-                        theme: 'custom',
-                        custom_theme_widget: 'recaptcha_widget'
-                    };
-                </script>
-                <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LcrK9cSAAAAALEcjG9gTRPbeA0yAVsKd8sBpFpR"></script>
-                <noscript>
-                    <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LcrK9cSAAAAALEcjG9gTRPbeA0yAVsKd8sBpFpR" height="300" width="500" frameborder="0"></iframe>
-                    <br/>
-                    <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-                    <input type="hidden" name="recaptcha_response_field" value="manual_challenge" />
-                </noscript>
+            <div class="form-group" align = "right">
+            <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-success" >Next
+            </button>
             </div>
-                        
-                        
-                        <div class="form-group" align = "right">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                
-                                <button type="Next" class="btn btn-default">
-                                    
-                                    Next
-                                </button>
-                                
-                                
-                            </div>
-                        </div>
-                    </form></div> </div>
-        
-    </body></html>
+            </div>						
+</div> 
+        </form>
+         
+    </div>
+<div class="col-md-5">
+<br><br><br><br><br><br><br>
+<p><center><font size='3' color="#161640">*Layout of the hotel profile page</font></center><p>
+<br><br>
+<img src="hotelimages/layout.jpg">
+</div>
+</div>
+
+<!--footer start here-->
+
+<!--description before footer-->
+<br><br><br>
+<div class="container">
+  	<div class="col-sm-8 col-sm-offset-2 text-center">
+    <h4>
+    <a href="homepage.php">OHRMS</a>
+    </h4>
+    <p><b><font color="#161640">"Smarter choice for your business and vacation plans in Sri Lanka"</font></b></p>
+    <hr>
+<!-- starting of facebook icons-->
+<p> Join Us On </p>
+      <ul class="list-inline center-block">
+        <li><a href="#"><img src="hotelimages/facebook.png"></a></li>
+        <li><a href="#"><img src="hotelimages/twitter.png"></a></li>
+        <li><a href="#"><img src="hotelimages/google.png"></a></li>
+        <li><a href="#"><img src="hotelimages/youtube.png"></a></li>
+      </ul>
+      
+</div><!--/col-->
+</div><!--/container-->
+
+<!-- scroll up button-->
+
+<ul class="nav pull-right scroll-top">
+<li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
+</ul>
+
+<script>
+$('.scroll-top').click(function(){
+  $('body,html').animate({scrollTop:0},1000);
+})
+
+</script>
+<!--footer-->
+
+ <div id="footer">
+    <div class="container">
+	<div class="row">
+	<div class="col-sm-4">
+	<p><a href="homepage.php"> Online Hotel Reservation and Management System</a></p>
+	</div> 
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4">
+	<font color="#fff">© 2016 All Rights Reserved</font>
+	</div>
+    </div>
+	</div>
+	
+	
+</div>
+<!--footer end-->
+
+<style>
+#footer {
+  height: 80px;
+  background-color: #161640;
+  margin-top:50px;
+  padding-top:20px;
+  
+  
+}
+#footer {
+  background-color:#161640;
+}
+
+</style> 
+
+<!--footer end here-->		
+ 
+</body>
+</html>

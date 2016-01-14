@@ -92,10 +92,9 @@ $res = $log->return_sorted_room($hotel_email);
                 <thread>
                     <tr>
                         <th>Room_name</th>
-                        <th>Cost per Stay</th>
+                        <th>Cost per Stay(Rs)</th>
                         <th>Room Type</th>
                         <th>Room Image</th>
-                        <th>Options</th>
                         <th>Create Reservation</th>
                     </tr>
                     </thread>
@@ -109,6 +108,7 @@ $res = $log->return_sorted_room($hotel_email);
             $room_image = $data['Room_photo_location'];
             $Room_options =($log->return_room_options($room));
             $print_option = "";
+            $room_id = $data['Room_id'];
             while($option = mysql_fetch_array($Room_options)){
                 if ($print_option != "") {
                     $print_option = $print_option . " " . $option['Room_Option'];
@@ -118,7 +118,7 @@ $res = $log->return_sorted_room($hotel_email);
                 }
             }
 
-            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td>".$print_option."</td><td><a href='Reservations_hotel.php?room_id=".$room."'>Link</a></td></tr>";
+            echo "<tr><td>".$room."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='manual_reser_form.php?room_id=".$room_id."'>Link</a></td></tr>";
         }
         ?>
                 </tbody>

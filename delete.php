@@ -1,5 +1,4 @@
 <?php 
-
 require('function.php');
 
 $db = new dbConnect();
@@ -11,5 +10,6 @@ $db = new dbConnect();
                 $query1 = mysql_query($que);
                 header("location:admin_account.php");
                 }
+
 
 ?>

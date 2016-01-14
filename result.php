@@ -1,24 +1,34 @@
-<!DOCTYPE html>
+<?php
+    include 'function.php';
+    
+?>
+
+
+<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Result</title>
+   
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-	
-	<style>
+    <style>
+      @import url(http://fonts.googleapis.com/css?family=Bree+Serif);
+      body, h1, h2, h3, h4, h5, h6{
+      font-family: 'Bree Serif', serif;
+      }
+    </style>
+  </head>
+  
+  <body>
+       <!-- navbar -->
+  <style>
 .navbar {
     color: #FFFFFF;
     background-color: #161640;
@@ -29,7 +39,7 @@
 .nav {
     color: #FFFFFF;
     background-color: #161640;
-	
+  
 .nav-pills > li > a {
   color: #A7A79Bf;
   font-family: 'Oswald', sans-serif;
@@ -37,146 +47,38 @@
   padding: 1px 1px 1px ;
 }
 </style>
-   </head>
-    
-    <body background="">
-	<!-- Navigation bar which is in the top of the page -->
-               
-        <nav class="navbar navbar-default">
-		<div class="container-fluid">
-				<div class="navbar-header">
-					<ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
-					</ul>
-				</div>
-		
-		<div>
-					 <ul class="nav nav-pills navbar-left">
-                        <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>  
-						<li><a href="payment.php"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
-						
-						<li><form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div> 
-						
-					</form></li>		
-					</ul>
-                     </ul>
-				</div>
-				<div>
-						<ul class="nav nav-pills navbar-right">
-						   
-						 <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
-						 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
-				
-				
-				
-				</div>
-                    
-			<!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button-->                 
-				</div>
-				
-				<!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
-					<ul class="nav navbar-nav">
 
-						<li >
-                            
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Price Range<strong class="caret" ></strong></a>
-						</li>
-                        
-						<li>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">City<strong class="caret" ></strong></a>
-						</li>
-						
-					</ul-->
-                    
-                        <!--form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div> 
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
-					</form-->					
-                    <!--ul class="nav navbar-nav navbar-right">
-						<button type="submit" class="btn btn-primary btn-md">
-							<span class=" glyphicon glyphicon-log-in"></span> Login
-						</button>
-                        <button type="submit" class="btn btn-primary btn-md">
-                            <span class=" glyphicon glyphicon-thumbs-up"></span> About us
-							
-						</button>
-						<button type="submit" class="btn btn-primary btn-md">
-                            <span class=" glyphicon glyphicon-modal-window"></span> Rooms
-							
-						</button>
-						
-					</ul-->
-				</div>
-				
-			</nav>
-            
-			
-			<div class="row">
-			
-			<div class="col-sm-offset-2 col-sm-6">
-                    <!--  Create the form horizontally !-->
-                    <br></br>
-                    
-                    
-                    <form class="form-horizontal col-md-10 col-md-offset-1" data-toggle="validator" role="form" align = "center"  >
-					   <legend>Manual Payment Details</legend>
-                        
-                        <div class="form-group" align = "center">
-							<label for="invoicenumber" class="col-md-4 control-label" >
-								Invoice Number:
-							</label>
-                            <?php if(isset($_POST['invoice'])){echo $_POST ["invoice"]; }?>
-						</div>
-						
-						<div class="form-group" align = "center">
-							<label for="Paydate" class="col-md-4 control-label" >Payment Date:</label>
-                            <?php if(isset($_POST['date'])){echo $_POST ["date"]; }?>
-						</div>
-						
-						<div class="form-group" align = "center">
-							<label for="Amount" class="col-md-4 control-label" >
-								Amount(Rs):
-							</label>
-                            <?php if(isset($_POST['amount'])){echo $_POST ["amount"]; }?>
-						</div>
-						
-						
-						<div class="form-group" align = "center">
-							<label for="Discount" class="col-md-4 control-label" >
-								Discount(%):
-							</label>
-                            <?php if(isset($_POST['discount'])){echo $_POST ["discount"]; }?>
-						</div>
-						<br>
-						
-						<div class="form-group" align = "center">
-							<label for="Net" class="col-md-4 control-label" >
-								Net Amount(Rs):
-							</label>
-                                                <?php if(isset($_POST["amount"])&&($_POST["discount"]))
-						{echo $net=$_POST["amount"]-($_POST["amount"]*$_POST["discount"])/100;}
-						?>
-                                                </div>
-                                                                      <?php
+<nav class="navbar navbar-default responsive">
+    <div class="container-fluid">
+          <div class="navbar-header">
+              <ul class="nav navbar-nav navbar-left">
+                
+                <li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
+          </ul>
+          <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+          </div>
+    <div>
+
+        
+              <ul class="nav nav-pills navbar-right">
+                  <li><a href="manual_reserve.php"><span class="glyphicon glyphicon-arrow-left"><b>
+              <font size="4" color="#FFF" face="calibri light"> Back</font>
+                </b></a></li>
+              <li><a href=<?php echo "Hotel-profile.php?hotel_id=".$_SESSION['hotel_id'].""?>><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></span></a></li>
+              <li><a href="hotel_logout.php"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#FFF" face="calibri light">Logout</font></b></a></li></ul>
+          
+      </div>
+    
+    
+    
+      </div>
+  </nav>
+      <?php
                 require_once('mysqli_connection.php');
 		//$nameErr = $descErr = $priceErr = $qtyErr = "";
   		$invoice = $date = $amount = $discount= "";
 
-  		function test_input($data) {
-			$data = trim($data);
-			$data = stripslashes($data);
-			$data = htmlspecialchars($data);
-			return $data;
-		}
+  		
                 
 		$isValid = array(False, False, False, False);
                 
@@ -212,39 +114,213 @@
 				$discount = test_input($_POST["discount"]);
 				$isValid[3] = True;
 			}
-                        //echo count(array_keys($isValid, True)) ;
-			if(count(array_keys($isValid, True)) == count($isValid)){
-                                require_once('mysqli_connection.php');
-                                
-				$query = "insert into payment 
-					(invoiceid, paydate, amount, discount) 
-					values ('".$_POST['invoice']."', '".$_POST['date']."', '".$_POST['amount']."', '".$_POST['discount']."')";
-                                   //echo $query;
-				if (mysqli_query($dbconn, $query)) {
-				    //echo "New record added successfully";
-				    $invoice = $date = $amount = $discount= "";
-				} else {
-				    echo "Error: " . $query . "<br>" . mysqli_error($dbconn);
-				}
+                        $_SESSION['formdata'];
+                        $resformdata = $_SESSION['formdata'];
+                        $log = new dbHotel();
+                        $data1 = $log->get_hotel_data($resformdata['hotel_id']);
+                        $room = $resformdata['roomid'];
+                        if ($room = 'Multiple'){
+                            $rooms = $_SESSION['fdata_rooms'];
+                            foreach ($rooms as $room){
+                                $rid = $log->create_new_reservation($resformdata['hotel_id'], $room, $resformdata['fname'], $resformdata['lname'], $resformdata['country'], $resformdata['address'], $resformdata['checkin'], $resformdata['checkout'], "CNF", $resformdata['contact']);
+                                $reserid = "SELECT ReservationID FROM reservation ORDER BY ReservationID DESC LIMIT 1";
+                                $res = mysql_query($reserid);
+                                $data = mysql_fetch_array($res);
+                                $reservaID = $data['ReservationID'];
+                                if(count(array_keys($isValid, True)) == count($isValid)){
+                                        
+                                        $roomdata= $log->get_room_data($room);
+                                        $pay = $roomdata['Cost_per_unit'];
+                                        $query = "insert into payment 
+                                                (invoiceid, reservationid, paydate, amount, discount) 
+                                                values ('".$_POST['invoice']."','".$data['ReservationID']."', '".$_POST['date']."', '".$pay."', '".$_POST['discount']."')";
+                                           //echo $query;
+                                        if (mysqli_query($dbconn, $query)) {
+                                            //echo "New record added successfully";
+                                            
+                                        } else {
+                                            echo "Error: " . $query . "<br>" . mysqli_error($dbconn);
+                                        }
 
-				//mysqli_close($dbconn);
+                                        //mysqli_close($dbconn);
+                                }
+                            }
                         }
+                        
                 }
 	?>
-							
-						</div>
-						<br>
-						 
-					</form>	
-				</div>		
-				</div>
-				</div>
-				
- <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>
+            
+              <img src="hotelimages/1.jpg">
+          
+            </a>
+          </h1>
+        </div>
+        <div class="col-xs-6 text-right">
+            
+            
+            <h1>INVOICE <?php if(isset($_POST['invoice'])){echo $_POST ["invoice"]; }?></h1>
+            
+
+          <h1><link rel="stylesheet" type="text/css" media="print" href="print.css"></h1>
+                       <button class="btn btn-primary hidden-print" onclick="myFunction()"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print</button>
+        </div>
+          
+          <div class="container" id="box">
+	</div>
+        </div>
+          <script>
+              function myFunction() {
+              window.print();}
+          </script>
+          <br>
+      
+      <div class="row">
+        <div class="col-xs-5">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>From : <a href="#"><?php if(isset($data1['Hotel_Name'])){echo $data1['Hotel_Name']; }?></a></h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Address :  <?php if(isset($data1['address'])){echo $data1['address']; }?> <br>
+                Email : <?php if(isset($data1['email'])){echo $data1['email']; }?> <br>
+                Contact No : <?php if(isset($data1['telephone_number'])){echo $data1['telephone_number']; }?> <br>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-5 col-xs-offset-2 text-left">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>To : <a href="#"><?php if(isset($resformdata['fname'])){echo $resformdata['fname']." ".$resformdata['lname']; }?></a></h4>
+            </div>
+            <div class="panel-body">
+              <p>
+                Address : <?php if(isset($resformdata['address'])){echo $resformdata['address']; }?> <br>
+                Email : <?php if(isset($resformdata['email'])){echo $resformdata['email']; }?> <br>
+                
+                Contact No : <?php if(isset($resformdata['contact'])){echo $resformdata['contact']; }?> <br>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / end client details section -->
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+        <h4 class="text-center">Room Name</h4>
+            </th>
+            <th>
+              <h4 class="text-center">Check in</h4>
+            </th>
+            <th>
+              <h4 class="text-center">Check out</h4>
+            </th>
+            <th>
+              <h4 class="text-center">Discount (%)</h4>
+            </th>
+            <th>
+              <h4 class="text-center">Sub Total</h4>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php 
+                if (isset($_SESSION['fdata_rooms'])){
+                    $rooms = $_SESSION['fdata_rooms'];
+                    $roomcharges = array();
+                    $checkin = $_SESSION['formdata']['checkin'];
+                    $checkout = $_SESSION['formdata']['checkout'];
+                    $day1 = date_create($checkin);
+                    $day2 = date_create($checkout);
+                    $diff = date_diff($day1, $day2, TRUE);
+                    $days = $diff->days;
+                    $total = 0;
+                    $discount = 0;
+                    if (isset($_POST['discount'])){$discount = $_POST['discount'];}
+                    foreach ($rooms as $room){
+                        $data = $log->get_room_data($room);
+                        $room_name = $data["Room_name"];
+                        $room_charge = $data['Cost_per_unit'];
+                        $charge = $room_charge*$days;
+                        $roomcharges["$room_name"] = $charge;
+                        $total += $charge;
+                        echo "<tr>"
+                        . "<td class='text-right'>".$room_name."</td>"
+                        . "<td class='text-right'>".$checkin."</td>"
+                                . "<td class='text-right'>".$checkout."</td>"
+                                . "<td class='text-right'>".$discount."</td>"
+                                . "<td class='text-right'>".$charge."</td>"
+                                . "</tr>";
+                    }
+                }
+                
+                
+            ?>
+          
+          <!--
+          <tr>
+            <td>Development</td>
+            <td><a href="#">WordPress Blogging theme</a></td>
+            <td class="text-right">5</td>
+            <td class="text-right">50.00</td>
+            <td class="text-right">$250.00</td>
+          </tr>-->
+        </tbody>
+      </table>
+      <div class="row text-right">
+        <div class="col-xs-2 col-xs-offset-8">
+          <p>
+            <strong>
+            
+            Total : <br>
+            </strong>
+          </p>
+        </div>
+        <div class="col-xs-2">
+          <strong>
+          
+         
+           <?php if(isset($_POST["amount"])&&($_POST["discount"]))
+						{
+                                                    echo $net=$_POST["amount"]-($_POST["amount"]*$_POST["discount"])/100;}
+                                                else{
+                                                    echo $_POST["amount"];
+                                                }
+						?><br>
+          </strong>
+        </div>
+      </div>
+      <div class="row">
+        
+        <div class="container">
+          <div class="span7">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h4>Terms and Conditions</h4>
+              </div>
+              <div class="panel-body">
+                <p>
+                  The owner will want to negotiate the terms of the agreement and introduce some balance, giving the owner rights and remedies if the hotel business experiences financial concerns. The scope to add balance to a hotel management agreement may depend on the allure of the hotel to the operator – if it is a prestigious hotel, in a good location, the operator will be more likely to negotiate.
+                </p>
+                <h4>Signature of the customer : </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
   </body>
-
+  
 </html>
-                        

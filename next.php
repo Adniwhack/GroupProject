@@ -1,5 +1,6 @@
 <?php
 include "function.php";
+
 if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 	$FirstName = $_POST['fname'];
@@ -19,6 +20,13 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 
 }
+$log=new dbUser();
+require_once('mysqli_connection.php');
+$fdata=array();
+
+$fdata=array('HotelID'=>$hotelid, 'RoomID'=>$roomid,'fname'=>$FirstName,'lname'=>$LastName,'address'=>$Address,'Country'=>$Country,'cnumber'=>$Contact,'checkin'=>$checkin,'checkout'=>$checkout, 'notes'=> '');
+$_SESSION['fdata']=$fdata;
+header("location:onlinepay.php");
 
 	?>
 
@@ -42,121 +50,68 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
     <![endif]-->
 
 
-  <style>
-.navbar {
-    color: #FFFFFF;
-    background-color: #161640;
-}
+<style>
+      
+	.navbar {
+		color: #FFFFFF;
+		background-color: #161640;
+	}
 
-/* OR*/
+	/* OR*/
 
-.nav {
-    color: #FFFFFF;
-    background-color: #161640;
+	.nav {
+		color: #FFFFFF;
+		background-color: #161640;
+		
+	.nav-pills > li > a {
+	  color: #A7A79Bf;
+	  font-family: 'Oswald', sans-serif;
+	  font-size: 0.8em ;
+	  padding: 1px 1px 1px ;
+	}
 
-.nav-pills > li > a {
-  color: #A7A79Bf;
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.8em ;
-  padding: 1px 1px 1px ;
-}
+
 </style>
-
 
    </head>
 
-    <body background="images/back2.jpg">
+    <body style="background-color:	white"><!--changed-->
 	<!-- Navigation bar which is in the top of the page -->
 
-        <nav class="navbar navbar-default">
-		<div class="container-fluid">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-responsive">
+			<div class="container-fluid">
 				<div class="navbar-header">
-					<ul class="nav navbar-nav navbar-left"><li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
+					<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
 					</ul>
-				</div>
-
-		<div>
-					 <ul class="nav nav-pills navbar-left">
-                        <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#A7A79B">Home</font></b></span></a></li>
-						<li><a href="#"><span class="glyphicon glyphicon-chevron-left"><b><font size="4" color="#A7A79B">Back</font></b></span></a></li>
-
-						<li><form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div>
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
-					</form></li>
+    
+				<a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a></div>
+					<ul class="nav nav-pills navbar-right">
+						<li><a href="#"><span class="glyphicon glyphicon-home"></span><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+						<li><a href="aboutus.html"><span class="glyphicon glyphicon-thumbs-up"></span><b><font size="4" color="#FFF" face="calibri light"> About Us</font></b></a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-phone-alt"></span><b><font size="4" color="#FFF" face="calibri light"> ContactUs</font></b></a></li>
+						<li><a href="rooms_hotel.php"><b><font size="4" color="#FFF" face="calibri light"> Back</font></b><span class="glyphicon glyphicon-chevron-right"></span></a></li><!--changed!-->
+						<li><a href="#"><span class="glyphicon glyphicon-log-out"></span><b><font size="4" color="#FFF" face="calibri light"> Logout</font></b></a></li><!--changed!-->
 					</ul>
-                     </ul>
-				</div>
-				<div>
-						<ul class="nav nav-pills navbar-right">
-						   <li><a href="#"><span class="glyphicon glyphicon-log-in"><b><font size="4" color="#A7A79B">Login</font></b></span></a></li>
-						 <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#A7A79B">AboutUs</font></b></span></a></li>
-						 <li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>
-
-
-
-				</div>
-
-			<!--button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-					</button-->
-				</div>
-
-				<!--div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-					<ul class="nav navbar-nav">
-
-						<li >
-
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Price Range<strong class="caret" ></strong></a>
-						</li>
-
-						<li>
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">City<strong class="caret" ></strong></a>
-						</li>
-
-					</ul-->
-
-                        <!--form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Hotel, Guest house etc" />
-						</div>
-						<button type="submit" class="btn btn-primary btn-md">
-							Search
-						</button>
-					</form-->
-                    <!--ul class="nav navbar-nav navbar-right">
-						<button type="submit" class="btn btn-primary btn-md">
-							<span class=" glyphicon glyphicon-log-in"></span> Login
-						</button>
-                        <button type="submit" class="btn btn-primary btn-md">
-                            <span class=" glyphicon glyphicon-thumbs-up"></span> About us
-
-						</button>
-						<button type="submit" class="btn btn-primary btn-md">
-                            <span class=" glyphicon glyphicon-modal-window"></span> Rooms
-
-						</button>
-
-					</ul-->
-				</div>
-
-			</nav>
+        				
+			</div>   
+		</nav>
 			<div class="container">
-			<div class="jumbotron">
+			<br><br><br>
+				<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4 class="text-center">Summary<span class="glyphicon glyphicon-saved pull-right"></span></h4>
+				</div>
+				</div>
 			<div class="row">
 
-			<div class="col-sm-offset-2 col-sm-6">
+			<div class=" col-md-10">
                     <!--  Create the form horizontally !-->
                     <br>
 
 
                     <form class="form-horizontal col-md-10 col-md-offset-1" data-toggle="validator" role="form" align = "center" action="reserve_action.php" method="post" >
-					   <legend>Your Details</legend>
+					   <p><h4 align="left"><b><legend> Reservation Details</legend></b></h4></p><!--changed-->
+						<div class="jumbotron">
 					   <div class="form-group" align = "center">
 							<label for="finame" class="col-md-4 control-label" >
 								First Name:
@@ -174,20 +129,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 						</div>
 
-						<div class="form-group" align= "center">
-							<label for="gender" class="col-md-4 control-label">
-								Gender:
-							</label>
-
-								<?php
-									if (isset($_POST['gender'])) {
-										{
-										if ($_POST['gender']=="male") { echo "Male"; }
-											else { echo "Female"; }
-										}
-																	}
-								?>
-						</div>
+						
+						</div-->
 						<div class="form-group" align = "center">
 							<label for="add" class="col-md-4 control-label" >
 								Address:
@@ -204,6 +147,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 										if ($_POST['Country']=="UK") { echo "United Kingdom"; }
 											elseif ($_POST['Country']=="germany") { echo "Germany"; }
+											elseif ($_POST['Country']=="SL") { echo "Sri Lanka"; }
 												else{echo "USA";}
 
 
@@ -235,9 +179,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 
 						</div>
 						<div class="form-group" align="center">
-							<button class="btn btn-primary" type="submit">
-								Next
-							</button>
+							<div class="col-sm-offset-10 col-sm-3">
+								<button type="submit" class="btn btn-success btn-md"> Next</button>
+							</div>
 						</div>
 						<input type="hidden" value="<?php echo $FirstName;?>" name="fname">
 						<input type="hidden" value="<?php echo $LastName;?>" name="lname">
@@ -250,11 +194,86 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
 						<input type="hidden" value="<?php echo $hotelid;?>" name="hotel_id">
 						</form>
 
+</div>
+</div>
+</div>
+</div>
 
 
 
+		<br><br><br>
+<div class="container">
+<div class="col-sm-8 col-sm-offset-2 text-center">
+<h4>
+<a href="homepage.php">OHRMS</a>
+</h4>
+<p><b><font color="#161640">"Smarter choice for your business and vacation plans in Sri Lanka"</font></b></p>
+<hr>
+<!-- starting of facebook icons-->
+<p> Join Us On </p>
+<ul class="list-inline center-block">
+<li><a href="#"><img src="hotelimages/facebook.png"></a></li>
+<li><a href="#"><img src="hotelimages/twitter.png"></a></li>
+<li><a href="#"><img src="hotelimages/google.png"></a></li>
+<li><a href="#"><img src="hotelimages/youtube.png"></a></li>
+</ul>
+
+</div><!--/col-->
+</div><!--/container-->
+
+<!-- scroll up button-->
+
+<ul class="nav pull-right scroll-top">
+	<li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
+</ul>
+
+<script>
+$('.scroll-top').click(function(){
+$('body,html').animate({scrollTop:0},1000);
+})
+
+</script>
+<!--footer-->
+
+			<div id="footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-4">
+							<p><a href="homepage.php"> Online Hotel Reservation and Management System</a></p>
+						</div>
+						<div class="col-sm-4">
+						</div>
+						<div class="col-sm-4">
+							<font color="#fff">© 2016 All Rights Reserved</font>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		
+<!--footer end-->
+
+		<style>
+				#footer {
+				height: 80px;
+				background-color: #161640;
+				margin-top:50px;
+				padding-top:20px;
 
 
+				}
+				#footer {
+				background-color:#161640;
+				}
+
+				#footer a {
+				color:#efefef;
+				}
+				#footer > .container {
+
+				}
+
+		</style>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -1,86 +1,43 @@
-<!DOCTYPE html>
 <html>
 <head>
-    <style type="text/css">
-        html, body { height: 100%; margin: 0; padding: 0; }
-        #map { height: 100%; }
-    </style>
-    <script type="text/javascript">
-        var oldMarker;
-
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 0, lng: 0},
-                zoom:12
-            });
-            var infoWindow = new google.maps.InfoWindow();
-            var latlngbounds = new google.maps.LatLngBounds();
-
-            var geocoder = new google.maps.Geocoder();
-            document.getElementById('submit').addEventListener('click', function() {
-                geocodeAddress(geocoder, map);
-            })
-            document.getElementById('city').addEventListener('keyup', function() {
-                geocodeAddress(geocoder, map);
-            })
-
-            google.maps.event.addListener(map,'click', function(e){
-                document.getElementById("latitude").value = e.latLng.lat();
-                document.getElementById("longitude").value = e.latLng.lng();
-                var lat = e.latLng.lat();
-                var lng = e.latLng.lng();
-                placeMarker(e.latLng);
-
-            })
-
-
-
-        }
-        function geocodeAddress(geocoder, resultsMap) {
-            var address = document.getElementById('city').value;
-            try {
-                geocoder.geocode({'address': address, 'region': 'lk'}, function (results, status) {
-                    if (status === google.maps.GeocoderStatus.OK) {
-                        resultsMap.setCenter(results[0].geometry.location);
-
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
-                    }
-                });
-
-            }
-            catch(err){}
-        }
-        function placeMarker(location) {
-
-
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-
-
-            if (oldMarker != undefined){
-                oldMarker.setMap(null);
-            }
-            oldMarker = marker;
-
-        }
-
-    </script>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsgBFqz2cjiLyvYBDRHrOdgf9vDBIvno8&callback=initMap">
-    </script>
-
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="//raw.github.com/botmonster/jquery-bootpag/master/lib/jquery.bootpag.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
-<div id="map" style="width: 300px; height: 300px"></div>
-
-<input type="text" name="city" id="city" >
-<input  id="latitude" name="latitude" type="text">
-<input  id="longitude" name="longitude" type="text">
-<input type="submit" name="submit" id="submit" >
+    <nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+    <div id="content">Dynamic Content goes here</div>
+    <div id="page-selection">Pagination goes here</div>
+    <script>
+        // init bootpag
+        $('.demo1').bootpag({
+    total: 5
+}).on("page", function(event, num){
+    $(".content").html("Page " + num); // or some ajax content loading...
+ 
+    // ... after content load -> change total to 10
+    $(this).bootpag({total: 10, maxVisible: 10});
+ 
+});
+    </script>
 </body>
 </html>
-

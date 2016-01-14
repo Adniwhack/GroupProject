@@ -47,7 +47,7 @@ include('function.php');
 </style>
   </head>
   
- <body background="hotelimages/neela4.jpg">
+ <body background="">
 
  <nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -70,11 +70,13 @@ include('function.php');
     			</div>
   		</div>
 	</nav>
-	
-	
-		<pre><p class="text-center"><font size="30" face="verdana" ><legend><?php echo $Hotel_Name;?></legend></font></p></pre>
+     <div class="container">
+	<div class="panel panel-primary">
+	<div class="panel-heading">
+            <h4 class="text-center"><?php echo $Hotel_Name;?><span class="glyphicon glyphicon-saved pull-right"></span></h4>
+        </div>
 		<div class="container"><p class="text-center">
-				
+				<br><br><br><br><br><br><br>
     			<div class="col-sm-2 col-sm-offset-4 text-center"><br><br><div class="btn-group-vertical" role="group" aria-label="...">
 					<a href="Hotel-profile.php?hotel_id=<?php echo $_SESSION['hotel_id']; ?>" class="btn btn-primary btn-lg" role="button">Profile Page</a>
                                         <a href="manual_reserve.php" class="btn btn-primary btn-lg" role="button">Add Reservation Details</a>
@@ -84,7 +86,9 @@ include('function.php');
 					
 				</div>
 		</p></div>
+            <br><br><br><br><br><br><br><br><br>
 	</div>
+     </div>
  
    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

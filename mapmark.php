@@ -30,8 +30,8 @@ if (isset($_GET['id'])){
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 0, lng: 0},
-                zoom:12
+                center: {lat: 7.873054, lng: 80.771797},
+                zoom:8
             });
             var infoWindow = new google.maps.InfoWindow();
             var latlngbounds = new google.maps.LatLngBounds();
@@ -62,7 +62,7 @@ if (isset($_GET['id'])){
                         resultsMap.setCenter(results[0].geometry.location);
 
                     } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
+                        //alert('Geocode was not successful for the following reason: ' + status);
                     }
                 });
 
@@ -93,57 +93,61 @@ if (isset($_GET['id'])){
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <!-- Adding recaptcha file in to the page -->
+    
     <style>
-        .captcha, #recaptcha_image, #recaptcha_image img {
-            width:100% !important;
-        }
-        .navbar {
-            color: #FFFFFF;
-            background-color: #161640;
-        }
-
-        /* OR*/
-
-        .nav {
-            color: #FFFFFF;
-            background-color: #161640;
-
-        .nav-pills > li > a {
-            color: #A7A79BF6;
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.8em ;
-            padding: 1px 1px 1px ;
-        }
+        
+   	
 
 
-    </style>
+</style>
+	
 </head>
 
-<body background="images/123.jpg">
-<nav class="navbar navbar-default">
+<body>
+   <!-- navbar -->
+  <style>
+.navbar {
+    color: #FFFFFF;
+    background-color: #161640;
+}
+
+/* OR*/
+
+.nav {
+    color: #FFFFFF;
+    background-color: #161640;
+  
+.nav-pills > li > a {
+  color: #A7A79Bf;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em ;
+  padding: 1px 1px 1px ;
+}
+</style>
+
+<nav class="navbar navbar-default responsive">
     <div class="container-fluid">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
-            </ul>
-        </div>
-        <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+          <div class="navbar-header">
+              <ul class="nav navbar-nav navbar-left">
+                
+                <li><img src="hotelimages/logotra.png" height=50px width=50px align="left"></li>
+          </ul>
+          <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+          </div>
+    <div>
 
-
-
-        <ul class="nav nav-pills navbar-right">
-
-            <!--<li><a href="#"><span class="glyphicon glyphicon-modal-window"><b><font size="4" color="#A7A79B">Rooms</font></b></span></a></li>-->
-            <!--li><a href="#"><span class="glyphicon glyphicon-user"><b><font size="4" color="#A7A79B">Profile</font></b></span></a></li-->
-            <!--<li><a href="#"><span class="glyphicon glyphicon-file"><b><font size="4" color="#A7A79B">Reports</font></b></span></a></li>-->
-            <li><a href="#"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-thumbs-up"><b><font size="4" color="#FFF" face="calibri light"> AboutUs</font></b></a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-phone-alt"><b><font size="4" color="#FFF" face="calibri light"> ContactUs</font></b></a></li></ul>
-
-
-    </div>
-</nav>
-
+        
+              <ul class="nav nav-pills navbar-right">
+                  
+                  <li><a href="aboutus.html"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> About Us</font></b></span></a></li>
+              <li><a href="contactus.html"><span class="glyphicon glyphicon-log-out"><b><font size="4" color="#FFF" face="calibri light">Contact Us</font></b></a></li></ul>
+          
+      </div>
+    
+    
+    
+      </div>
+  </nav>         
 
 <!--Create account for hotel -->
 <div class="container">
@@ -151,18 +155,57 @@ if (isset($_GET['id'])){
         <!--  Create the form horizontally !-->
         <br><br>
     </div>
-    <form name="mapmark" method="post" action="markaction.php">
-        <div id="map" style="width: 300px; height: 300px"></div><br>
+	<p><font size="4" >Please enter the location of your hotel in the provided space. Or else mark the exact location in the map using the marker, inside the map.</font></p>
+    <br><br>
+	
+	<form name="mapmark" method="post" action="markaction.php">
+        <div id="map" style="width: 600px; height: 600px"></div><br>
 
         <input type="text" name="city" id="city" >
         <input  id="latitude" name="latitude" type="hidden">
         <input  id="longitude" name="longitude" type="hidden">
         <input type="hidden" name="id" value="<?php echo $id?>">
-        <input type="submit" name="submit" id="submit" >
+		
+		
+	<!--modal><input type="submit" name="submit" id="submit" data-toggle="modal" data-target="#myModal"><-->
+	
+	
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Insert</button>                  
+	
+	
+	
+	
+<!--modal><-->
+ <!-- Modal content-->
+ <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-m">
+    
+      <!-- Modal content-->
+      <div class="modal-content"  style='background-color:#000'>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><font color='white' >Thank you!</font></h4>
+        </div>
+        <div class="modal-body">
+          <p><font color='white' >Please wait for the confirmation e-mail. And follow the procedure mentioned in the e-mail.</font></p>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" name="submit" id="submit" >Finish</button>
+        </div>
+      </div>
+	 
+      
+  </div>
+  </div>
+  
+		
+<!--modal><-->
+ 
 
+	
 
-    </form>
-
+</form>
+ <br><br><br>
 
 </div>
 </body>

@@ -7,13 +7,50 @@
  */
 
 include 'function.php';
+$data = "";
 
-if (isset($_GET['hotel_id']) ){
-    $hotel_id = $_GET['hotel_id'];
+if (isset($_SESSION['hotel_login']) and ($_POST['hotel_id'] == $_SESSION['hotel_id'] )){
+    //redirect to shyama page
+    header("Location:rooms_all.php");
+}
 
-    $log = new dbHotel();
-    $res = $log->get_hotel_room($hotel_id);
 
+
+if ($_SERVER['REQUEST_METHOD'] == "POST"){
+    $hotel_id = $_POST['hotel_id']; 
+    if (empty($_POST['datefilter']) or $_POST['datefilter'] == ""){
+        $log = new dbHotel();
+        
+        $res = $log->get_hotel_room($hotel_id);
+    }
+    else{
+        $dates = $_POST['datefilter'];
+        $args = explode("-", $dates);
+        $Check_in = trim($args[0]);
+        $inst = strtotime($Check_in);
+        $Check_in = date("Y-m-d", $inst); 
+        $Check_out = trim($args[1]);
+        $outst = strtotime($Check_out);
+        $Check_out =  date("Y-m-d", $outst); 
+        $log = new dbHotel();
+        $data = $log->get_hotel_data($hotel_id);
+        $Hotel_email = $data['email'];
+        $log = new dbSearch();
+        $_SESSION['dates'] = array('checkin'=>$Check_in, 'checkout'=>$Check_out);
+        $res = $log->return_unreserved_room($Hotel_email, $Check_in, $Check_out);
+        
+    }
+}
+ else {
+    if (isset($_SESSION['chotel'])){
+        $cid =$_SESSION['chotel'];
+        $_SESSION['chotel'] = NULL;
+        header("location:Hotel-profile.php?hotel_id=".$cid);
+        exit();
+    }
+    else{
+        header("location:index.html");
+    }
 }
 
 ?>
@@ -42,61 +79,64 @@ if (isset($_GET['hotel_id']) ){
 </head>
 
 <body>
+<nav class="navbar navbar-default navbar-fixed-top navbar-responsive">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
+				</ul>
+        
+				<a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+			</div>
+				<ul class="nav nav-pills navbar-right">
+                                    <li><a href="Hotel-profile.php"><span class="glyphicon glyphicon-chevron-left"></span><b><font size="4" color="#FFF" face="calibri light">Back</font></b></a></li>
+                                    <li><a href="homepage.php"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></span></a></li>
 
-<div class="container-fluid">
+				</ul>
+     	
+		</div>
+		
+	</nav>
+    <style>
+      
+		.navbar {
+			color: #FFFFFF;
+			background-color: #161640;
+		}
+
+		/* OR*/
+
+		.nav {
+			color: #FFFFFF;
+			background-color: #161640;
+			
+		.nav-pills > li > a {
+		  color: #A7A79Bf;
+		  font-family: 'Oswald', sans-serif;
+		  font-size: 0.8em ;
+		  padding: 1px 1px 1px ;
+		}
+
+
+</style>
+<div class="container">
 
 
 
     <div class="col-md-12">
 
-        <nav class="navbar navbar-default" role="navigation" >
-
-
-            <div class="navbar-header">
-                <button type="button" class="btn btn-primary btn-md">
-
-
-                    <span class="glyphicon glyphicon-home"></span> Home
-                </button>
-
-                <button type="button" class="btn btn-primary btn-md">
-
-                    <span class="glyphicon glyphicon-chevron-left"></span> Back
-                </button>
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-                </button>
-            </div>
-
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-                <ul class="nav navbar-nav navbar-right">
-                    <button type="submit" class="btn btn-primary btn-md">
-                        <span class=" glyphicon glyphicon-log-in"></span> Login
-                    </button>
-                    <button type="submit" class="btn btn-primary btn-md">
-                        <span class=" glyphicon glyphicon-thumbs-up"></span> About us
-
-                    </button>
-
-                </ul>
-
-            </div>
-
-        </nav>
+        
     </div>
-    <div class="col-md-6">
+    <div class="col-md-10">
         <div class="container-fluid">
             <h2>Rooms available</h2>
             <table class="table">
                 <thread>
                     <tr>
                         <th>Room_name</th>
-                        <th>Cost per Stay</th>
+                        <th>Cost per Stay($)</th>
                         <th>Room Type</th>
                         <th>Room Image</th>
 
-                        <th>Options</th>
                         <th>Reserve now!</th>
                     </tr>
                     </thread>
@@ -111,21 +151,14 @@ if (isset($_GET['hotel_id']) ){
             $room_image = $data['Room_photo_location'];
             $Room_options =($log->return_room_options($room));
             $print_option = "";
-            while($option = mysql_fetch_array($Room_options)){
-                if ($print_option != "") {
-                    $print_option = $print_option . " " . $option['Room_Option'];
-                }
-                else{
-                    $print_option = $option['Room_Option'];
-                }
-            }
+            
 
-            echo "<tr><td>".$room_name."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td>".$print_option."</td><td><a href='reservation.php?room_id=".$room."&hotel_id=".$hotel_id."'>Link</a></td></tr>";
+            echo "<tr><td>".$room_name."</td><td>".$room_cost."</td><td>".$room_type."</td><td><img height=100 width=100 src=".$room_image."></td><td><a href='reservation.php?room_id=".$room."&hotel_id=".$hotel_id."'>Reserve Now!</a></td></tr>";
         }
         ?>
                 </tbody>
                 </table>
-           
+            
             </div>
     </div>
 </div>

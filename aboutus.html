@@ -2,47 +2,182 @@
 <html lang="en">
     <!--  Adding bootstrap !-->
  <head>
-   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-      
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>  
+  <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
       <!-- Adding recaptcha file in to the page -->
       <style>
       .captcha, #recaptcha_image, #recaptcha_image img {
     width:100% !important;
 }
-		p {color:white;}
-		h2{font-size:200%;}
-		h3{font-size:200%;}
-      </style>
-    </head>
-    
-    <body  background="images/back3.jpg">
-	<div class="col-lg-6 col-lg-offset-2  text-center">
-<h1 style="color:yellow">Who are we?</h1><h2 style="color:yellow">Are you bothering to find the best place to spend your this vacation</h2>
+.navbar {
+    color: #FFFFFF;
+    background-color: #161640;
+}
 
-<p class="lead"><!--<font size="10" align="center">!-->
-	We help you to make that period marvellous with your favourits and remarkable.
-	Now you can search a place through the Online Hotel Reservation and Management System.You can search hotels relavent to
-	several categories such as rating(star),location,prices.And also you can choose a hotel room in deffrent categories.
-	They are price,sea view,A/C,single or double.Now you can pay for reservations online.It is easy to use the OHRMS with your 
-	daytoday life.
- <!-- </font> !-->
- </p>
- <h3 style="color:yellow">Are you searching for a best place for your businesses? </h3>
- <p class="lead">OHRMS is a best place for hotels also.You can have your own profiles in the OHRMS and manage them easily .
-    We supply the rating and customer feedback features to your hotels ,then a foreigner can validate your hospitality 
-	through the OHRMS.You can post potos and small vedio clip about your attractive place.OHRMS is a best solution for your business. </p>
- </div>
+/* OR*/
+
+.nav {
+    color: #FFFFFF;
+    background-color: #161640;
+	
+.nav-pills > li > a {
+  color: #A7A79Bf;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8em ;
+  padding: 1px 1px 1px ;
+}
+
+
+</style>
+
+</head>
+    
+<body bgcolor="#fff">
+<!-- Building the nav bar of the page-->
+	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+    			<div class="navbar-header">
+      				<ul class="nav navbar-nav navbar-left"><li><img src="images/logo.png" height=50px width=50px align="left"></li>
+					</ul>
+                 </div>
+                    <a class="navbar-brand" href="#"><font color= #FFF>Online Hotel Reservation and Management System </font></a>
+		
+
+    		
+      				<ul class="nav nav-pills navbar-right">
+    
+                    <li><a href="homepage.php"><span class="glyphicon glyphicon-home"><b><font size="4" color="#FFF" face="calibri light"> Home</font></b></a></li>
+      				</ul>
+					
+    			
+  		</div>
+	</nav>
+
+ <div class="container">
+ <div class="row">
+ <div class= "col-sm-8">
+ <div class="jumbotron">
+  <h1 style="color:#161640 size:4">Who are we?</h1>
+
+ <h2 style="color:#161640">Are you searching for a best place for your business? </h2>
+ <p class="lead">
  
+	<font size="3">OHRMS is a best place for your hotel too.You can have your own profiles in the OHRMS and manage them easily .
+    We supply the rating and customer feedback features to your hotels ,then a foreigner can validate your hospitality 
+	through the OHRMS.You can post photos and small vedio clip about your attractive place.OHRMS is a best solution for your business, which will helps you to take your business to a whole new level. </p>
+	</font>
+	</div>
+</div>
+
+ <div class= "col-sm-4">
+<img src="images/logo.png" > 
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div class="jumbotron">
+
+	<h2 style="color:#161640">Are you bothering to find the best place to spend your vacation?</h2>
+	<p><font size="3">We will help you to make that period marvellous and memorizing, by introducing remarkable destinations where your family can enjoy this vacation season.
+	Now you can search for accommodation places and tourist destinations in Sri Lanka through the Online Hotel Reservation and Management System, with less effort. We have allow the facility for you
+	you to find the best place that suits you, by giving you the opportunity to search hotels relevant to
+	several categories such as locations,prices. And to do reservations through our system, where you can pay through online and book the hotels for your journey.
+	</p>
+	</font>
+	
+
+</div>
+</div>
+</div>
+</div>
+
+<!--footer start here-->
+
+<!--description before footer-->
+<br><br><br>
+<div class="container">
+  	<div class="col-sm-8 col-sm-offset-2 text-center">
+    <h4>
+    <a href="homepage.php">OHRMS</a>
+    </h4>
+    <p><b><font color="#161640">"Smarter choice for your business and vacation plans in Sri Lanka"</font></b></p>
+    <hr>
+<!-- starting of facebook icons-->
+<p> Join Us On </p>
+      <ul class="list-inline center-block">
+        <li><a href="#"><img src="hotelimages/facebook.png"></a></li>
+        <li><a href="#"><img src="hotelimages/twitter.png"></a></li>
+        <li><a href="#"><img src="hotelimages/google.png"></a></li>
+        <li><a href="#"><img src="hotelimages/youtube.png"></a></li>
+      </ul>
+      
+</div><!--/col-->
+</div><!--/container-->
+
+<!-- scroll up button-->
+
+<ul class="nav pull-right scroll-top">
+<li><a href="#" title="Scroll to top"><i class="glyphicon glyphicon-chevron-up"></i></a></li>
+</ul>
+
+<script>
+$('.scroll-top').click(function(){
+  $('body,html').animate({scrollTop:0},1000);
+})
+
+</script>
+<!--footer-->
+
+ <div id="footer">
+    <div class="container">
+	<div class="row">
+	<div class="col-sm-4">
+	<p><a href="homepage.php"> Online Hotel Reservation and Management System</a></p>
+	</div> 
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4">
+	<font color="#fff">© 2016 All Rights Reserved</font>
+	</div>
+    </div>
+	</div>
+	
+	
+</div>
+<!--footer end-->
+
+<style>
+#footer {
+  height: 80px;
+  background-color: #161640;
+  margin-top:50px;
+  padding-top:20px;
+  
+  
+}
+#footer {
+  background-color:#161640;
+}
+
+#footer a {
+  color:#efefef;
+}
+#footer > .container {
+  
+}
+
+<style> 
+
+<!--footer end here>		
+ 
+
+
 
   </body>
   

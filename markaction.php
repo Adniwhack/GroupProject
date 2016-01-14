@@ -17,6 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST"){
     $query = "UPDATE hotel set Hotel_Lat=".$LAT.", Hotel_Lng=".$LNG." WHERE Hotel_ID='".$ID."' ";
     $res = mysql_query($query);
 
-    header("Location:index.html");
+    header("Location:homepage.php");
 
 }
